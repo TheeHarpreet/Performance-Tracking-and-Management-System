@@ -2,6 +2,8 @@
 require_once("includes/config.php");
 session_start();
 $_SESSION["user_id"] = 1;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,15 +16,17 @@ $_SESSION["user_id"] = 1;
     <script src="js/main.js" defer></script>
 </head>
 <body>
-<?php include_once("includes/header.php") ?>
+    <?php include_once("includes/simplified-header.php") ?>
         <div class="container">
-            <h1>Log In</h1>
-            <h3>Email</h3>
-            <input type="text" name="email">
-            <h3>Password</h3>
-            <input type="password" name="password">
-            <button>Login</button>
-            <p>Don't have an account? <a href="signup.php">Register here</a></p>
+            <form action="" method="post">
+                <h1>Log In</h1>
+                <h3>Email</h3>
+                <input type="text" name="email">
+                <h3>Password</h3>
+                <input type="password" name="password">
+                <button>Login</button>
+                <p>Don't have an account? <a href="signup.php">Register here</a></p>
+            </form>
         </div>
     <?php include_once("includes/footer.php") ?>
 </body>

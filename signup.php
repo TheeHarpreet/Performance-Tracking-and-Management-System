@@ -9,13 +9,13 @@ $_SESSION["user_id"] = 1;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
-    <link rel="stylesheet" href="css/mobile.css" />
+    <link rel="stylesheet" href="css/mobile.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
     <script src="js/main.js" defer></script>
 </head>
 <body>
-<?php include_once("includes/header.php") ?>
-        <div class="container">
+    <?php include_once("includes/simplified-header.php") ?>
+        <div class="signup-container">
             <h1>Sign Up</h1>
             <h3>First name</h3>
             <input type="text" name="fname">

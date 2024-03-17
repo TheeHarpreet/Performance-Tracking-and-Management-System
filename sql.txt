@@ -1,0 +1,57 @@
+Call the database "performance-tracker"
+
+CREATE TABLE users (
+    userID int NOT NULL AUTO_INCREMENT,
+    jobRole text NOT NULL,
+    fname text NOT NULL,
+    lname text NOT NULL,
+    email text NOT NULL,
+    password text NOT NULL,
+    PRIMARY KEY (userID)
+);
+
+CREATE TABLE submission (
+    submissionID int NOT NULL AUTO_INCREMENT,
+    title text NOT NULL,
+    author int NOT NULL,
+    dateSubmitted datetime NOT NULL,
+    type text NOT NULL,
+    comments text NOT NULL,
+    PRIMARY KEY (submissionID),
+    FOREIGN KEY (author) REFERENCES users (userID)
+);
+
+CREATE TABLE file (
+    fileID int NOT NULL AUTO_INCREMENT,
+    fileName text NOT NULL,
+    name text NOT NULL,
+    author int NOT NULL,
+    PRIMARY KEY (fileID),
+    FOREIGN KEY (author) REFERENCES users (userID) 
+);
+
+CREATE TABLE submission-coauthor (
+    submissionID int NOT NULL,
+    userID int NOT NULL,
+    FOREIGN KEY (userID) REFERENCES users (userID)
+);
+
+CREATE TABLE submission-file (
+    submissionID int NOT NULL,
+    fileID INT NOT NULL,
+    FOREIGN KEY (submissionID) REFERENCES submission (submissionID),
+    FOREIGN KEY (fileID) REFERENCES file (fileID)
+);
+
+
+
+
+INSERT INTO users (userID, jobRole, fname, lname, email, password) VALUES (1, "Researcher", "Robert", "Jenner", "emailRJ@outlook.com", "12345"), (2, "Supervisor", "Jacob", "Westfield", "email@gmail.com", "54321"), (3, "Manager", "Yusuf", "Rick", "gmail@gmail.com", "qwerty");
+
+INSERT INTO submission (submissionID, title, author, dateSubmitted, type, comments) VALUES (1, "Test submission", 1, NOW(), "A", "Test description");
+
+INSERT INTO file (fileID, fileName, name, author) VALUES (1, "submission1.txt", "Test submission file name thing", 1);
+
+INSERT INTO submission-coauthor (submissionID, userID) VALUES (1, 2);
+
+INSERT INTO submission-file (submissionID, fileID) VALUES (1, 1);

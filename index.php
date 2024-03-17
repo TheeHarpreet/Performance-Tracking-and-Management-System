@@ -16,9 +16,6 @@ ob_clean();
 <body>
     <?php include_once("includes/header.php") ?>
         <div class="container">
-            <div class="navigation">
-                <a href="login.php">Login</a>
-            </div>
             <div class="performance">
 
             </div>
