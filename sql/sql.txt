@@ -17,6 +17,7 @@ CREATE TABLE submission (
     dateSubmitted datetime NOT NULL,
     type text NOT NULL,
     comments text NOT NULL,
+    approved bool NOT NULL,
     PRIMARY KEY (submissionID),
     FOREIGN KEY (author) REFERENCES users (userID)
 );
