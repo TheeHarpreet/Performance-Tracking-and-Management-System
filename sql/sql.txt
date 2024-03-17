@@ -2,11 +2,11 @@ Call the database "performance-tracker"
 
 CREATE TABLE users (
     userID int NOT NULL AUTO_INCREMENT,
-    jobRole text NOT NULL,
     fname text NOT NULL,
     lname text NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
+    jobRole text NOT NULL,
     PRIMARY KEY (userID)
 );
 
@@ -19,6 +19,15 @@ CREATE TABLE submission (
     comments text NOT NULL,
     PRIMARY KEY (submissionID),
     FOREIGN KEY (author) REFERENCES users (userID)
+);
+
+CREATE TABLE submissionReturn (
+    submissionID int NOT NULL,
+    returnDate datetime NOT NULL,
+    manager int NOT NULL,
+    comments text NOT NULL,
+    FOREIGN KEY (submissionID) REFERENCES submission (submissionID),
+    FOREIGN KEY (manager) REFERENCES users (userID)
 );
 
 CREATE TABLE file (
@@ -50,7 +59,7 @@ INSERT INTO users (userID, jobRole, fname, lname, email, password) VALUES (1, "R
 
 INSERT INTO submission (submissionID, title, author, dateSubmitted, type, comments) VALUES (1, "Test submission", 1, NOW(), "A", "Test description");
 
-INSERT INTO file (fileID, fileName, name, author) VALUES (1, "submission1.txt", "Test submission file name thing", 1);
+INSERT INTO file (fileID, fileName, name, author) VALUES (1, "submission1.txt", "Test submission file name", 1);
 
 INSERT INTO submission-coauthor (submissionID, userID) VALUES (1, 2);
 
