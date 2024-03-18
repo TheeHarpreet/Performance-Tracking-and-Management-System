@@ -17,7 +17,7 @@ $_SESSION["user_id"] = 1;
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
-        <div class="container">
+        <div class="login-container">
             <form action="" method="post">
                 <h1>Log In</h1>
                 <h3>Email</h3>
