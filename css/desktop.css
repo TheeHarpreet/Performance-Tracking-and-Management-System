@@ -66,7 +66,7 @@ body {
     margin: 0 auto;
   }
   
-  .performance, .submission-preview-box {
+  .performance, .submission-preview-box, .supervisor-user-selection {
     max-width: 400px;
     margin: 136px auto;
     background: #2c2c2c;

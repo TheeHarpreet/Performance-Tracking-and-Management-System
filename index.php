@@ -36,6 +36,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: admin-index.php");
                 }
             ?>
+            <?php
+                if ($user->jobRole == "Supervisor") {
+                    echo "<h1>Select a researcher to view their work</h1>";
+                    echo "<div class='supervisor-user-selection'>";
+                    echo "<p><a href='index.php'>View your own work</a></p>";
+                    $results = $mysqli->query("SELECT * FROM users, researcherssupervisor WHERE supervisorID = $userID and researcherID = userID");
+                    echo "<div class='researchers-names'>";
+                    while ($researcher = $results->fetch_object()) {
+                        echo "<p><a href='index.php?user_override=$researcher->userID'>$researcher->fname $researcher->lname</a></p>";
+                    }
+                    echo "</div>";
+                    echo "</div>";
+                }
+                if (isset($_SESSION['user_override'])) {
+                    $userID = $_SESSION['user_override'];
+                    echo "hi";
+                }
+            ?>
             <div class="performance">
                 <p>*Performance Container Here*</p>
             </div>
@@ -46,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $i = 0;
 
                     while ($i < 7) {
+                        echo "<div class='section-container'>";
                         echo "<h1 class='section-header'>$sectionTitles[$i]</h1>";
                         $type = $sectionTypes[$i];
                         $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
@@ -64,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<form method='post'>";
                         echo "<button class='new-submission' name='new-submission' value='$sectionTypes[$i]'>+ Add New Submission</button>";
                         echo "</form>";
+                        echo "</div>";
                         echo "</div>";
                         $i++;
                     }
