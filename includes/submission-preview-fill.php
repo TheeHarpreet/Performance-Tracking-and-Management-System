@@ -1,6 +1,6 @@
 <?php
     if ($isAuthor == false) {
-        echo "<div style='background-color: gray;'>";
+        echo "<div class='coauthor-indicator' style='background-color: gray;'>";
         echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
         echo "</div>";
     }
@@ -50,11 +50,9 @@
     }
 
     $backgroundColour = "orange";
-    $message = "Submitted";
     $textColour = "black";
     if ($obj->approved == 1) {
         $backgroundColour = "green";
-        $message = "Accepted";
         $textColour = "white";
     }
 
@@ -62,12 +60,11 @@
     if (mysqli_num_rows($returns) > 0) {
         $latestReturn = $returns->fetch_object();
         $backgroundColour = "red";
-        $message = "Rejected";
         $textColour = "white";
     }
     
     echo "<div class='colour-bar' style='background-color: $backgroundColour';>";
-    echo "<p style='color: $textColour;'>$message</p>";
+    echo "<p style='color: $textColour;'>‎ ‎ ‎ ‎ ‎ ‎</p>";
     echo "</div>";
     echo "</div>";
 ?>

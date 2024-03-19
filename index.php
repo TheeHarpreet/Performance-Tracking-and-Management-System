@@ -54,7 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             ?>
             <div class="performance">
-                <p>*Performance Container Here*</p>
+                <h1>Performance Overview</h1>
+                <div class="performance-overview">
+                    <p>*Performance Container Here*</p>
+                </div>
             </div>
             <div class="tasks">
                 <?php
