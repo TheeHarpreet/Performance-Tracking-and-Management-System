@@ -4,6 +4,7 @@
         echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
         echo "</div>";
     }
+    echo "<div class='submission-preview-text'>";
     echo "<div>";
     echo "<p>$obj->title</p>";
     $query = $mysqli->query("SELECT * FROM users WHERE userID = $obj->author");
@@ -48,6 +49,7 @@
         }
         echo "</div>";
     }
+    echo "</div>";
 
     $backgroundColour = "orange";
     $textColour = "black";
