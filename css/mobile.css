@@ -55,7 +55,10 @@ a {
   width: auto;
   max-height: 15px;
 }
-
 .submission-preview-box div {
   flex-basis: 100%;
+}
+.submission-preview-text{
+  flex-direction: column;
+  display: flex;
 }
