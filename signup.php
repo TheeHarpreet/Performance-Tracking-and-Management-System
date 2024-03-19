@@ -21,8 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['signup'] = "successful";
         
         header("Location: index.php");
-    } else {
-        $_SESSION['signup'] = "failed";
     }
 }
 ?>
@@ -41,16 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="signup-container">
             <form class="signup-form" method="post">
                 <h1>Sign Up</h1>
-                <?php
-                $_SESSION['signup'] = "successful";
-                try {
-                    if ($_SESSION['signup'] == "failed") {
-                        echo "<p class='signup-failed'>An account already exists with that email.</p>";
-                        $_SESSION['signup'] = "successful";
-                    }
-                }
-                catch (e $e) {}
-                ?>
                 <h3>First name</h3>
                 <input type="text" name="fname">
                 <h3>Surname</h3>

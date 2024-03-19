@@ -18,8 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['login'] = "successful";
 
         header("Location: index.php");
-    } else {
-        $_SESSION['login'] = "failed";
     }
 }
 ?>
@@ -38,16 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="login-container">
             <form class="login-form" method="post">
                 <h1>Log In</h1>
-                <?php
-                $_SESSOPN['login'] = "successful";
-                try {
-                    if ($_SESSION['login'] == "failed") {
-                        echo "<p class='login-failed'>Account not found.</p>";
-                        $_SESSION['login'] = "successful";
-                    }
-                }
-                catch (e $e) {}
-                ?>
                 <h3>Email</h3>
                 <input type="text" name="email" required>
                 <h3>Password</h3>
