@@ -113,4 +113,6 @@ p {
 }
 .submission-preview-box{
   background-color: #2c2c2c;
+  padding:10px;
+  border-radius: 5%;
 }
