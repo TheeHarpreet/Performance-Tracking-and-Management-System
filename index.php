@@ -2,6 +2,16 @@
 require_once("includes/config.php");
 require_once("includes/redirect-login.php");
 ob_clean();
+
+$query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+$user = $query->fetch_object();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $type = $_POST['new-submission'];
+    $_SESSION['newSubmission'] = $_POST['new-submission'];
+    header("Location: new-submission.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +26,48 @@ ob_clean();
 <body>
     <?php include_once("includes/header.php") ?>
         <div class="container">
+            <?php
+                if ($user->jobRole == "None") {
+                    echo "<p class='invalid-role'>Your account doesn't have a role assigned. Please speak to an admin to assign you one.</p>";
+                    echo "</div>";
+                    include_once("includes/footer.php");
+                    exit();
+                } else if ($user->jobRole == "Admin") {
+                    header("Location: admin-index.php");
+                }
+            ?>
             <div class="performance">
-
+                <p>*Performance Container Here*</p>
             </div>
             <div class="tasks">
+                <?php
+                    $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
+                    $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
+                    $i = 0;
 
+                    while ($i < 7) {
+                        echo "<h1 class='section-header'>$sectionTitles[$i]</h1>";
+                        $type = $sectionTypes[$i];
+                        $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
+                        while ($obj = $query->fetch_object()) {
+                            echo "<div class='submission-preview-box'>";
+                            $isAuthor = true;
+                            include("includes/submission-preview-fill.php");
+                        }
+                        $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.userID = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.type = '$type'");
+                        while ($obj = $query->fetch_object()) {
+                            echo "<div class='submission-preview-box'>";
+                            $isAuthor = false;
+                            include("includes/submission-preview-fill.php");
+                        }
+                        echo "<div>";
+                        echo "<form method='post'>";
+                        echo "<button class='new-submission' name='new-submission' value='$sectionTypes[$i]'>+ Add New Submission</button>";
+                        echo "</form>";
+                        echo "</div>";
+                        $i++;
+                    }
+                ?>
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>
