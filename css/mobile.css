@@ -11,12 +11,15 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 50px;
 }
 
 .container {
   text-align: center;
   padding: 20px;
   background-color: white;
+  box-sizing: border-box;
 }
 
 .navigation {
@@ -50,11 +53,6 @@ body {
   padding: 0;
   background: #1a1a1a;
   color: #f1f1f1;
-}
-
-.container {
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 h1 {
