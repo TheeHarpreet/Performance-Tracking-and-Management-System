@@ -19,7 +19,9 @@ $thing = $_SESSION['newSubmission'];
 <body>
     <?php include_once("includes/header.php") ?>
         <div class="container">
-
+            <?php
+            echo "<p style='color: black;'>$thing</p>";
+            ?>
         </div>
     <?php include_once("includes/footer.php") ?>
 </body>

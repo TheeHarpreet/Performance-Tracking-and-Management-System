@@ -35,14 +35,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
-        <div class="container">
+        <div class="login-container">
             <form class="login-form" method="post">
                 <h1>Log In</h1>
                 <?php
-                if ($_SESSION['login'] == "failed") {
-                    echo "<p class='login-failed'>Account not found.</p>";
-                    $_SESSION['login'] = "successful";
+                $_SESSOPN['login'] = "successful";
+                try {
+                    if ($_SESSION['login'] == "failed") {
+                        echo "<p class='login-failed'>Account not found.</p>";
+                        $_SESSION['login'] = "successful";
+                    }
                 }
+                catch (e $e) {}
                 ?>
                 <h3>Email</h3>
                 <input type="text" name="email" required>

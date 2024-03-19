@@ -76,7 +76,7 @@ body {
   
 }
 
-.signup-container {
+.signup-container, .login-container {
   max-width: 400px;
   margin: 10px auto;
   background: #2c2c2c;

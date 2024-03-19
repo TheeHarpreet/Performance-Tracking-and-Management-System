@@ -42,10 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <form class="signup-form" method="post">
                 <h1>Sign Up</h1>
                 <?php
-                if ($_SESSION['signup'] == "failed") {
-                    echo "<p class='signup-failed'>An account already exists with that email.</p>";
-                    $_SESSION['signup'] = "successful";
+                $_SESSION['signup'] = "successful";
+                try {
+                    if ($_SESSION['signup'] == "failed") {
+                        echo "<p class='signup-failed'>An account already exists with that email.</p>";
+                        $_SESSION['signup'] = "successful";
+                    }
                 }
+                catch (e $e) {}
                 ?>
                 <h3>First name</h3>
                 <input type="text" name="fname">
