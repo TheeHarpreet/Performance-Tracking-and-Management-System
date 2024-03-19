@@ -7,6 +7,10 @@ body {
 .top-header{
   background-color: white;
 }
+.bottom-header{
+  display: flex;
+  flex-direction: row;
+}
 
 .container {
   text-align: center;
