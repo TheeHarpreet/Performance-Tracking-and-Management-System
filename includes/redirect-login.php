@@ -1,13 +1,13 @@
 <?php 
 session_start();
-$user_id = 0;
+$userID = 0;
 try {
-    $userID = $_SESSION["user_id"];
+    $userID = $_SESSION['user_id'];
 }
 catch (Exception $ex) {
     
 }
-if ($user_id == 0) {
-    //header("Location: login.php");
+if ($userID == 0) {
+    header("Location: login.php");
 }
 ?>

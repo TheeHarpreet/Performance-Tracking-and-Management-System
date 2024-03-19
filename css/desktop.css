@@ -4,9 +4,13 @@ body {
     padding: 0;
     background: #fff;
   }
+  
+
+  
   .navigation {
     margin-top: 20px;
   }
+  
   .navigation a {
     display: inline-block;
     background: #d4af37;
@@ -16,16 +20,19 @@ body {
     border-radius: 5px;
     border: 1px solid #d4af37;
     transition: background-color 0.3s ease;
-  } 
+  }
+  
   .navigation a:hover {
     background-color: #c5a028;
   }
+
   @media (min-width: 1024px) {
     .container {
       padding: 50px;
       margin-top: 5%;
     }
-  } 
+  }
+  
   .footer-container {
     background: #000;
     color: #d4af37;
@@ -35,50 +42,60 @@ body {
     bottom: 0;
     width: 100%;
   }
+  
   .footer-container footer p {
     margin: 0;
   }
+  
+  
   .bottom-header {
     background: #000;
     padding: 20px 0;
     text-align: center;
   }
+
   .top-header {
     background: #ffffff;
     padding: 10px 0px 10px 0px;
   }
+  
   .logo {
     width: 250px;
     height: auto;
     display: block;
     margin: 0 auto;
   }
-  .login-container {
+  
+  .container {
     max-width: 400px;
-    margin: 153px auto;
+    margin: 136px auto;
     background: #2c2c2c;
     padding: 35px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
+
   .signup-container {
     max-width: 400px;
-    margin: 41.5px auto;
+    margin: 10px auto;
     background: #2c2c2c;
-    padding: 20px 20px;
+    padding: 35px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
+  
+  
   input[type=text], input[type=password] {
     width: calc(100% - 30px);
     padding: 15px;
     border: 1px solid #4d4d4d;
   }
+  
+  
   button {
     width: calc(100% - 30px);
     padding: 15px;
     font-size: 16px;
-    margin-left: 15px;
   } 
   .footer-container {
     position: bottom;
@@ -86,10 +103,13 @@ body {
     color: #d4af37;
     padding: 10px 0;
   }
+  
+  
   .header-container {
     background: #000;
     text-align: center;
   }
+  
   .logo {
     max-width: 150px;
     margin: 0 auto;
