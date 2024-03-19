@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="text" name="email">
                 <h3>Password</h3>
                 <input type="password" name="password">
-                <button>Signup</button>
-                <p>Have an account? <a href="login.php">Login</a></p>
+                <button type="submit" id="signup-button">Signup</button>
+                <p>Have an account? <a href="login.php" class="login-change">Login</a></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>

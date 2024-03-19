@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   background: #f4f4f4;
+  color: white;
 }
 
 .bottom-header {
@@ -48,7 +49,11 @@ h2 {
 
 a {
   text-decoration: none;
-  color: black;
+  color: white;
+}
+
+.login-change {
+  text-decoration: underline;
 }
 
 .supervisor-user-selection, .performance-overview, .submission-preview-box {
@@ -96,4 +101,32 @@ button {
   cursor: pointer;
   margin: 0px 0px 0px 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#login-button, #signup-button {
+  width: 300px;
+}
+
+.login-container, .signup-container {
+  max-width: 400px;
+  margin: 10px auto;
+  background: #2c2c2c;
+  padding: 35px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+input[type=text], input[type=password] {
+  width: 93%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #333;
+  background-color: #f1f1f1;
+  color: #333;
+  border-radius: 3px;
+}
+
+h3 {
+  margin: 10px 0px 0px 0px;
+  size: 10px;
 }

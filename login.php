@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="text" name="email" required>
                 <h3>Password</h3>
                 <input type="password" name="password" required>
-                <button type="submit" class="login-button">Login</button>
-                <p>Don't have an account? <a href="signup.php">Register here</a></p>
+                <button type="submit"  id="signup-button">Login</button>
+                <p>Don't have an account? <a href="signup.php" class="login-change">Register here</a></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
