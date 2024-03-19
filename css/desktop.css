@@ -67,12 +67,14 @@ body {
   }
   
   .performance, .submission-preview-box, .supervisor-user-selection {
-    max-width: 400px;
+    width: 1300px;
     margin: 136px auto;
     background: #2c2c2c;
-    padding: 35px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    gap: 200px;
   }
 
 .signup-container, .login-container {
