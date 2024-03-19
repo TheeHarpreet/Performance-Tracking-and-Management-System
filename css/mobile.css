@@ -93,3 +93,24 @@ p {
   bottom: 0;
   width: 100%;
 }
+
+.tasks{
+
+}
+
+.section-container{
+  width: 90vw;
+  height:auto;
+  margin:5vw;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px; 
+  
+}
+.submission-preview-box{
+  
+}
