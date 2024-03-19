@@ -9,7 +9,7 @@
     echo "<p>$obj->title</p>";
     $query = $mysqli->query("SELECT * FROM users WHERE userID = $obj->author");
     $author = $query->fetch_object();
-    echo "<p>Author: $author->fname $author->lname</p>";
+    echo "<p>By $author->fname $author->lname</p>";
     echo "<p>$obj->dateSubmitted</p>";
     echo "<p>$obj->comments";
     echo "</div>";

@@ -31,6 +31,16 @@ body {
 
 h1 {
   color: #f8b822;
+  margin: 25px 50px 5px 50px;
+  border: 0px 0px 5px 0px;
+  border-color: black;
+  border-bottom-style: solid;
+  text-align: center;
+}
+
+h2 {
+  color: #8a6103;
+  margin: 25px 50px 5px 50px;
 }
 
 a {
@@ -52,13 +62,35 @@ a {
 }
 
 .coauthor-indicator, .colour-bar {
-  width: auto;
   max-height: 15px;
+  max-width: 1000px;
+  width: auto;
 }
+
 .submission-preview-box div {
   flex-basis: 100%;
 }
+
 .submission-preview-text{
   flex-direction: column;
   display: flex;
+  text-align: center;
+}
+
+.new-submission {
+  margin-top: 15px;
+  width: 250px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: #d4af37;
+  border: none;
+  color: #1a1a1a;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0px 0px 0px 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }

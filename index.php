@@ -65,9 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
                     $i = 0;
 
+                    echo "<h1>Submissions</h1>";
+
                     while ($i < 7) {
                         echo "<div class='section-container'>";
-                        echo "<h1 class='section-header'>$sectionTitles[$i]</h1>";
+                        echo "<h2 class='section-header'>$sectionTitles[$i]</h2>";
                         $type = $sectionTypes[$i];
                         $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
                         while ($obj = $query->fetch_object()) {
