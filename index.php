@@ -52,6 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (isset($_SESSION['user_override'])) {
                     $userID = $_SESSION['user_override'];
                     echo "hi";
+                } else {
+                    echo "not hi";
                 }
             ?>
             <div class="performance">
