@@ -51,22 +51,21 @@
     }
     echo "</div>";
 
-    $backgroundColour = "orange";
-    $textColour = "black";
-    if ($obj->approved == 1) {
-        $backgroundColour = "green";
-        $textColour = "white";
-    }
-
+    $backgroundColour = "gray";
     $returns = $mysqli->query ("SELECT * FROM submissionreturn WHERE submissionID = $obj->submissionID ORDER BY returnDate ASC");
     if (mysqli_num_rows($returns) > 0) {
         $latestReturn = $returns->fetch_object();
         $backgroundColour = "red";
-        $textColour = "white";
+    }
+    if ($obj->submitted == 1) {
+        $backgroundColour = "orange";
+    }
+    if ($obj->approved == 1) {
+        $backgroundColour = "green";
     }
     
     echo "<div class='colour-bar' style='background-color: $backgroundColour';>";
-    echo "<p style='color: $textColour;'>‎ ‎ ‎ ‎ ‎ ‎</p>";
+    echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
     echo "</div>";
     echo "</div>";
 ?>
