@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include_once("includes/header.php") ?>
-        <div class="container">
+        <div class="index-container">
             <?php
                 if ($user->jobRole == "None") {
                     echo "<p class='invalid-role'>Your account doesn't have a role assigned. Please speak to an admin to assign you one.</p>";

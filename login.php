@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <form class="login-form" method="post">
                 <h1>Log In</h1>
                 <?php
-                $_SESSOPN['login'] = "successful";
+                $_SESSION['login'] = "successful";
                 try {
                     if ($_SESSION['login'] == "failed") {
                         echo "<p class='login-failed'>Account not found.</p>";
