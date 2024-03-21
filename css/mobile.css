@@ -6,7 +6,7 @@ body {
   color: white;
 }
 
-.bottom-header {
+.bottom-header, .footer-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,6 +16,14 @@ body {
   padding: 20px 0;
   text-align: center;
   color: white;
+}
+
+.footer-container {
+  margin-top: 25px;
+}
+
+.footer-container p {
+  margin: 0;
 }
 
 .bottom-header a {

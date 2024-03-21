@@ -20,7 +20,7 @@ if ($user->jobRole != "Admin") {
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
 <body>
-    <?php include_once("includes/simplified-header.php") ?>
+    <?php include_once("includes/header.php") ?>
         <div class="container">
         </div>
     <?php include_once("includes/footer.php") ?>
