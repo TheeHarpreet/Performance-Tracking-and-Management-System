@@ -7,9 +7,13 @@ $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $type = $_POST['new-submission'];
-    $_SESSION['newSubmission'] = $_POST['new-submission'];
-    header("Location: new-submission.php");
+    if (isset($_POST['new-submission'])) {
+        $_SESSION['newSubmission'] = $_POST['new-submission'];
+        header("Location: new-submission.php");
+    } else {
+        $_SESSION['viewSubmission'] = $_POST['submission-id'];
+        header("Location: view-submission.php");
+    }
 }
 
 ?>
@@ -18,10 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
-    <script src="js/main.js" defer></script>
 </head>
 <body>
     <?php include_once("includes/header.php") ?>
@@ -36,8 +39,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: admin-index.php");
                 }
             ?>
+            <?php
+                if ($user->jobRole == "Supervisor") {
+                    echo "<h1>Select a researcher to view their work</h1>";
+                    echo "<div class='supervisor-user-selection'>";
+                    echo "<p><a href='index.php'>View your own work</a></p>";
+                    $results = $mysqli->query("SELECT * FROM users, researcherssupervisor WHERE supervisorID = $userID and researcherID = userID");
+                    echo "<div class='researchers-names'>";
+                    while ($researcher = $results->fetch_object()) {
+                        echo "<p><a href='index.php?user_override=$researcher->userID'>$researcher->fname $researcher->lname</a></p>";
+                    }
+                    echo "</div>";
+                    echo "</div>";
+                }
+                if (isset($_GET['user_override'])) {
+                    $userID = $_GET['user_override'];
+                }
+            ?>
             <div class="performance">
-                <p>*Performance Container Here*</p>
+                <h1>Performance Overview</h1>
+                <div class="performance-overview">
+                    <p>*Performance Info Here*</p>
+                </div>
             </div>
             <div class="tasks">
                 <?php
@@ -45,18 +68,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
                     $i = 0;
 
+                    echo "<h1>Submissions</h1>";
+
                     while ($i < 7) {
-                        echo "<h1 class='section-header'>$sectionTitles[$i]</h1>";
+                        echo "<div class='section-container'>";
+                        echo "<h2 class='section-header'>$sectionTitles[$i]</h2>";
+                        echo "<div>";
                         $type = $sectionTypes[$i];
                         $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
                         while ($obj = $query->fetch_object()) {
-                            echo "<div class='submission-preview-box'>";
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
                         }
                         $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.userID = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.type = '$type'");
                         while ($obj = $query->fetch_object()) {
-                            echo "<div class='submission-preview-box'>";
                             $isAuthor = false;
                             include("includes/submission-preview-fill.php");
                         }
@@ -64,6 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<form method='post'>";
                         echo "<button class='new-submission' name='new-submission' value='$sectionTypes[$i]'>+ Add New Submission</button>";
                         echo "</form>";
+                        echo "</div>";
+                        echo "</div>";
                         echo "</div>";
                         $i++;
                     }

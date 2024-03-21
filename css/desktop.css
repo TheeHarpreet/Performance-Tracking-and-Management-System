@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -68,6 +69,25 @@ body {
   padding: 35px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+=======
+.bottom-header {
+  gap: 500px;
+}
+
+.supervisor-user-selection, .performance-overview, .submission-preview-box {
+  flex-direction: row;
+}
+
+.coauthor-indicator, .colour-bar {
+  max-height: 1000px;
+  height: auto;
+  max-width: 15px;
+}
+
+.submission-preview-text{
+  flex-direction: row;
+  display: flex;
+>>>>>>> b9ee867a2c42e1d6bb77f86d2575951f0fd5e665
 }
 .index-container{
 
@@ -93,9 +113,9 @@ body {
   color: #ffffff;
 }
 input[type=text], input[type=password] {
-  width: calc(100% - 30px);
   padding: 15px;
   border: 1px solid #4d4d4d;
+<<<<<<< HEAD
 }
 button {
   width: calc(100% - 30px);
@@ -119,4 +139,6 @@ button {
 .new-submission {
   margin-top: 15px;
   width: 250px;
+=======
+>>>>>>> b9ee867a2c42e1d6bb77f86d2575951f0fd5e665
 }

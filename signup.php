@@ -21,8 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['signup'] = "successful";
         
         header("Location: index.php");
-    } else {
-        $_SESSION['signup'] = "failed";
     }
 }
 ?>
@@ -31,26 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
+    <title>Sign up | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
-    <script src="js/main.js" defer></script>
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
         <div class="signup-container">
             <form class="signup-form" method="post">
                 <h1>Sign Up</h1>
-                <?php
-                $_SESSION['signup'] = "successful";
-                try {
-                    if ($_SESSION['signup'] == "failed") {
-                        echo "<p class='signup-failed'>An account already exists with that email.</p>";
-                        $_SESSION['signup'] = "successful";
-                    }
-                }
-                catch (e $e) {}
-                ?>
                 <h3>First name</h3>
                 <input type="text" name="fname">
                 <h3>Surname</h3>
@@ -59,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="text" name="email">
                 <h3>Password</h3>
                 <input type="password" name="password">
-                <button>Signup</button>
-                <p>Have an account? <a href="login.php">Login</a></p>
+                <button type="submit" id="signup-button">Signup</button>
+                <p>Have an account? <a href="login.php" class="login-change">Login</a></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
