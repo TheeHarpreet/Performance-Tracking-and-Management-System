@@ -1,0 +1,6 @@
+Includes files
+- config makes a connection to the database, called "performance-tracker".
+- footer and header are obvious.
+- redirect-login is on every page but login.php and signup.php. If you're not logged into an account, it directs you to the login page.
+- simplified-header is used on login.php and signup.php to remove to login button.
+- submission-preview-fill displays the submission overview for each task on index.php. Before it is opened, index.php sets the value of $isAuthor to indicate if it needs the gray bar.

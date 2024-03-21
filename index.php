@@ -73,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     while ($i < 7) {
                         echo "<div class='section-container'>";
                         echo "<h2 class='section-header'>$sectionTitles[$i]</h2>";
+                        echo "<div>";
                         $type = $sectionTypes[$i];
                         $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
                         while ($obj = $query->fetch_object()) {
@@ -88,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<form method='post'>";
                         echo "<button class='new-submission' name='new-submission' value='$sectionTypes[$i]'>+ Add New Submission</button>";
                         echo "</form>";
+                        echo "</div>";
                         echo "</div>";
                         echo "</div>";
                         $i++;

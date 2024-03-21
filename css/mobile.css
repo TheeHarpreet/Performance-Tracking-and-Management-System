@@ -111,8 +111,7 @@ button {
   border: none;
   color: #1a1a1a;
   font-weight: bold;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-radius: 8px;
   cursor: pointer;
   margin: 0px 0px 0px 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -127,6 +126,8 @@ button {
   margin-left: 200px;
   margin-right: 200px;
   background-color: #afafaf;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .login-container, .signup-container {

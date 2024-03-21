@@ -3,7 +3,9 @@ require_once("includes/config.php");
 require_once("includes/redirect-login.php");
 ob_clean();
 
-$thing = $_SESSION['newSubmission'];
+$query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+$user = $query->fetch_object();
+$section = $_SESSION['newSubmission'];
 
 ?>
 <!DOCTYPE html>
