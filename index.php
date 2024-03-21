@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="performance">
                 <h1>Performance Overview</h1>
                 <div class="performance-overview">
-                    <p>*Performance Container Here*</p>
+                    <p>*Performance Info Here*</p>
                 </div>
             </div>
             <div class="tasks">
@@ -72,13 +72,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $type = $sectionTypes[$i];
                         $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
                         while ($obj = $query->fetch_object()) {
-                            echo "<div class='submission-preview-box'>";
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
                         }
                         $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.userID = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.type = '$type'");
                         while ($obj = $query->fetch_object()) {
-                            echo "<div class='submission-preview-box'>";
                             $isAuthor = false;
                             include("includes/submission-preview-fill.php");
                         }

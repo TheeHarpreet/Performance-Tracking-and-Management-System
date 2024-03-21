@@ -1,4 +1,6 @@
 <?php
+    echo "<div class='submission-preview'>";
+    echo "<div class='submission-preview-box'>";
     if ($isAuthor == false) {
         echo "<div class='coauthor-indicator' style='background-color: gray;'>";
         echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
@@ -67,5 +69,7 @@
     echo "<div class='colour-bar' style='background-color: $backgroundColour';>";
     echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
     echo "</div>";
+    echo "</div>";
+    echo "<button class='view-details'>View Details</button>";
     echo "</div>";
 ?>
