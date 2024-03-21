@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -69,7 +68,7 @@ body {
   padding: 35px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-=======
+}
 .bottom-header {
   gap: 500px;
 }
@@ -87,35 +86,10 @@ body {
 .submission-preview-text{
   flex-direction: row;
   display: flex;
->>>>>>> b9ee867a2c42e1d6bb77f86d2575951f0fd5e665
-}
-.index-container{
-
-}
-.performance, .submission-preview-box{
-  position: relative;
-  width: max-content;
-  display: flex;
-  margin: 20px;
-  background: #2c2c2c;
-  padding: 50px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  list-style: none;
-}
-.tasks{
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  margin: 0px;
-  min-width: 50px;
-  height: 0px;
-  color: #ffffff;
 }
 input[type=text], input[type=password] {
   padding: 15px;
   border: 1px solid #4d4d4d;
-<<<<<<< HEAD
 }
 button {
   width: calc(100% - 30px);
@@ -139,6 +113,4 @@ button {
 .new-submission {
   margin-top: 15px;
   width: 250px;
-=======
->>>>>>> b9ee867a2c42e1d6bb77f86d2575951f0fd5e665
 }
