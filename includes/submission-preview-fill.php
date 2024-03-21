@@ -70,6 +70,10 @@
     echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
     echo "</div>";
     echo "</div>";
-    echo "<button class='view-details'>View Details</button>";
+    echo "<div>";
+    echo "<form method='post'>";
+    echo "<button class='view-details' name='submission-id' value='$obj->submissionID'>View Details</button>";
+    echo "</form>";
+    echo "</div>";
     echo "</div>";
 ?>

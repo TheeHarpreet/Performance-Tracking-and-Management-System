@@ -7,9 +7,13 @@ $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $type = $_POST['new-submission'];
-    $_SESSION['newSubmission'] = $_POST['new-submission'];
-    header("Location: new-submission.php");
+    if (isset($_POST['new-submission'])) {
+        $_SESSION['newSubmission'] = $_POST['new-submission'];
+        header("Location: new-submission.php");
+    } else {
+        $_SESSION['viewSubmission'] = $_POST['submission-id'];
+        header("Location: view-submission.php");
+    }
 }
 
 ?>
