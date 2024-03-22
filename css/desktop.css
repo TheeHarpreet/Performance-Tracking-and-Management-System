@@ -114,3 +114,18 @@ button {
   margin-top: 15px;
   width: 250px;
 }
+
+/* admin css */
+
+.account-list{
+  margin: 20px;
+  color: #c5a028;
+  background: #000;
+}
+.admin-container{
+  background-color: #000;
+}
+.account-list h2{
+  display: flex;
+  justify-content: center;
+}

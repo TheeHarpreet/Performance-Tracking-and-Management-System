@@ -153,3 +153,21 @@ h3 {
   margin: 10px 0px 0px 0px;
   size: 10px;
 }
+
+/* admin css */
+
+.account-list{
+  margin: 20px;
+  color: #c5a028;
+  background: #000;
+}
+.admin-container{
+  background: #000;
+}
+.account-list h2{
+  display: flex;
+  justify-content: center;
+}
+.account-list table{
+  color: #000;
+}
