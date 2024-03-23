@@ -37,6 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 } else if ($user->jobRole == "Admin") {
                     header("Location: admin-index.php");
+                } else if ($user->jobRole == "Manager") {
+                    header("Location: manager-index.php");
                 }
             ?>
             <?php
@@ -73,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     while ($i < 7) {
                         echo "<div class='section-container'>";
                         echo "<h2 class='section-header'>$sectionTitles[$i]</h2>";
-                        echo "<div>";
+                        echo "<div class='section-hide'>";
                         $type = $sectionTypes[$i];
                         $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
                         while ($obj = $query->fetch_object()) {
