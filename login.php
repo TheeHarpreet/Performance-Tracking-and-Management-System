@@ -35,19 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="login-container">
             <form class="login-form" method="post">
                 <h1>Log In</h1>
-<<<<<<< HEAD
-                <?php
-                $_SESSION['login'] = "successful";
-                try {
-                    if ($_SESSION['login'] == "failed") {
-                        echo "<p class='login-failed'>Account not found.</p>";
-                        $_SESSION['login'] = "successful";
-                    }
-                }
-                catch (e $e) {}
-                ?>
-=======
->>>>>>> b9ee867a2c42e1d6bb77f86d2575951f0fd5e665
                 <h3>Email</h3>
                 <input type="text" name="email" required>
                 <h3>Password</h3>

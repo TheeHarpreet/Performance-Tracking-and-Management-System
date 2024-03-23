@@ -3,7 +3,11 @@ require_once("includes/config.php");
 require_once("includes/redirect-login.php");
 ob_clean();
 
-$thing = $_SESSION['viewSubmission'];
+$submissionID = $_SESSION['viewSubmission'];
+$submissionQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $submissionID");
+$submission = $submissionQuery->fetch_object();
+$coauthorsQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE submissionID = $submissionID");
+$coauthors = $coauthorsQuery->fetch_object();
 
 ?>
 <!DOCTYPE html>
@@ -19,7 +23,10 @@ $thing = $_SESSION['viewSubmission'];
     <?php include_once("includes/header.php") ?>
         <div class="container">
             <?php
-            echo "<p style='color: black;'>$thing</p>";
+                echo "<h1 class='submission-title'>$submission->title</h1>";
+                echo "<h2>$submission->author</h2>";
+                echo "<h1>$submission->title</h1>";
+                echo "<h1>$submission->title</h1>";
             ?>
         </div>
     <?php include_once("includes/footer.php") ?>
