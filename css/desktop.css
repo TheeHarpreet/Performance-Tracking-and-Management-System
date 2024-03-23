@@ -120,12 +120,12 @@ button {
 .account-list{
   margin: 20px;
   color: #c5a028;
-  background: #000;
+  background: #914c4c;
 }
 .admin-container{
-  background-color: #000;
+  background-color: #884747;
 }
 .account-list h2{
   display: flex;
-  justify-content: center;
+  justify-content:end;
 }

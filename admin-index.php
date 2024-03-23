@@ -36,7 +36,10 @@ if ($user->jobRole != "Admin") {
                         </tr>
                         <tr>
                         <?php
-                            while ($user)
+
+                        $user_accounts = mysqli_query($mysqli, "SELECT * FROM users");
+                            
+                            while ($row = mysqli_fetch_assoc($user_accounts))
                             {
                         ?>
                             <td><?php echo $row['userID']; ?></td>
