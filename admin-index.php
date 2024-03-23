@@ -33,10 +33,11 @@ if ($user->jobRole != "Admin") {
                             <th>Email</th>
                             <th>Password</th>
                             <th>Job Role</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                         <tr>
                         <?php
-
                         $user_accounts = mysqli_query($mysqli, "SELECT * FROM users");
                             
                             while ($row = mysqli_fetch_assoc($user_accounts))

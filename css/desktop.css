@@ -33,7 +33,7 @@ button {
   padding: 10px 0;
 }
 .header-container {
-  background: #000;
+  background: #ffffff;
   text-align: center;
 }
 .logo {
@@ -48,14 +48,45 @@ button {
 /* admin css */
 
 .account-list{
-  margin: 20px;
-  color: #c5a028;
-  background: #914c4c;
+  background-color: #4d4d4d;
+  margin: 20px 30px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  gap: 30px;
 }
 .admin-container{
-  background-color: #884747;
+  background-color: #ffffff;
 }
 .account-list h2{
   display: flex;
-  justify-content:end;
+  justify-content:center;
+  color: #f8b822;
+  text-decoration: underline;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th, td{
+  text-align: left;
+  border: 2px solid #f8b822;
+  padding: 20px;
+}
+th{
+  background-color: #f8b822;
+  color: #ffffff;
+  font-size: 20px;
+}
+.edit-button, .delete-button{
+  background-color: #a81a1a;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
