@@ -3,55 +3,52 @@ require_once("includes/config.php");
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $firstname = $_POST['fname'];
-        $surname = $_POST['lname'];
-        $email = $_POST['email'];
-        $password = $_POST['password1'];
-        $passwordConfirm = $_POST['password2'];
+    $firstname = $_POST['fname'];
+    $surname = $_POST['lname'];
+    $email = $_POST['email'];
+    $password = $_POST['password1'];
+    $passwordConfirm = $_POST['password2'];
 
-
-    //hashing algorithm
+    // Hashing algorithm
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     $errors = array();
 
     // Basic validation
     if (empty($firstname) || empty($surname) || empty($email) || empty($password) || empty($passwordConfirm)) {
         array_push($errors, "All fields are required");
-        header("Location:../index.php");
-        die();
-    }
-    //email format validation
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        array_push($errors, "Email is not valid");
-        header("Location:../index.php");
-        die();
-    }
-    //password length validation
-    if (strlen($password) < 8) {
-        array_push($errors, "Password must be at least 8 characters long");
-        header("Location:../index.php");
-        die();
     }
 
-    if ($password !== $passwordRepeat) {
+    // Email format validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, "Email is not valid");
+    }
+
+    // Password length validation
+    if (strlen($password) < 8) {
+        array_push($errors, "Password must be at least 8 characters long");
+    }
+
+    // Password confirmation check
+    if ($password !== $passwordConfirm) {
         array_push($errors, "Passwords do not match");
-        header("Location:../index.php");
-        die();
     }
 
     if (count($errors) == 0) {
         $sql = "INSERT INTO users (fname, lname, email, password, jobRole) VALUES (?, ?, ?, ?, 'None')";
-        $stmt = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            die("SQL statement preparation failed: " . mysqli_stmt_error($stmt));
+        $stmt = $mysqli->prepare($sql);
+        
+        if (!$stmt) {
+            die("SQL statement preparation failed: " . $mysqli->error);
+        }
+
+        $stmt->bind_param("ssss", $firstname, $surname, $email, $passwordHash);
+
+        if ($stmt->execute()) {
+            echo "<div class='alert alert-success'>You are registered successfully.</div>";
+            header("Location:../login.php");
+            exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "sssssss", $firstname, $surname, $email, $passwordHash);
-            if (mysqli_stmt_execute($stmt)) {
-                echo "<div class='alert alert-success'>You are registered successfully.</div>";
-                header("Location:../login.php");
-            } else {
-                die("Error executing statement: " . mysqli_stmt_error($stmt));
-            }
+            die("Error executing statement: " . $stmt->error);
         }
     } else {
         // Display errors
@@ -60,8 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+?>
 
-// if ($_SERVER['REQUEST_METHOD'] == "POST") {
+<!-- // if ($_SERVER['REQUEST_METHOD'] == "POST") {
 //     $firstname = $_POST['fname'];
 //     $surname = $_POST['lname'];
 //     $email = $_POST['email'];
@@ -85,8 +83,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //         }
 //     }
 
-// }
-?>
+// } -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
