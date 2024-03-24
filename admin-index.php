@@ -54,7 +54,7 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['lname']; ?></td>
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['jobRole']; ?></td>
-                            <td><a href="admin-index.php" class="edit-button">Edit</a></td>
+                            <td><a href="admin-index.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
                             <td><a href="admin-index.php?userID=<?php echo $row['userID']; ?>" class="delete-button">Delete</a></td>
                         </tr>
                         <?php
