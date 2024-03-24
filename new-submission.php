@@ -1,14 +1,116 @@
 <?php
 require_once("includes/config.php");
-require_once("includes/redirect-login.php");
-ob_clean();
 
-$query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
-$user = $query->fetch_object();
-$section = $_SESSION['newSubmission'];
+// make sure user is logged in
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$author = $_SESSION['user_id'];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST["title"];
+    $type = $_POST["type"];
+    $comments = $_POST["comments"];
+    $dateSubmitted = date("Y-m-d");
+
+    // File upload handling
+    $fileUploaded = false;
+    if ($_FILES["file"]["error"] == UPLOAD_ERR_OK) {
+        $fileName = $_FILES["file"]["name"];
+        $fileType = $_FILES["file"]["type"];
+        $fileTmpName = $_FILES["file"]["tmp_name"];
+
+        // Move uploaded file to a directory
+        $uploadDir = "uploads/";
+        $filePath = $uploadDir . basename($fileName);
+        if (move_uploaded_file($fileTmpName, $filePath)) {
+            $fileUploaded = true;
+        }
+    }
+
+    // Insert details for submission
+    if ($fileUploaded) {
+        $stmt = $conn->prepare("INSERT INTO submission (title, author, type, comments, dateSubmitted, submitted) VALUES (?, ?, ?, ?, ?, 1)");
+        $stmt->bind_param("sssss", $title, $author, $type, $comments, $dateSubmitted);
+        $stmt->execute();
+        $submissionID = $stmt->insert_id;
+
+        // Insert file details into the file table
+        $stmt = $conn->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $fileType, $fileName, $author);
+        $stmt->execute();
+        $fileID = $stmt->insert_id;
+
+        // Insert details into submissionfile table
+        $stmt = $conn->prepare("INSERT INTO submissionfile (submissionID, fileID) VALUES (?, ?)");
+        $stmt->bind_param("ii", $submissionID, $fileID);
+        $stmt->execute();
+        echo "file uploaded successfully.";
+    
+    } else {
+        $error = "File upload failed.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Form</title>
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
+</head>
+<body>
+<?php include_once("includes/header.php") ?>
+    <div class="container">
+        <h2>Submission Form</h2>
+        <?php if (isset($error)) : ?>
+            <div><?php echo $error; ?></div>
+        <?php endif; ?>
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div>
+                <label for="type">Type:</label>
+                <input type="text" id="type" name="type" required>
+            </div>
+            <div>
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="3"></textarea>
+            </div>
+            <div>
+                <label for="file">Upload File:</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <?php include_once("includes/footer.php") ?>
+</body>
+</html>
+
+
+
+
+
+<?php
+// require_once("includes/config.php");
+// require_once("includes/redirect-login.php");
+// ob_clean();
+
+// $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+// $user = $query->fetch_object();
+// $section = $_SESSION['newSubmission'];
 
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,12 +120,12 @@ $section = $_SESSION['newSubmission'];
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
 <body>
-    <?php include_once("includes/header.php") ?>
+    <?php //include_once("includes/header.php") ?>
         <div class="container">
             <?php
-            echo "<p style='color: black;'>$thing</p>";
+            //echo "<p style='color: black;'>$thing</p>";
             ?>
         </div>
-    <?php include_once("includes/footer.php") ?>
+    <?php //include_once("includes/footer.php") ?>
 </body>
-</html>
+</html> -->
