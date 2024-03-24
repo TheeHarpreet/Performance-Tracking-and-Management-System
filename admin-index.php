@@ -13,6 +13,17 @@ if (isset($_GET['userID'])){
     header("Location: index.php");
 }
 
+// edit query
+if (isset($_GET['userID'])){
+    $id=$_GET['userID'];
+    $firstname=$_POST['fname'];
+    $lastname=$_POST['lname'];
+    $email=$_POST['email'];
+    $jobRole=$_POST['jobRole'];
+    mysqli_query($mysqli, "UPDATE `users` SET firstname='$firstname', lastname='$lastname', email='$email', jobRole='$jobRole' WHERE `userID`='$id'");
+    header("Location: index.php");
+}
+
 if ($user->jobRole != "Admin") {
     header("Location: index.php");
 }
