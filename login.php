@@ -1,20 +1,25 @@
 <?php
 require_once("includes/config.php");
-session_start()
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    //make sure email and password is not empty
+    // make sure email and password are not empty
     if (empty($email) || empty($password)) {
         $error = "Both email and password are required";
     } else {
+
         $sql = "SELECT userID, password FROM users WHERE email = ?";
-        $stmt = $conn->prepare($sql);
+        $stmt = $mysqli->prepare($sql);
+        
+        // Bind parameters and execute statement
         $stmt->bind_param("s", $email);
         $stmt->execute();
+        
         $result = $stmt->get_result();
 
+        // Check if user exists
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             $userID = $row['userID'];
@@ -31,18 +36,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } else {
             $error = "User not found. <a href='../login.php'>Go back to login</a>";
         }
+        
+        // Close statement
+        $stmt->close();
     }
     if (isset($error)) {
         echo "<div>$error</div>";
     }
 }
-
-
-    
-    
-    
-    
-    
+?>
+<!--     
     // $email = $_POST['email'];
     // $password = $_POST['password'];
     
@@ -57,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //     $_SESSION['login'] = "successful";
 
     //     header("Location: index.php");
-    // }
-?>
+    // } -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
