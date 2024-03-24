@@ -153,3 +153,7 @@ h3 {
   margin: 10px 0px 0px 0px;
   size: 10px;
 }
+
+.top-header {
+  background-color: white;
+}
