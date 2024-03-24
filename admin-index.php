@@ -6,6 +6,13 @@ ob_clean();
 $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
+// delete query 
+if (isset($_GET['userID'])){
+    $id=$_GET['userID'];
+    mysqli_query($mysqli, "DELETE FROM `users` WHERE `userID`='$id'");
+    header("Location: index.php");
+}
+
 if ($user->jobRole != "Admin") {
     header("Location: index.php");
 }
@@ -31,7 +38,6 @@ if ($user->jobRole != "Admin") {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Password</th>
                             <th>Job Role</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -47,7 +53,6 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['fname']; ?></td>
                             <td><?php echo $row['lname']; ?></td>
                             <td><?php echo $row['email']; ?></td>
-                            <td><?php echo $row['password']; ?></td>
                             <td><?php echo $row['jobRole']; ?></td>
                             <td><a href="admin-index.php" class="edit-button">Edit</a></td>
                             <td><a href="admin-index.php?userID=<?php echo $row['userID']; ?>" class="delete-button">Delete</a></td>
