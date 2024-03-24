@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST["title"];
     $type = $_POST["type"];
     $comments = $_POST["comments"];
-    $dateSubmitted = date("Y-m-d");
+    $dateSubmitted = NOW();
 
     // File upload handling
     $fileUploaded = false;
