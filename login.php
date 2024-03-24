@@ -1,42 +1,43 @@
 <?php
 require_once("includes/config.php");
-session_start();
-$_SESSION['user_id'] = 0;
-
+session_start()
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-// Validate user input
+    //make sure email and password is not empty
     if (empty($email) || empty($password)) {
         $error = "Both email and password are required";
     } else {
-// Check if user exists in the database
-        $sql = "SELECT * FROM users WHERE email = ?";
+        $sql = "SELECT userID, password FROM users WHERE email = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            $userID = $row['userID'];
+            $passwordHash = $row['password'];
 
+            // Verify password
             if (password_verify($password, $passwordHash)) {
-                $_SESSION['user_id'] = $userID;
+                $_SESSION['user_id'] = $userID; 
                 header("Location: ../index.php");
                 exit();
             } else {
                 $error = "Invalid password. <a href='../login.php'>Go back to login</a>";
             }
         } else {
-            $error = "User not found. . <a href='../login.php'>Go back to login</a>";
+            $error = "User not found. <a href='../login.php'>Go back to login</a>";
         }
     }
     if (isset($error)) {
         echo "<div>$error</div>";
     }
-    
+}
+
+
     
     
     
@@ -57,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     //     header("Location: index.php");
     // }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
