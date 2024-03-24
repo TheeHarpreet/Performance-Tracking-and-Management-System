@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
             echo "<div class='alert alert-success'>You are registered successfully.</div>";
-            header("Location:../login.php");
+            header("Location:../signup.php");
             exit();
         } else {
             die("Error executing statement: " . $stmt->error);
