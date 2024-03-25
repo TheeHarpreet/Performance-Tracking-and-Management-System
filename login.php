@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // Verify password
             if (password_verify($password, $passwordHash)) {
                 $_SESSION['user_id'] = $userID; 
-                header("Location: ../index.php");
+                header("Location: index.php");
                 exit();
             } else {
                 $error = "Invalid password. <a href='../login.php'>Go back to login</a>";
