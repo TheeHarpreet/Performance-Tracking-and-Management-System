@@ -154,52 +154,48 @@ h3 {
   size: 10px;
 }
 
-/* admin css */
+/* admin mobile css */
 
-.account-list{
-  background-color: #4d4d4d;
-  margin: 20px 30px;
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  position: relative;
-  flex-direction: column;
-  gap: 30px;
+.admin-container {
+  background: #d4af37;
+  padding: 15px; 
+  border-radius: 3px; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 10px;
 }
-.admin-container{
-  background-color: #ffffff;
-}
-.account-list h2{
-  display: flex;
-  justify-content:center;
-  color: #f8b822;
-  text-decoration: underline;
-}
-table{
+
+.admin-container table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
-}
-th, td{
-  text-align: left;
-  border: 2px solid #f8b822;
-  padding: 15px;
-}
-th{
-  background-color: #f8b822;
-  color: #ffffff;
-  font-size: 20px;
-}
-.edit-button, .delete-button{
-  background-color: #a81a1a;
-  color: white;
-  padding: 8px 20px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-.top-header {
-  background-color: white;
+.admin-container th, .admin-container td {
+  text-align: left;
+  padding: 8px; 
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.admin-container th {
+  background-color: #d4af37;
+  color: #333;
+  font-size: 14px; }
+
+.edit-button, .delete-button {
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px; 
+}
+
+.edit-button {
+  background-color: #0c7400;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+}
+
+.edit-button:hover, .delete-button:hover {
+  opacity: 0.9;
 }
