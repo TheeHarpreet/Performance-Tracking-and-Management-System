@@ -45,6 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
             echo "<div class='alert alert-success'>You are registered successfully.</div>";
+            $_SESSION['user_id'] = mysqli_insert_id($mysqli);
+            $_SESSION['signup'] = "successful";
             header("Location: index.php");
             exit();
         } else {

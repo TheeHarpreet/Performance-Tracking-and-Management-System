@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // make sure email and password are not empty
     if (empty($email) || empty($password)) {
         $error = "Both email and password are required";
-    } else {
+    }
+     else {
 
         $sql = "SELECT userID, password FROM users WHERE email = ?";
         $stmt = $mysqli->prepare($sql);
@@ -27,10 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             // Verify password
             if (password_verify($password, $passwordHash)) {
-                $_SESSION['user_id'] = $userID; 
+                $_SESSION['user_id'] = $userID;
+                $_SESSION['login'] = "successful";
                 header("Location: index.php");
                 exit();
-            } else {
+            } 
+            else {
                 $error = "Invalid password. <a href='../login.php'>Go back to login</a>";
             }
         } else {

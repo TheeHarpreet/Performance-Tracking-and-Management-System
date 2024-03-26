@@ -1,20 +1,18 @@
 <?php
 require_once("includes/config.php");
-
-// make sure user is logged in
-session_start();
+session_start(); // start session
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
 $author = $_SESSION['user_id'];
+$error = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST["title"];
-    $type = $_POST["type"];
     $comments = $_POST["comments"];
-    $dateSubmitted = NOW();
+    $dateSubmitted = date("Y-m-d H:i:s");
 
     // File upload handling
     $fileUploaded = false;
@@ -29,29 +27,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (move_uploaded_file($fileTmpName, $filePath)) {
             $fileUploaded = true;
         }
+    } else {
+        $error = "File upload failed.";
     }
 
-    // Insert details for submission
+// Insert details for submission
     if ($fileUploaded) {
-        $stmt = $conn->prepare("INSERT INTO submission (title, author, type, comments, dateSubmitted, submitted) VALUES (?, ?, ?, ?, ?, 1)");
-        $stmt->bind_param("sssss", $title, $author, $type, $comments, $dateSubmitted);
+        $stmt = $mysqli->prepare("INSERT INTO submission (title, author, type, comments, dateSubmitted, submitted) VALUES (?, ?, ?, ?, ?, 1)");
+        $stmt->bind_param("sssss", $title, $author, $fileType, $comments, $dateSubmitted);
         $stmt->execute();
         $submissionID = $stmt->insert_id;
 
-        // Insert file details into the file table
-        $stmt = $conn->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
+// Insert file details into the file table
+        $stmt = $mysqli->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $fileType, $fileName, $author);
         $stmt->execute();
         $fileID = $stmt->insert_id;
 
-        // Insert details into submissionfile table
-        $stmt = $conn->prepare("INSERT INTO submissionfile (submissionID, fileID) VALUES (?, ?)");
+// Insert details into submissionfile table
+        $stmt = $mysqli->prepare("INSERT INTO submissionfile (submissionID, fileID) VALUES (?, ?)");
         $stmt->bind_param("ii", $submissionID, $fileID);
         $stmt->execute();
-        echo "file uploaded successfully.";
-    
-    } else {
-        $error = "File upload failed.";
+        $successMessage = "File uploaded successfully.";
     }
 }
 ?>
@@ -69,21 +66,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include_once("includes/header.php") ?>
     <div class="container">
         <h2>Submission Form</h2>
-        <?php if (isset($error)) : ?>
+        <?php if (!empty($error)) : ?>
             <div><?php echo $error; ?></div>
+        <?php endif; ?>
+        <?php if (isset($successMessage)) : ?>
+            <div><?php echo $successMessage; ?></div>
         <?php endif; ?>
         <form method="post" enctype="multipart/form-data">
             <div>
                 <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
-            </div>
-            <div>
-                <label for="type">Type:</label>
-                <input type="text" id="type" name="type" required>
+                <input type="text" id="title" name="title" placeholder="Title" required>
             </div>
             <div>
                 <label for="comments">Comments:</label>
-                <textarea id="comments" name="comments" rows="3"></textarea>
+                <textarea id="comments" name="comments"  placeholder="Comments" rows="3"></textarea>
             </div>
             <div>
                 <label for="file">Upload File:</label>
@@ -95,7 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
-
 
 
 
