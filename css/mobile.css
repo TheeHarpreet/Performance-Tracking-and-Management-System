@@ -203,3 +203,16 @@ th{
 .top-header {
   background-color: white;
 }
+
+.section-name-bar {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+}
+
+.section-name-bar button {
+  width: 75px;
+  height: 25px;
+  padding: 0px;
+  margin: 25px 0px 0px 0px;
+}

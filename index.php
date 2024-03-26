@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Home | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
+    <script src="js/index.js"></script>
 </head>
 <body>
     <?php include_once("includes/header.php") ?>
@@ -74,8 +75,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     while ($i < 7) {
                         echo "<div class='section-container'>";
+                        echo "<div class='section-name-bar'>";
                         echo "<h2 class='section-header'>$sectionTitles[$i]</h2>";
-                        echo "<div class='section-hide'>";
+                        echo "<button onclick='hideSection($i)' id='toggle-button$i'>Hide</button>";
+                        echo "</div>";
+                        
+                        echo "<div id='section-hide$i'>";
                         $type = $sectionTypes[$i];
                         $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
                         while ($obj = $query->fetch_object()) {

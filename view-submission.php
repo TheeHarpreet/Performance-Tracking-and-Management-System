@@ -8,6 +8,8 @@ $submissionQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID =
 $submission = $submissionQuery->fetch_object();
 $coauthorsQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE submissionID = $submissionID");
 $coauthors = $coauthorsQuery->fetch_object();
+$authorQuery = $mysqli->query("SELECT * FROM users WHERE userID = $submission->author");
+$author = $authorQuery->fetch_object();
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +26,7 @@ $coauthors = $coauthorsQuery->fetch_object();
         <div class="container">
             <?php
                 echo "<h1 class='submission-title'>$submission->title</h1>";
-                echo "<h2>$submission->author</h2>";
+                echo "<h2>$author->fname $author->lname</h2>";
                 echo "<h1>$submission->title</h1>";
                 echo "<h1>$submission->title</h1>";
             ?>
