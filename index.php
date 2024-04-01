@@ -72,13 +72,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         for ($loop = 0; $loop < 7; $loop++) {
                             $section = $sectionTypes[$loop];
                             include("includes/calculate-score.php");
-                            $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
-                            echo "
-                            <p>$sectionTitles[$loop]: $minPoints $points $maxPoints</p>
-                            <div class='progress-bar-container'>
-                                <div id='myBar' class='progress-bar' style='--percent: $percent;'></div>
-                            </div>
-                            ";
+                            if ($points == 0){
+                                echo "<p>$sectionTitles[$loop]: Not enough data to calculate scores</p>";
+                            }
+                            else {
+                                $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
+                                echo "
+                                <p>$sectionTitles[$loop]: $minPoints $points $maxPoints</p>
+                                <div class='progress-bar-container'>
+                                    <div id='myBar' class='progress-bar' style='--percent: $percent;'></div>
+                                </div>
+                                ";
+                            }
                         }
                         ?>
                     </div>
