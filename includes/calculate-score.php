@@ -3,14 +3,11 @@ $query = $mysqli->query("SELECT SUM(approved) AS amount FROM submission WHERE au
 $result = $query->fetch_object();
 $currentAmount = $result->amount;
 if ($currentAmount == 0) {
-    $points = 1.5;
-    
-    $minPoints = 1;
-    $maxPoints = 2;
+    $points = 0;
 }
 else {
-    $minRange = 1;
-    $maxRange = 5;
+    $minRange = 2;
+    $maxRange = 4;
     if ($section == 'A') {
         $minPoints = 1;
         $maxPoints = 2;
@@ -30,6 +27,12 @@ else {
         $minPoints = 3;
         $maxPoints = 5;
     }
-    $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange)));
+    if ($minRange == $maxRange) {
+        $points = $maxPoints;
+    }
+    else {
+        $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange)));
+    }
+    $points = round($points, 2);
 }
 ?>

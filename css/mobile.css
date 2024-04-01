@@ -217,10 +217,30 @@ h3 {
   height:24px;
   background-color:#817c7c;
   border-radius:10px;
+  display: flex;
+  flex-direction: row;
 }
 .progress-bar{
   width: var(--percent) + '%';
   height:100%;
   background-color:#d4af37;
   border-radius:10px;
+}
+.performance-overview {
+  gap: 400px;
+}
+.performance-section {
+  width: 500px;
+}
+.percent-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+circle.fg {
+  transform: rotate(-90deg);
+  transform-origin: 125px 125px;
+}
+.point-boundary {
+  margin: 5px;
 }

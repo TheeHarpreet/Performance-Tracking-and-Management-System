@@ -63,29 +63,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="performance">
                 <h1>Performance Overview</h1>
                 <div class="performance-overview">
-                    <div>
+                    <div class="performance-section">
                         <?php
                         $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
                         $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
-                        $author = $user->userID;
-                        
+                        $author = $userID;
+                        $pointsTotal = 0;
                         for ($loop = 0; $loop < 7; $loop++) {
                             $section = $sectionTypes[$loop];
                             include("includes/calculate-score.php");
+                            $pointsTotal += $points;
                             if ($points == 0){
                                 echo "<p>$sectionTitles[$loop]: Not enough data to calculate scores</p>";
                             }
                             else {
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
                                 echo "
-                                <p>$sectionTitles[$loop]: $minPoints $points $maxPoints</p>
+                                <p>$sectionTitles[$loop]:</p>
+                                <div class='percent-bar'>
+                                <p class='point-boundary'>$minPoints</p>
                                 <div class='progress-bar-container'>
-                                    <div id='myBar' class='progress-bar' style='width: $percent%;'></div>
+                                    <div id='myBar' class='progress-bar' style='width: $percent%;'>"; if ($percent >= 10) { echo "<p style='padding: 4px 7px 0px 0px; margin: 0px; border: 0px; text-align: right;'>$points</p>"; } echo"</div>";
+                                    if ($percent < 10) { echo "<p style='padding: 4px 0px 0px 3px; margin: 0px; border: 0px; text-align: right;'>$points</p>"; }
+                                echo "</div>
+                                <p class='point-boundary'>$maxPoints</p>
                                 </div>
                                 ";
                             }
                         }
                         ?>
+                    </div>
+                    <div class="performance-section">
+                    <p><?php echo "$pointsTotal"; ?> / 55</p> <!-- 42 is the minimum if you have something in all categories -->
+                        <svg width="250" height="250" viewBox="0 0 250 250">
+                        <circle class="bg" cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"></circle>
+                        <circle class="fg"cx="125" cy="125" r="115" fill="none" stroke="#f8b822" stroke-width="20" stroke-dasharray="362.25 362.25"></circle>
+                        </svg>
+                        <p>The circle does nothing yet</p>
                     </div>
                 </div>
             </div>
