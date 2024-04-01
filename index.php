@@ -62,13 +62,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="performance">
                 <h1>Performance Overview</h1>
                 <div class="performance-overview">
-                    <p>*Performance Info Here*</p>
+                    <?php $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
+                    ?>
                 </div>
             </div>
             <div class="tasks">
                 <?php
                     $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
-                    $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
                     $i = 0;
 
                     echo "<h1>Submissions</h1>";
