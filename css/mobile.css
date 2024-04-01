@@ -200,6 +200,15 @@ h3 {
   opacity: 0.9;
 }
 
+.create-account{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 50px;
+  margin: 40px 60px;
+}
+
 .section-name-bar {
   display: flex;
   flex-direction: row;
