@@ -212,3 +212,9 @@ h3 {
   padding: 0px;
   margin: 25px 0px 0px 0px;
 }
+.progress-bar-container{
+  width: 300px;
+}
+.progress-bar{
+  width: var(--points)
+}

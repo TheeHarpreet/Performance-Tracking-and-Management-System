@@ -72,7 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             include("includes/calculate-score.php");
                             echo "
                             <p>$sectionTitles[$loop]: $min $points $max</p>
-                            <div class='progress-bar' style='--points'>
+                            <div class='progress-bar-container'>
+                                <div id='myBar' class='progress-bar'></div>
                             </div>
                             ";
                         }
