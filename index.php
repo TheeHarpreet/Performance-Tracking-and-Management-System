@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 echo "
                                 <p>$sectionTitles[$loop]: $minPoints $points $maxPoints</p>
                                 <div class='progress-bar-container'>
-                                    <div id='myBar' class='progress-bar' style='--percent: $percent;'></div>
+                                    <div id='myBar' class='progress-bar' style='width: $percent%;'></div>
                                 </div>
                                 ";
                             }
