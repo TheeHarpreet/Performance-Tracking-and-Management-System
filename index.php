@@ -68,13 +68,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
                         $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
                         $author = $user->userID;
+                        
                         for ($loop = 0; $loop < 7; $loop++) {
                             $section = $sectionTypes[$loop];
                             include("includes/calculate-score.php");
+                            $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
                             echo "
                             <p>$sectionTitles[$loop]: $minPoints $points $maxPoints</p>
                             <div class='progress-bar-container'>
-                                <div id='myBar$loop' class='progress-bar' onload=progress()></div>
+                                <div id='myBar' class='progress-bar' style='--percent: $percent;'></div>
                             </div>
                             ";
                         }
