@@ -3,7 +3,10 @@ $query = $mysqli->query("SELECT SUM(approved) AS amount FROM submission WHERE au
 $result = $query->fetch_object();
 $currentAmount = $result->amount;
 if ($currentAmount == 0) {
-    $points = 0;
+    $points = 1.5;
+    
+    $minPoints = 1;
+    $maxPoints = 2;
 }
 else {
     $minRange = 1;
