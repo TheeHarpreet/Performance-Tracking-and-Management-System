@@ -62,13 +62,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="performance">
                 <h1>Performance Overview</h1>
                 <div class="performance-overview">
-                    <?php $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
-                    ?>
+                    <div>
+                        <?php
+                        $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
+                        $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
+                        for ($loop = 0; $loop < 7; $loop++) {
+                            $section = $sectionTypes[$loop];
+                            include("includes/calculate-score.php");
+                            echo "<p>$sectionTitles[$loop]: $min $points $max</p>";
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
             <div class="tasks">
                 <?php
-                    $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
                     $i = 0;
 
                     echo "<h1>Submissions</h1>";
