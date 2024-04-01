@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php
                         $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
                         $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
+                        $author = $user->userID;
                         for ($loop = 0; $loop < 7; $loop++) {
                             $section = $sectionTypes[$loop];
                             include("includes/calculate-score.php");
