@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
     <script src="js/index.js"></script>
+    <script src="js/performance-bars.js" defer></script>
 </head>
 <body>
     <?php include_once("includes/header.php") ?>

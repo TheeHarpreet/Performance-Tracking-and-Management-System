@@ -1,27 +1,25 @@
 <?php
+$currentAmount = $mysqli->query("SELECT SUM(approved) AS amount FROM submission WHERE author = $author AND type = '$section'");
+$minRange = 1;
+$maxRange = 5;
 if ($section == 'A') {
-    $min = 1;
-    $points = 1.5;
-    $max = 2;
+    $minPoints = 1;
+    $maxPoints = 2;
 } else if ($section == 'B') {
-    $min = 6;
-    $points = 7;
-    $max = 8; 
+    $minPoints = 6;
+    $maxPoints = 8; 
 } else if ($section == 'C') {
-    $min = 14;
-    $points = 15;
-    $max = 16;
+    $minPoints = 14;
+    $maxPoints = 16;
 } else if ($section == 'D' || $section == 'F') {
-    $min = 5;
-    $points = 6;
-    $max = 7;
+    $minPoints = 5;
+    $maxPoints = 7;
 } else if ($section == 'E') {
-    $min = 8;
-    $points = 9;
-    $max = 10;
+    $minPoints = 8;
+    $maxPoints = 10;
 } else if ($section == 'G') {
-    $min = 3;
-    $points = 4;
-    $max = 5;
+    $minPoints = 3;
+    $maxPoints = 5;
 }
+//$points = $minPoints * (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange)));
 ?>
