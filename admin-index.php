@@ -96,7 +96,7 @@ if ($user->jobRole != "Admin") {
                         </tr>
                         <tr>
                         <?php
-                        $user_accounts = mysqli_query($mysqli, "SELECT * FROM users");
+                        $user_accounts = mysqli_query($mysqli, "SELECT * FROM users ORDER BY $orderBy");
                             
                             while ($row = mysqli_fetch_assoc($user_accounts))
                             {
