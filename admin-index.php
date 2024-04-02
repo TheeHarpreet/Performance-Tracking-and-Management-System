@@ -6,6 +6,12 @@ ob_clean();
 $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
+if (isset($_GET["orderby"])) {
+    $orderBy = $_GET["orderby"];
+} else {
+    $orderBy = "userID";
+}
+
 // delete query 
 if (isset($_GET['userID'])){
     $id=$_GET['userID'];
@@ -79,12 +85,12 @@ if ($user->jobRole != "Admin") {
                 <h2>List Of User Accounts</h2>
                 <table>
                     <thead>
-                        <tr>
-                            <th>UserID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Job Role</th>
+                        <tr class="accounts-table">
+                            <th><div>UserID <a class="sort" href="admin-index.php">Sort by</a></div></th>
+                            <th><div>First Name <a class="sort" href="admin-index.php?orderby=fname">Sort by</a></div></th>
+                            <th><div>Last Name <a class="sort" href="admin-index.php?orderby=lname">Sort by</a></div></th>
+                            <th><div>Email <a class="sort" href="admin-index.php?orderby=email">Sort by</a></div></th>
+                            <th><div>Job Role <a class="sort" href="admin-index.php?orderby=jobRole">Sort by</a></div></th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -102,7 +108,7 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['jobRole']; ?></td>
                             <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
                             <?php if ($row['password'] == "") {
-                                echo "<td><p>Account archived</p></td>";
+                                echo "<td><a href='admin-index.php?userID="; $row['userID']; echo "'class='Unblock-button'>Unblock</a></td>";
                             } else {
                                 echo "
                                 <td><a href='admin-index.php?userID="; $row['userID']; echo "' class='delete-button'>Delete</a></td>

@@ -6,7 +6,7 @@ if ($currentAmount == 0) {
     $points = 0;
 }
 else {
-    $minRange = 2;
+    $minRange = mysqli_query($mysqli, "SELECT ");
     $maxRange = 4;
     if ($section == 'A') {
         $minPoints = 1;

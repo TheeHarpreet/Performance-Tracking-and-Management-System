@@ -267,3 +267,15 @@ circle.fg {
 .new-admin-inputs input {
   height: 0px;
 }
+.sort {
+  background-color: grey;
+  height: 16px;
+  width: 46px;
+  margin: 0;
+  padding: 3px;
+  font-size: 12px;
+}
+.accounts-table th div {
+  display: flex;
+  flex-direction: row;
+}
