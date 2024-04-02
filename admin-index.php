@@ -26,7 +26,6 @@ if (isset($_GET['userID'])){
 
 // creating an admin account
 if(isset($_POST['submit'])){
-    $admin_userID = $_POST['userID'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
@@ -44,7 +43,7 @@ if (mysqli_num_rows($email_verify) !=0){
     echo "<a href='javascript:script.history.back()'><button class = 'btn'>Go Back</button>";
 }
 else{
-    mysqli_query($mysqli, "INSERT INTO `user_accounts(userID, fname, lname, email, password, jobRole) VALUES ('$admin_userID', '$fname', '$lname', '$email', '$password', '$jobRole')");
+    mysqli_query($mysqli, "INSERT INTO `user_accounts(fname, lname, email, password, jobRole) VALUES ('$fname', '$lname', '$email', '$password', '$jobRole')");
     echo "<div class='message'
             <p> Account has been created.</p>
         </div> <br>";
@@ -69,23 +68,22 @@ if ($user->jobRole != "Admin") {
     <?php include_once("includes/header.php") ?>
         <div class="admin-container">
             <div class="create-account">
-                <form action="admin-update.php?userID=<?php echo $id; ?>" method="post" class="basic">
-                    <label for="admin-userID">Admin UserID</label>
-                    <input type="number" name="admin-userID" id="<?php echo $admin_userID; ?>" required>
-                    
-                    <label for="fname">FirstName</label>
-                    <input type="text" name="fname" id="fname" required>
-                    
-                    <label for="lname">LastName</label>
-                    <input type="text" name="lname" id="lname" required>
-                    
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
-                    
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
-
-                    <input type="submit" class="btn" name="submit" value="create account" required>
+                <form action="admin-update.php?userID=<?php echo $id; ?>" method="post" class="new-admin-form">
+                <div class="new-admin-inputs">
+                    <div>
+                        <p>First Name</p>
+                        <input type="text" name="fname" id="fname" required>
+                        <p>Last Name</p>
+                        <input type="text" name="lname" id="lname" required>
+                    </div>
+                    <div>
+                        <p>Email</p>
+                        <input type="email" name="email" id="email" required>
+                        <p>Password</p>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                </div>
+                <input type="submit" class="btn" name="submit" value="Create Account" required>
                 </form>
             </div>
             <div class="account-list">

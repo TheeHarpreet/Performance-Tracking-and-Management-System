@@ -139,7 +139,7 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
   width: 93%;
   padding: 15px;
   margin-bottom: 10px;
@@ -252,4 +252,18 @@ circle.fg {
 }
 .point-boundary {
   margin: 5px;
+}
+.new-admin-inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 150px;
+}
+.new-admin-inputs p, .new-admin-inputs input {
+  margin: 0px;
+}
+.new-admin-inputs p {
+  height: 25px;
+}
+.new-admin-inputs input {
+  height: 0px;
 }

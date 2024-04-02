@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
                         }
-                        $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.userID = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.type = '$type'");
+                        $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.type = '$type'");
                         while ($obj = $query->fetch_object()) {
                             $isAuthor = false;
                             include("includes/submission-preview-fill.php");

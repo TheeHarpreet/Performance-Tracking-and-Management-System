@@ -48,23 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
-<!--     
-    // $email = $_POST['email'];
-    // $password = $_POST['password'];
-    
-    // $query = $mysqli->prepare('SELECT userID, fname, lname FROM users WHERE email = ? AND password = ?'); 
-    // $query->bind_param('ss', $email, $password); 
-    // $query->execute();
-    // $result = $query->get_result();
-    // $obj = $result->fetch_object();
-    
-    // if (mysqli_num_rows($result) == 1) {
-    //     $_SESSION['user_id'] = $obj->userID;
-    //     $_SESSION['login'] = "successful";
-
-    //     header("Location: index.php");
-    // } -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

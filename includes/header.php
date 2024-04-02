@@ -6,7 +6,7 @@
         <div class="bottom-header">
             <?php
             if (basename($_SERVER['PHP_SELF']) == "index.php") {
-                echo "<p>Welcome, $user->fname!</p>";
+                echo "<p>Hello, $user->fname $user->lname!</p>";
             }
             ?>
             <a href="login.php">logout</a>
