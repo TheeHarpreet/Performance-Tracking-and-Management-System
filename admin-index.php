@@ -6,21 +6,10 @@ ob_clean();
 $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
-// edit query
-if (isset($_GET['userID'])){
-    $id=$_GET['userID'];
-    $firstname=$_POST['fname'];
-    $lastname=$_POST['lname'];
-    $email=$_POST['email'];
-    $jobRole=$_POST['jobRole'];
-    mysqli_query($mysqli, "UPDATE `users` SET `fname`='$firstname', `lname`='$lastname', `email`='$email', `jobRole`='$jobRole' WHERE `userID`='$id'");
-    header("Location: index.php");
-}
-
 // delete query 
 if (isset($_GET['userID'])){
     $id=$_GET['userID'];
-    mysqli_query($mysqli, "DELETE FROM `users` WHERE `userID`='$id'");
+    mysqli_query($mysqli, "UPDATE `users` SET `password` = '' WHERE `users`.`userID` =  $id");
     header("Location: index.php");
 }
 
