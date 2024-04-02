@@ -19,6 +19,13 @@ if (isset($_GET['userID'])){
     header("Location: index.php");
 }
 
+// unblock query
+if (isset($_GET['userID'])){
+    $id=$_GET['userID'];
+    mysqli_query($mysqli, "UPDATE `users` SET `password` = '12345' WHERE `users`.`userID` =  $id");
+    header("Location: index.php");
+}
+
 // creating an admin account
 if(isset($_POST['submit'])){
     $fname = $_POST['fname'];
@@ -108,7 +115,7 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['jobRole']; ?></td>
                             <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
                             <?php if ($row['password'] == "") {
-                                echo "<td><a href='admin-index.php?userID="; $row['userID']; echo "'class='Unblock-button'>Unblock</a></td>";
+                                echo "<td><a href='admin-index.php?userID="; $row['userID']; echo "'class='unblock-button'>Unblock</a></td>";
                             } else {
                                 echo "
                                 <td><a href='admin-index.php?userID="; $row['userID']; echo "' class='delete-button'>Delete</a></td>
