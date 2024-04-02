@@ -101,7 +101,14 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['jobRole']; ?></td>
                             <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
-                            <td><a href="admin-index.php?userID=<?php echo $row['userID']; ?>" class="delete-button">Delete</a></td>
+                            <?php if ($row['password'] == "") {
+                                echo "<td><p>Account archived</p></td>";
+                            } else {
+                                echo "
+                                <td><a href='admin-index.php?userID="; $row['userID']; echo "' class='delete-button'>Delete</a></td>
+                                ";
+                            }
+                            ?>
                         </tr>
                         <?php
                             }
