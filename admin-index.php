@@ -12,18 +12,21 @@ if (isset($_GET["orderby"])) {
     $orderBy = "userID";
 }
 
-// delete query 
-if (isset($_GET['userID'])){
-    $id=$_GET['userID'];
-    mysqli_query($mysqli, "UPDATE `users` SET `password` = '' WHERE `users`.`userID` =  $id");
-    header("Location: index.php");
+// block query 
+if (isset($_GET['block'])){
+    $stmt = $mysqli->prepare("UPDATE users SET `password` = '' WHERE userID = ?");
+    $stmt->bind_param('s', $_GET['block'] );
+    $stmt->execute();
+    header("Location: admin-index.php");
 }
 
 // unblock query
-if (isset($_GET['userID'])){
-    $id=$_GET['userID'];
-    mysqli_query($mysqli, "UPDATE `users` SET `password` = '12345' WHERE `users`.`userID` =  $id");
-    header("Location: index.php");
+if (isset($_GET['unblock'])){
+    $passwordHash = password_hash("password123", PASSWORD_DEFAULT);
+    $stmt = $mysqli->prepare("UPDATE users SET `password` = ? WHERE userID = ?");
+    $stmt->bind_param('ss', $passwordHash, $_GET['unblock'] );
+    $stmt->execute();
+    header("Location: admin-index.php");
 }
 
 // creating an admin account
@@ -115,11 +118,9 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['jobRole']; ?></td>
                             <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
                             <?php if ($row['password'] == "") {
-                                echo "<td><a href='admin-index.php?userID="; $row['userID']; echo "'class='unblock-button'>Unblock</a></td>";
+                                echo "<td><a href='admin-index.php?unblock="; echo $row['userID']; echo "' class='unblock-button'>Unblock</a></td>";
                             } else {
-                                echo "
-                                <td><a href='admin-index.php?userID="; $row['userID']; echo "' class='delete-button'>Delete</a></td>
-                                ";
+                                echo " <td><a href='admin-index.php?block="; echo $row['userID']; echo "' class='delete-button'>Delete</a></td> ";
                             }
                             ?>
                         </tr>
