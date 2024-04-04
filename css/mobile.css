@@ -139,7 +139,7 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
   width: 93%;
   padding: 15px;
   margin-bottom: 10px;
@@ -157,7 +157,7 @@ h3 {
 /* admin mobile css */
 
 .admin-container {
-  background: #d4af37;
+  background: #3a3a3a;
   padding: 15px; 
   border-radius: 3px; 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -178,9 +178,18 @@ h3 {
 .admin-container th {
   background-color: #d4af37;
   color: #333;
-  font-size: 14px; }
-
-.edit-button, .delete-button {
+  font-size: 14px;
+}
+.account-list h2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d4af37;
+  color: #ffffff;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+.edit-button, .delete-button, .btn, .unblock-button {
   padding: 5px 10px;
   border-radius: 3px;
   text-decoration: none;
@@ -195,9 +204,26 @@ h3 {
 .delete-button {
   background-color: #e74c3c;
 }
+.unblock-button{
+  background-color:coral;
+}
+.btn{
+  margin: 10px 215px;
+  background-color: #d4af37;
+  border-radius: 6px;
+}
 
-.edit-button:hover, .delete-button:hover {
+.edit-button:hover, .delete-button:hover, .btn:hover {
   opacity: 0.9;
+}
+
+.create-account{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 50px;
+  margin: 40px 60px;
 }
 
 .section-name-bar {
@@ -243,4 +269,31 @@ circle.fg {
 }
 .point-boundary {
   margin: 5px;
+}
+.new-admin-inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  margin: 0 15px;
+}
+.new-admin-inputs p, .new-admin-inputs input {
+  margin: 0px;
+}
+.new-admin-inputs p {
+  height: 25px;
+}
+.new-admin-inputs input {
+  height: 0px;
+}
+.sort {
+  background-color: grey;
+  height: 16px;
+  width: 46px;
+  margin: 2px;
+  padding: 5px;
+  font-size: 10px;
+}
+.accounts-table th div {
+  display: flex;
+  flex-direction: row;
 }

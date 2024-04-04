@@ -1,13 +1,25 @@
 <?php
-$query = $mysqli->query("SELECT SUM(approved) AS amount FROM submission WHERE author = $author AND type = '$section'");
+
+$query = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND type = '$section'");
 $result = $query->fetch_object();
 $currentAmount = $result->amount;
+
+// getting the min points for a section
+function getMinPoint($mysqli, $section){
+    mysqli_query($mysqli, "SELECT MIN(`approved`) AS minPoint FROM `submission` WHERE type = '$section' AND approved > 0");
+}
+
+// getting the max points for a section
+function getMaxPoint($mysqli, $section){
+    mysqli_query($mysqli, "SELECT MAX(`approved`) AS maxPoint FROM `submission` WHERE type = '$section'");
+}
+
 if ($currentAmount == 0) {
     $points = 0;
 }
 else {
-    $minRange = 2;
-    $maxRange = 4;
+    $minRange = getMinPoint($mysqli, $section);
+    $maxRange = getMaxPoint($mysqli, $section);
     if ($section == 'A') {
         $minPoints = 1;
         $maxPoints = 2;

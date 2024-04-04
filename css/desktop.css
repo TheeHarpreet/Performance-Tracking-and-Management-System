@@ -47,7 +47,7 @@ button {
 
 /* admin css */
 .admin-container {
-  background: #d4af37;
+  background: #3a3a3a;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -64,15 +64,22 @@ button {
   padding: 10px;
   border-bottom: 1px solid #e0e0e0;
 }
+.account-list h2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0px;
+  margin: 5px 500px;
+}
 
 .admin-container th {
   background-color: #d4af37;
   color: #333;
 }
 
-.edit-button, .delete-button {
+.edit-button, .delete-button, .btn, .unblock-button{
   padding: 5px 15px;
-  border-radius: 3px;
+  border-radius: 6px;
   text-decoration: none;
   color: #fff;
   font-size: 14px;
@@ -84,6 +91,15 @@ button {
 
 .delete-button {
   background-color: #e74c3c;
+}
+
+.unblock-button{
+  background-color:coral;
+}
+
+.btn{
+  margin: 10px 205px;
+  background-color: #d4af37;
 }
 
 .edit-button:hover, .delete-button:hover {

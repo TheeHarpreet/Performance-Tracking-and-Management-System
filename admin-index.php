@@ -6,23 +6,55 @@ ob_clean();
 $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
-// delete query 
-if (isset($_GET['userID'])){
-    $id=$_GET['userID'];
-    mysqli_query($mysqli, "DELETE FROM `users` WHERE `userID`='$id'");
-    header("Location: index.php");
+if (isset($_GET["orderby"])) {
+    $orderBy = $_GET["orderby"];
+} else {
+    $orderBy = "userID";
 }
 
-// edit query
-if (isset($_GET['userID'])){
-    $id=$_GET['userID'];
-    $firstname=$_POST['fname'];
-    $lastname=$_POST['lname'];
-    $email=$_POST['email'];
-    $jobRole=$_POST['jobRole'];
-    mysqli_query($mysqli, "UPDATE `users` SET firstname='$firstname', lastname='$lastname', email='$email', jobRole='$jobRole' WHERE `userID`='$id'");
-    header("Location: index.php");
+// block query 
+if (isset($_GET['block'])){
+    $stmt = $mysqli->prepare("UPDATE users SET `password` = '' WHERE userID = ?");
+    $stmt->bind_param('s', $_GET['block'] );
+    $stmt->execute();
+    header("Location: admin-index.php");
 }
+
+// unblock query
+if (isset($_GET['unblock'])){
+    $passwordHash = password_hash("password123", PASSWORD_DEFAULT);
+    $stmt = $mysqli->prepare("UPDATE users SET `password` = ? WHERE userID = ?");
+    $stmt->bind_param('ss', $passwordHash, $_GET['unblock'] );
+    $stmt->execute();
+    header("Location: admin-index.php");
+}
+
+// creating an admin account
+if(isset($_POST['submit'])){
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $jobRole = $_POST['jobRole'];
+
+
+// verifying if the email is already in use or not
+$email_verify = mysqli_query($mysqli, "SELECT `email` FROM `users` WHERE `email`='$email'");
+
+if (mysqli_num_rows($email_verify) !=0){
+    echo "<div class='message'
+            <p>This email is already in use, please try another email.</p>
+        </div> <br>";
+    echo "<a href='javascript:script.history.back()'><button class = 'btn'>Go Back</button>";
+}
+else{
+    mysqli_query($mysqli, "INSERT INTO `user_accounts(fname, lname, email, password, jobRole) VALUES ('$fname', '$lname', '$email', '$password', '$jobRole')");
+    echo "<div class='message'
+            <p> Account has been created.</p>
+        </div> <br>";
+    echo "<a href='admin-index.php'><button class = 'btn'>Go Back</button>";
+}
+}else{
 
 if ($user->jobRole != "Admin") {
     header("Location: index.php");
@@ -40,22 +72,41 @@ if ($user->jobRole != "Admin") {
 <body>
     <?php include_once("includes/header.php") ?>
         <div class="admin-container">
+            <div class="create-account">
+                <form action="admin-update.php?userID=<?php echo $id; ?>" method="post" class="new-admin-form">
+                <div class="new-admin-inputs">
+                    <div>
+                        <p>First Name</p>
+                        <input type="text" name="fname" id="fname" required>
+                        <p>Last Name</p>
+                        <input type="text" name="lname" id="lname" required>
+                    </div>
+                    <div>
+                        <p>Email</p>
+                        <input type="email" name="email" id="email" required>
+                        <p>Password</p>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                </div>
+                <input type="submit" class="btn" name="submit" value="Create Account" required>
+                </form>
+            </div>
             <div class="account-list">
                 <h2>List Of User Accounts</h2>
                 <table>
                     <thead>
-                        <tr>
-                            <th>UserID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Job Role</th>
+                        <tr class="accounts-table">
+                            <th><div>UserID <a class="sort" href="admin-index.php">Sort by</a></div></th>
+                            <th><div>First Name <a class="sort" href="admin-index.php?orderby=fname">Sort by</a></div></th>
+                            <th><div>Last Name <a class="sort" href="admin-index.php?orderby=lname">Sort by</a></div></th>
+                            <th><div>Email <a class="sort" href="admin-index.php?orderby=email">Sort by</a></div></th>
+                            <th><div>Job Role <a class="sort" href="admin-index.php?orderby=jobRole">Sort by</a></div></th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                         <tr>
                         <?php
-                        $user_accounts = mysqli_query($mysqli, "SELECT * FROM users");
+                        $user_accounts = mysqli_query($mysqli, "SELECT * FROM users ORDER BY $orderBy");
                             
                             while ($row = mysqli_fetch_assoc($user_accounts))
                             {
@@ -65,8 +116,13 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['lname']; ?></td>
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['jobRole']; ?></td>
-                            <td><a href="admin-index.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
-                            <td><a href="admin-index.php?userID=<?php echo $row['userID']; ?>" class="delete-button">Delete</a></td>
+                            <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
+                            <?php if ($row['password'] == "") {
+                                echo "<td><a href='admin-index.php?unblock="; echo $row['userID']; echo "' class='unblock-button'>Unblock</a></td>";
+                            } else {
+                                echo " <td><a href='admin-index.php?block="; echo $row['userID']; echo "' class='delete-button'>Delete</a></td> ";
+                            }
+                            ?>
                         </tr>
                         <?php
                             }
@@ -76,5 +132,6 @@ if ($user->jobRole != "Admin") {
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>
+    <?php } ?>
 </body>
 </html>
