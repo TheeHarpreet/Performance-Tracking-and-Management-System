@@ -1,11 +1,6 @@
 <?php
 require_once("includes/config.php");
 require_once("includes/redirect-login.php");
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
 
 $author = $_SESSION['user_id'];
 $type = $_SESSION['newSubmission'];

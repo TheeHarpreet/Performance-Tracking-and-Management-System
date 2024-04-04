@@ -19,7 +19,9 @@ $user = $query->fetch_object();
 <body>
     <?php include_once("includes/header.php") ?>
         <div class="container">
-            
+            <div>
+                <a href="manager-index.php">Hi</a>
+            </div>
         </div>
     <?php include_once("includes/footer.php") ?>
 </body>
