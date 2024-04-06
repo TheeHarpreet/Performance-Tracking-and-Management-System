@@ -69,12 +69,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
                         $author = $userID;
                         $pointsTotal = 0;
+                        $pointsArray = array ();
                         for ($loop = 0; $loop < 7; $loop++) {
                             $section = $sectionTypes[$loop];
                             include("includes/calculate-score.php");
                             $pointsTotal += $points;
                             if ($points == 0){
                                 echo "<p>$sectionTitles[$loop]: Not enough data to calculate scores</p>";
+                                array_push($pointsArray, 0);
                             }
                             else {
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
@@ -89,17 +91,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <p class='point-boundary'>$maxPoints</p>
                                 </div>
                                 ";
+                                array_push($pointsArray, $percent);
                             }
                         }
                         ?>
                     </div>
                     <div class="performance-section">
                     <p><?php echo "$pointsTotal"; ?> / 55</p> <!-- 42 is the minimum if you have something in all categories -->
-                        <svg width="250" height="250" viewBox="0 0 250 250">
-                        <circle class="bg" cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"></circle>
-                        <circle class="fg"cx="125" cy="125" r="115" fill="none" stroke="#f8b822" stroke-width="20" stroke-dasharray="362.25 362.25"></circle>
-                        </svg>
-                        <p>The circle does nothing yet</p>
+                    <?php $total = 0 ?>
+                    <div id="arc"></div>
+                    <div id="arc6"></div>
+                    <div id="arc5"></div>
+                    <div id="arc4"></div>
+                    <div id="arc3"></div>
+                    <div id="arc2"></div>
+                    <div id="arc1"></div>
+                    <?php $total = 0;  ?>
+                    <style> #arc1::before { transform: rotate(-90deg); } </style>
+                    <style> #arc2::before { transform: rotate(-90deg); } </style>
+                    <style> #arc3::before { transform: rotate(-90deg); } </style>
+                    <style> #arc4::before { transform: rotate(-90deg); } </style>
+                    <style> #arc5::before { transform: rotate(-90deg); } </style>
+                    <style> #arc6::before { transform: rotate(-90deg); } </style>
                     </div>
                 </div>
             </div>
