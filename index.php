@@ -97,9 +97,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ?>
                     </div>
                     <div class="performance-section">
-                    <p><?php echo "$pointsTotal"; ?> / 55</p> <!-- 42 is the minimum if you have something in all categories -->
+                    <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p> <!-- 42 is the minimum if you have something in all categories -->
                     <?php $total = 0 ?>
                     <div id="arc"></div>
+                    <div id="arc7"></div>
                     <div id="arc6"></div>
                     <div id="arc5"></div>
                     <div id="arc4"></div>
@@ -112,6 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <style> #arc4::before { transform: rotate(<?php $total += $pointsArray[3]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
                     <style> #arc5::before { transform: rotate(<?php $total += $pointsArray[4]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
                     <style> #arc6::before { transform: rotate(<?php $total += $pointsArray[5]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                    <style> #arc7::before { transform: rotate(<?php $total += $pointsArray[1]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
                     </div>
                 </div>
             </div>
@@ -142,7 +144,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                         echo "<div>";
                         echo "<form method='post'>";
-                        echo "<button class='new-submission' name='new-submission' value='$sectionTypes[$i]'>+ Add New Submission</button>";
+                        if (!isset($_GET['user_override'])) {
+                            echo "<button class='new-submission' name='new-submission' value='$sectionTypes[$i]'>+ Add New Submission</button>";
+                        }
                         echo "</form>";
                         echo "</div>";
                         echo "</div>";

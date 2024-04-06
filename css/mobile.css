@@ -308,8 +308,8 @@ circle.fg {
   flex-direction: row;
 }
 
-#arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6,
-#arc::before, #arc1::before, #arc2::before, #arc3::before, #arc4::before, #arc5::before, #arc6::before {
+#arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6, #arc7,
+#arc::before, #arc1::before, #arc2::before, #arc3::before, #arc4::before, #arc5::before, #arc6::before, #arc7::before {
   box-sizing: border-box;
   border-radius: 100%;
   width: 250px;
@@ -317,7 +317,7 @@ circle.fg {
   position: absolute;
   background-color: transparent;
 }
-#arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6 {
+#arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6, #arc7 {
   border: solid transparent 20px;
   clip: rect(0px, 250px, 125px, 0px);
   margin: 40px;
@@ -330,45 +330,37 @@ circle.fg {
   clip: rect(0px, 250px, 125px, 0px);
   transform: rotate(0deg);
 }
-#arc1::before {
+#arc1::before, #arc2::before, #arc3::before, #arc4::before, #arc5::before, #arc6::before, #arc7::before {
   content: '';
-  border: solid #fff0bd 20px;
   top: -20px;
   left: -20px;
   clip: rect(0px, 250px, 125px, 0px);
+}
+#arc1::before {
+  border: solid #fff0bd 20px;
 }
 #arc2::before {
-  content: '';
   border: solid #ffe284 20px;
-  top: -20px;
-  left: -20px;
-  clip: rect(0px, 250px, 125px, 0px);
 }
 #arc3::before {
-  content: '';
   border: solid #fdda67 20px;
-  top: -20px;
-  left: -20px;
-  clip: rect(0px, 250px, 125px, 0px);
 }
 #arc4::before {
-  content: '';
   border: solid #ffd64f 20px;
-  top: -20px;
-  left: -20px;
-  clip: rect(0px, 250px, 125px, 0px);
 }
 #arc5::before {
-  content: '';
   border: solid #f8c51e 20px;
-  top: -20px;
-  left: -20px;
-  clip: rect(0px, 250px, 125px, 0px);
 }
 #arc6::before {
-  content: '';
   border: solid #ffc400 20px;
-  top: -20px;
-  left: -20px;
-  clip: rect(0px, 250px, 125px, 0px);
+}
+#arc7::before {
+  border: solid #ffc400 20px;
+}
+.performance-points {
+  position: absolute;
+  margin: 115px 0px 0px 40px;
+  font-size: 35px;
+  text-align: center;
+  width: 250px;
 }
