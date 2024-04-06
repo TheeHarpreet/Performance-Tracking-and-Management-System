@@ -106,13 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div id="arc3"></div>
                     <div id="arc2"></div>
                     <div id="arc1"></div>
-                    <?php $total = 0;  ?>
-                    <style> #arc1::before { transform: rotate(-90deg); } </style>
-                    <style> #arc2::before { transform: rotate(-90deg); } </style>
-                    <style> #arc3::before { transform: rotate(-90deg); } </style>
-                    <style> #arc4::before { transform: rotate(-90deg); } </style>
-                    <style> #arc5::before { transform: rotate(-90deg); } </style>
-                    <style> #arc6::before { transform: rotate(-90deg); } </style>
+                    <style> #arc1::before { transform: rotate(<?php $total = $pointsArray[0]; // echo your degrees based from $total ?>); } </style>
+                    <style> #arc2::before { transform: rotate(<?php $total += $pointsArray[1]; // echo your degrees based from $total ?>); } </style>
+                    <style> #arc3::before { transform: rotate(<?php $total += $pointsArray[2]; // echo your degrees based from $total ?>); } </style>
+                    <style> #arc4::before { transform: rotate(<?php $total += $pointsArray[3]; // echo your degrees based from $total ?>); } </style>
+                    <style> #arc5::before { transform: rotate(<?php $total += $pointsArray[4]; // echo your degrees based from $total ?>); } </style>
+                    <style> #arc6::before { transform: rotate(<?php $total += $pointsArray[5]; // echo your degrees based from $total ?>); } </style>
                     </div>
                 </div>
             </div>
