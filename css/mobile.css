@@ -318,16 +318,17 @@ circle.fg {
   background-color: transparent;
 }
 #arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6 {
-  border: solid #a0a0a0 20px;
+  border: solid transparent 20px;
   clip: rect(0px, 250px, 125px, 0px);
-  margin: 25px;
+  margin: 40px;
 }
 #arc::before {
   content: '';
-  border: solid #fff0bd 20px;
+  border: solid #a0a0a0 20px;
   top: -20px;
   left: -20px;
   clip: rect(0px, 250px, 125px, 0px);
+  transform: rotate(0deg);
 }
 #arc1::before {
   content: '';
