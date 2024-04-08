@@ -105,3 +105,48 @@ button {
 .edit-button:hover, .delete-button:hover {
   opacity: 0.9;
 }
+
+@media only screen and (min-width : 790px) {
+  .container {
+      width: 75%; 
+  }
+
+  h2 {
+      font-size: 2em; 
+  }
+
+  label {
+      display: inline-block;
+      width: 150px; 
+      text-align: right;
+      margin-right: 10px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+      width: calc(100% - 160px); 
+      display: inline-block;
+  }
+
+  button {
+      display: block;
+      width: auto;
+      margin-top: 10px;
+  }
+
+
+  div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+
+  div > label {
+      margin-bottom: 0; 
+  }
+
+  textarea {
+      vertical-align: top; 
+  }
+}
