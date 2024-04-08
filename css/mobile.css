@@ -230,6 +230,9 @@ h3 {
   display: flex;
   flex-direction: row;
   flex-basis: 100%;
+  text-decoration:underline;
+  text-decoration-color:#000 ;
+  text-decoration-thickness: 1.5px;
 }
 
 .section-name-bar button {
