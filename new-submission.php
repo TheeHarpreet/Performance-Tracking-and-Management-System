@@ -72,31 +72,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submission Form</title>
     <link rel="stylesheet" href="css/mobile.css" />
-    <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
+<link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)" />
+
 </head>
 <body>
+
+
 <?php include_once("includes/header.php") ?>
-    <div class="container">
+    <div class="submission-form-container"> <!-- Updated class for submission form -->
         <h2>Submission Form</h2>
         <?php if (!empty($error)) : ?>
-            <div><?php echo $error; ?></div>
+            <div class="error-message"><?php echo $error; ?></div> <!-- Class added for styling -->
         <?php endif; ?>
         <?php if (isset($successMessage)) : ?>
-            <div><?php echo $successMessage; ?></div>
+            <div class="success-message"><?php echo $successMessage; ?></div> <!-- Class added for styling -->
         <?php endif; ?>
         <form method="post" enctype="multipart/form-data">
-            <div>
+            <div class="form-group"> <!-- Added class for styling -->
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" placeholder="Title" required>
             </div>
-            <div>
+            <div class="form-group"> <!-- Added class for styling -->
                 <label for="comments">Comments:</label>
-                <textarea id="comments" name="comments"  placeholder="Comments" rows="3"></textarea>
+                <textarea id="comments" name="comments" placeholder="Comments" rows="3"></textarea>
             </div>
-            <div>
+            <div class="form-group"> <!-- Added class for styling -->
                 <label for="file">Upload File:</label>
                 <input type="file" id="file" name="file[]" multiple required>
             </div>
+            <button type="submit" class="submit-button">Submit</button> <!-- Class added for styling -->
+        </form>
+    </div>
+    <?php include_once("includes/footer.php") ?>
             <!-- <div>
                 <label for="type">Type:</label>
                 <select name="type" id="type" required>
@@ -110,10 +117,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="G">Services to Community</option>
                 </select>
             </div> -->
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    <?php include_once("includes/footer.php") ?>
+
+
+
+
+</div>   
 </body>
 </html>
 
@@ -151,3 +159,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php //include_once("includes/footer.php") ?>
 </body>
 </html> -->
+
+
