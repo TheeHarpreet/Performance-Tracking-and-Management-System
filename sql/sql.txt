@@ -18,11 +18,12 @@ CREATE TABLE If Not Exists submission (
     title text NOT NULL,
     author int NOT NULL,
     dateSubmitted datetime NOT NULL,
-    type text NOT NULL,
+    sectionID int NOT NULL,
     comments text NOT NULL,
     submitted boolean NOT NULL,
     approved int NOT NULL DEFAULT 0,
     PRIMARY KEY (submissionID),
+    FOREIGN KEY (sectionID) REFERENCES sections (sectionID)
     FOREIGN KEY (author) REFERENCES users (userID)
 );
 
@@ -63,3 +64,22 @@ CREATE TABLE If Not Exists researchersSupervisor (
     FOREIGN KEY (researcherID) REFERENCES users (userID),
     FOREIGN KEY (supervisorID) REFERENCES users (userID)
 );
+
+CREATE TABLE If Not Exists sections (
+    sectionID INT NOT NULL,
+    sectionName text NOT NULL,
+    minPoints int NOT NULL,
+    maxPoints int NOT NULL,
+    minRange int NOT NULL,
+    maxRange int NOT NULL,
+    PRIMARY KEY (sectionID)
+);
+
+INSERT INTO Sections (sectionID, sectionName, minPoints, maxPoints, minRange, maxRange) VALUES
+(1, "Personal Particulars", 1, 2, 0, 0),
+(2, "Professional Achievements", 6, 8, 0, 0),
+(3, "Research And Development", 14, 16, 0, 0),
+(4, "Professional Consultations", 5, 7, 0, 0),
+(5, "Research Outcomes", 8, 10, 0, 0),
+(6, "Professional Recognition", 5, 7, 0, 0),
+(7, "Service To Community", 3, 5, 0, 0);
