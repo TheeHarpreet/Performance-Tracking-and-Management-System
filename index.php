@@ -179,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="new-password">
                 <form method="post">
                     <input type="password" placeholder="New Password" name="password">
-                    <button type="submit" name="new-password-button">Reset Password</button>
+                    <button type="submit" name="new-password-button">Change Password</button>
                 </form>
             </div>
         </div>
