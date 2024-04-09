@@ -8,7 +8,7 @@ $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $author = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-    $type =$_SESSION['newSubmission']
+    $type =$_SESSION['newSubmission'];
     $title = $_POST["title"];
     $comments = $_POST["comments"];
     $dateSubmitted = date("Y-m-d H:i:s");
