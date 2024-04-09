@@ -177,10 +177,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ?>
             </div>
             <div class="new-password">
-                <form method="post">
-                    <input type="password" placeholder="New Password" name="password">
-                    <button type="submit" name="new-password-button">Change Password</button>
+                <?php if (!isset($_GET['user_override'])) echo "
+                <form method='post'>
+                <input type='password' placeholder='New Password' name='password'>
+                <button type='submit' name='new-password-button'>Change Password</button>
                 </form>
+                " ?>
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>
