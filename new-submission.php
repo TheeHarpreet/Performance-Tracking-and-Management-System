@@ -1,68 +1,69 @@
 <?php
 require_once("includes/config.php");
 require_once("includes/redirect-login.php");
+ob_clean();
 
-$author = $_SESSION['user_id'];
-$type = $_SESSION['newSubmission'];
 $error = "";
+$successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $author = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+    $type = isset($_SESSION['newSubmission']) ? $_SESSION['newSubmission'] : null;
     $title = $_POST["title"];
     $comments = $_POST["comments"];
     $dateSubmitted = date("Y-m-d H:i:s");
 
-    if (empty($title) || empty($comments) || empty($dateSubmitted) || empty($type)) {
-        $error = "All fields are required";
-    }
-    else{
+    if (empty($title) || empty($comments) || empty($type)) {
+        $error = "Title, comments, and file are required fields.";
+    } else {
+        $fileUploaded = false;
+        $uploadDir = "submissionfiles/";
 
-    // File upload handling
-    $fileUploaded = false;
-    $fileCount = count($_FILES['file']['name']);
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
 
-    // need to work on this
-    $uploadDir = "submissionfiles/";
-    if (!file_exists($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
+        // Insert details for submission
+        $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, type, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
+        $stmt->bind_param("sisss", $title, $author, $dateSubmitted, $type, $comments);
+        $stmt->execute();
+        $submissionID = $stmt->insert_id;
 
-    for ($i = 0; $i < $fileCount; $i++) { 
-        $fileType = pathinfo($_FILES["file"]["name"][$i], PATHINFO_EXTENSION);
-        $customFileName = "upload" . $submissionID . "." . $fileType;
-        $fileTmpName = $_FILES["file"]["tmp_name"][$i];
+        $fileCount = count($_FILES['file']['name']);
 
-        $filePath = $uploadDir . $customFileName;
-        if (move_uploaded_file($fileTmpName, $filePath)) {
-            $fileUploaded = true;
+        // Loop through each uploaded file
+        for ($i = 0; $i < $fileCount; $i++) { 
+            $fileType = pathinfo($_FILES["file"]["name"][$i], PATHINFO_EXTENSION);
+            $customFileName = "upload" . uniqid() . "." . $fileType;
+            $fileTmpName = $_FILES["file"]["tmp_name"][$i];
+            $filePath = $uploadDir . $customFileName;
 
-            // Insert details for submission
-            $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, type, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
-            $stmt->bind_param("sssss", $title, $author, $dateSubmitted, $type, $comments);
-            $stmt->execute();
-            $submissionID = $stmt->insert_id;
+            if (move_uploaded_file($fileTmpName, $filePath)) {
+                // Insert file details into the file table
+                $stmt = $mysqli->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
+                $stmt->bind_param("ssi", $fileType, $customFileName, $author);
+                $stmt->execute();
+                $fileID = $stmt->insert_id;
 
-            // Insert file details into the file table
-            $stmt = $mysqli->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $fileType, $customFileName, $author);
-            $stmt->execute();
-            $fileID = $stmt->insert_id;
+                // Insert details into submissionfile table
+                $stmt = $mysqli->prepare("INSERT INTO submissionfile (submissionID, fileID) VALUES (?, ?)");
+                $stmt->bind_param("ii", $submissionID, $fileID);
+                $stmt->execute();
 
-            // Insert details into submissionfile table
-            $stmt = $mysqli->prepare("INSERT INTO submissionfile (submissionID, fileID) VALUES (?, ?)");
-            $stmt->bind_param("ii", $submissionID, $fileID);
-            $stmt->execute();
-        } else {
-            $error = "File upload failed.";
-            break;
+                $fileUploaded = true;
+            } else {
+                $error = "File upload failed.";
+                break;
+            }
+        }
+
+        if ($fileUploaded) {
+            $successMessage = "Files uploaded successfully.";
         }
     }
-
-    if ($fileUploaded) {
-        $successMessage = "Files uploaded successfully.";
-    }
-}
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -103,25 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="submit-button">Submit</button> <!-- Class added for styling -->
         </form>
     </div>
-    <?php include_once("includes/footer.php") ?>
-            <!-- <div>
-                <label for="type">Type:</label>
-                <select name="type" id="type" required>
-                    <option value="">Select Type</option>
-                    <option value="A">Personal Particulars</option>
-                    <option value="B">Professional Achievements</option>
-                    <option value="C">Research and Development</option>
-                    <option value="D">Professional Consultations</option>
-                    <option value="E">Research Outcomes</option>
-                    <option value="F">Professional Recognition</option>
-                    <option value="G">Services to Community</option>
-                </select>
-            </div> -->
-
-
-
-
-</div>   
+    <?php include_once("includes/footer.php") ?> 
 </body>
 </html>
 
