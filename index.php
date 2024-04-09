@@ -73,11 +73,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $section = $sectionQuery->fetch_object();
                             $minPoints = $section->minPoints;
                             $maxPoints = $section->maxPoints;
-                            $minRange = 0; //Needs to calculate this
+                            $minRange = $section->minRange;
                             $maxRange = $section->maxRange;
                             $title = $section->sectionName;
+                            $sectionID = $loop + 1;
 
-                            $query = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = '$loop'");
+                            $query = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = $sectionID");
                             $result = $query->fetch_object();
                             $currentAmount = $result->amount;
 
@@ -86,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 array_push($pointsArray, 0);
                             }
                             else {
+                                echo "$minPoints, $maxPoints, $minRange, $maxRange, $currentAmount";
                                 $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange)));
                                 $pointsTotal += $points;
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
