@@ -61,6 +61,10 @@ h2 {
   margin: 25px 50px 5px 50px;
 }
 
+.account-link{
+text-align: center;
+}
+
 a {
   text-decoration: none;
   color: white;
@@ -137,6 +141,8 @@ button {
   padding: 35px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 input[type=text], input[type=password], input[type=email] {

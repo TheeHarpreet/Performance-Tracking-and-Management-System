@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     }
                 }
                 ?>
-                <p>Don't have an account? <a href="signup.php" class="login-change">Register here</a></p>
+                <p class="account-link">Don't have an account? <a href="signup.php" class="login-change">Register here</a></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
