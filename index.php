@@ -65,23 +65,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="performance-overview">
                     <div class="performance-section">
                         <?php
-                        $sectionTitles = array ("Personal Particulars", "Professional Achievements", "Research And Development", "Professional Consultations", "Research Outcomes", "Professional Recognition", "Service To Community");
-                        $sectionTypes = array ("A", "B", "C", "D", "E", "F", "G");
+                        $sectionQuery = $mysqli->query("SELECT * FROM sections");
                         $author = $userID;
                         $pointsTotal = 0;
                         $pointsArray = array ();
                         for ($loop = 0; $loop < 7; $loop++) {
-                            $section = $sectionTypes[$loop];
-                            include("includes/calculate-score.php");
-                            $pointsTotal += $points;
-                            if ($points == 0){
-                                echo "<p>$sectionTitles[$loop]: Not enough data to calculate scores</p>";
+                            $section = $sectionQuery->fetch_object();
+                            $minPoints = $section->minPoints;
+                            $maxPoints = $section->maxPoints;
+                            $minRange = 0; //Needs to calculate this
+                            $maxRange = $section->maxRange;
+                            $title = $section->sectionName;
+
+                            $query = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = '$loop'");
+                            $result = $query->fetch_object();
+                            $currentAmount = $result->amount;
+
+                            if ($currentAmount == 0){
+                                echo "<p>$title: Not enough data to calculate scores</p>";
                                 array_push($pointsArray, 0);
                             }
                             else {
+                                $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange)));
+                                $pointsTotal += $points;
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
                                 echo "
-                                <p>$sectionTitles[$loop]:</p>
+                                <p>$title:</p>
                                 <div class='percent-bar'>
                                 <p class='point-boundary'>$minPoints</p>
                                 <div class='progress-bar-container'>
@@ -120,24 +129,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="tasks">
                 <?php
                     $i = 0;
+                    $sectionQuery = $mysqli->query("SELECT * FROM sections");
 
                     echo "<h1>Submissions</h1>";
 
                     while ($i < 7) {
+                        $section = $sectionQuery->fetch_object();
                         echo "<div class='section-container'>";
                         echo "<div class='section-name-bar'>";
-                        echo "<h2 class='section-header'>$sectionTitles[$i]</h2>";
+                        echo "<h2 class='section-header'>$section->sectionName</h2>";
                         echo "<button onclick='hideSection($i)' id='toggle-button$i'>Hide</button>";
                         echo "</div>";
                         
                         echo "<div id='section-hide$i'>";
-                        $type = $sectionTypes[$i];
-                        $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND type = '$type'");
+                        $sectionID = $i + 1;
+                        $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND sectionID = $sectionID");
                         while ($obj = $query->fetch_object()) {
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
                         }
-                        $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.type = '$type'");
+                        $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.sectionID = $sectionID");
                         while ($obj = $query->fetch_object()) {
                             $isAuthor = false;
                             include("includes/submission-preview-fill.php");
@@ -145,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<div>";
                         echo "<form method='post'>";
                         if (!isset($_GET['user_override'])) {
-                            echo "<button class='new-submission' name='new-submission' value='$sectionTypes[$i]'>+ Add New Submission</button>";
+                            echo "<button class='new-submission' name='new-submission' value='$section->sectionID'>+ Add New Submission</button>";
                         }
                         echo "</form>";
                         echo "</div>";
