@@ -10,6 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['new-submission'])) {
         $_SESSION['newSubmission'] = $_POST['new-submission'];
         header("Location: new-submission.php");
+    } else if (isset($_POST['new-password-button'])) {
+        $passwordHash = password_hash($_GET['password'], PASSWORD_DEFAULT);
+        $query = $mysqli->prepare("UPDATE users SET password = ? WHERE userID = $userID");
+        $query->bind_param("s", $passwordHash);
+        $query->execute();
     } else {
         $_SESSION['viewSubmission'] = $_POST['submission-id'];
         header("Location: view-submission.php");
@@ -170,6 +175,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $i++;
                     }
                 ?>
+            </div>
+            <div class="new-password">
+                <form method="post">
+                    <input type="password" placeholder="New Password" name="password">
+                    <button type="submit" name="new-password-button">Reset Password</button>
+                </form>
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>
