@@ -87,8 +87,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 array_push($pointsArray, 0);
                             }
                             else {
-                                echo "$minPoints, $maxPoints, $minRange, $maxRange, $currentAmount";
-                                $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange)));
+                                if ($minRange != $currentAmount && $minRange != $maxRange) {
+                                    $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange)));
+                                } else {
+                                    $points = $maxPoints;
+                                }
                                 $pointsTotal += $points;
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
                                 echo "
