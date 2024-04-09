@@ -8,7 +8,7 @@ $query = $mysqli->query("SELECT * FROM `users` WHERE userID = $userID");
 $user = $query->fetch_object();
 
 if (isset($_GET['reset'])) {
-    $passwordHash = password_hash("password123", PASSWORD_DEFAULT);
+    $passwordHash = password_hash("Password123", PASSWORD_DEFAULT);
     $stmt = $mysqli->prepare("UPDATE users SET `password` = ? WHERE userID = ?");
     $stmt->bind_param('ss', $passwordHash, $_GET['userID'] );
     $stmt->execute();
@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ";
                 }
                 ?>
+                <p>Passwords are reset to "Password123"</p>
                 <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1">Reset Password</a></p>
                 
                 <button type="submit">Update</button>
