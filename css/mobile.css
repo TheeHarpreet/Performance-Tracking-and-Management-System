@@ -415,6 +415,9 @@ circle.fg {
 .submission-form-container .success-message {
   background-color: #4cbb17;
 }
+.invalid-role{
+  color: #000;
+}
 
 
 @media (max-width: 767px) {
