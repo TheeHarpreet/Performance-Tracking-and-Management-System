@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['newSubmission'] = $_POST['new-submission'];
         header("Location: new-submission.php");
     } else if (isset($_POST['new-password-button'])) {
-        $passwordHash = password_hash($_GET['password'], PASSWORD_DEFAULT);
+        $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $query = $mysqli->prepare("UPDATE users SET password = ? WHERE userID = $userID");
         $query->bind_param("s", $passwordHash);
         $query->execute();
