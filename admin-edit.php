@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Passwords are reset to "Password123"</p>
                 <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1">Reset Password</a></p>
                 
-                <button type="submit">Update</button>
+                <button type="submit" class="submit-button">Update</button>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
