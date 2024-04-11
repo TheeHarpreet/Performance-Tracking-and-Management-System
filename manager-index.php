@@ -37,8 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include_once("includes/header.php") ?>
         <div class="container">
             <div class="managers-user-section">
-                <p>Search user</p>
-                <div class="user-search-results">
+                <div class="users-list">
                     <table>
                     <tr class="accounts-table">
                         <th>First Name <a class="sort" href="admin-index.php?orderby=fname">Sort by</a></th>
