@@ -8,19 +8,18 @@ $user = $query->fetch_object();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = "";
-    if (isset($_POST['submissionName'])) {
-        $nameText = $_POST['submissionName'];
-        $name = "&name='$nameText'";
+    $nameText = $_POST['submissionName'];
+    if ($nameText != "") {
+        $name = "&name=$nameText";
     }
-    if ($_POST['status'] = "both") {
+    if ($_POST['status'] == "both") {
         $status = "1";
-    } else if ($_POST['status'] = "accepted") {
+    } else if ($_POST['status'] == "accepted") {
         $status = "2";
     } else {
         $status = "3";
     }
-
-    header("Location: manager-index.php?status='$status'$name");
+    header("Location: manager-index.php?status=$status$name");
 }
 
 ?>
@@ -82,32 +81,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $nameMessage = "";
                 if (isset($_GET['status'])) {
                     $section = $_GET['status'];
-                    if ($section = "1") {
-                        $sectionMessage = " AND (accepted > 0 OR (accepted = 0 AND submitted = 1))";
-                    } else if ($section = "2") {
-                        $sectionMessage = " AND accepted > 0";
+                    if ($section == "1") {
+                        $sectionMessage = " AND (approved > 0 OR (approved = 0 AND submitted = 1))";
+                    } else if ($section == "2") {
+                        $sectionMessage = " AND approved > 0";
                     } else {
-                        $sectionMessage = " AND (accepted = 0 AND submitted = 1)";
+                        $sectionMessage = " AND (approved = 0 AND submitted = 1)";
                     }
                 }
                 if (isset($_GET['name'])) {
-                    $name = $_GET['name'];
-                    $nameMessage = " AND  name = '$name'";
+                    $nameText = $_GET['name'];
+                    $name = '%' . $nameText . '%';
+                    $nameMessage = " AND  title LIKE '$name'";
                 }
-                $sectionQuery = $mysqli->query("SELECT * FROM sections $sectionMessage $nameMessage");
+                $sectionQuery = $mysqli->query("SELECT * FROM sections");
                 while ($section = $sectionQuery->fetch_object()) {
-                    echo "<div class='section-container'>";
-                    echo "<div class='section-name-bar'>";
-                    echo "<h2 class='section-header'>$section->sectionName</h2>";
-                    echo "</div>";
-                    $query = $mysqli->query("SELECT * FROM submission WHERE sectionID = $section->sectionID");
-                    while ($obj = $query->fetch_object()) {
-                        $isAuthor = true;
-                        include("includes/submission-preview-fill.php");
+                    $query = $mysqli->query("SELECT * FROM submission WHERE sectionID = $section->sectionID $sectionMessage $nameMessage");
+                    if (mysqli_num_rows($query) > 0) {
+                        echo "<div class='section-container'>";
+                        echo "<div class='section-name-bar'>";
+                        echo "<h2 class='section-header'>$section->sectionName</h2>";
+                        echo "</div>";
+                        
+                        while ($obj = $query->fetch_object()) {
+                            $isAuthor = true;
+                            include("includes/submission-preview-fill.php");
+                        }
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
                     }
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
                 }
                 ?>
             </div>
