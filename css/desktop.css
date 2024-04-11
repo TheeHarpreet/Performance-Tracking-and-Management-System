@@ -162,7 +162,46 @@ button {
   background-color: #b29b37;
 }
 
+.signup-div{
+  margin-left: 30px;
+  flex-direction: row;
+}
 
+.login-container{
+  margin: 132.5px auto;
+}
 
+.signup-container{
+  margin: 65px auto;
+  padding: 20px;
+}
 
+#signup-button{
+  margin-left: 10px;
+}
 
+.first-column{
+  margin-left: -90px;
+  margin-right: 10px;
+}
+
+.second-column{
+  margin-right: -30px;
+  margin-left: 110px;
+}
+
+.login-change{
+  margin-left: 11px;
+}
+
+.signup-container{
+  padding: 100px;
+}
+
+.first-column input[type=text], .first-column input[type=email]{
+  padding: 15px 50px;
+}
+
+.login-input input[type=email]{
+  padding: 15px 0px;
+}

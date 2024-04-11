@@ -61,19 +61,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <?php include_once("includes/simplified-header.php") ?>
         <div class="login-container">
             <form class="login-form" method="post">
-                <h1>Log In</h1>
-                <h3>Email</h3>
-                <input type="text" name="email" required>
-                <h3>Password</h3>
-                <input type="password" name="password" required>
-                <button type="submit"  id="signup-button">Login</button>
-                <?php
-                if (count($errors) > 0) {
-                    foreach ($errors as $error) {
-                        echo "<div class='error-message'>$error</div>";
+                <div class="login-input">
+                    <h1>Log In</h1>
+                    <h3>Email</h3>
+                    <input type="text" name="email" required>
+                    <h3>Password</h3>
+                    <input type="password" name="password" required>
+                    <button type="submit"  id="signup-button">Login</button>
+                    <?php
+                    if (count($errors) > 0) {
+                        foreach ($errors as $error) {
+                            echo "<div class='error-message'>$error</div>";
+                        }
                     }
-                }
-                ?>
+                    ?>
+                </div>
                 <p class="account-link">Don't have an account? <a href="signup.php" class="login-change">Register here</a></p>
             </form>
         </div>

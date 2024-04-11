@@ -79,18 +79,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form class="signup-form" method="post">
                 <h1>Sign Up</h1>
                 <div class="signup-div">
-                    <div>
+                    <div class="first-column">
                         <h3>First name</h3>
                         <input type="text" name="fname" required>
                         <h3>Surname</h3>
                         <input type="text" name="lname" required>
                         <h3>Email</h3>
                         <input type="text" name="email" required>
+                    </div>
+                    <div class="second-column">
                         <h3>Password</h3>
                         <input type="password" name="password1" required>
                         <h3>Confirm Password</h3>
                         <input type="password" name="password2" required>
                         <button type="submit" id="signup-button">Signup</button>
+                        <p><a href="login.php" class="login-change">Have an account? Login</a></p>
                     </div>
                 </div>
                 <?php
@@ -100,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                 }
                 ?>
-                <p>Have an account? <a href="login.php" class="login-change">Login</a></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>

@@ -74,6 +74,7 @@ if ($user->jobRole != "Admin") {
         <div class="admin-container">
             <div class="create-account">
                 <form action="admin-update.php?userID=<?php echo $id; ?>" method="post" class="new-admin-form">
+                <h2>Create User Account</h2>
                 <div class="new-admin-inputs">
                     <div>
                         <p>First Name</p>
@@ -120,7 +121,7 @@ if ($user->jobRole != "Admin") {
                             <?php if ($row['password'] == "") {
                                 echo "<td><a href='admin-index.php?unblock="; echo $row['userID']; echo "' class='unblock-button'>Unblock</a></td>";
                             } else {
-                                echo " <td><a href='admin-index.php?block="; echo $row['userID']; echo "' class='delete-button'>Delete</a></td> ";
+                                echo " <td><a href='admin-index.php?block="; echo $row['userID']; echo "' class='delete-button'>Block</a></td> ";
                             }
                             ?>
                         </tr>

@@ -117,11 +117,10 @@ button {
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  margin: 0px 0px 0px 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-#login-button, #signup-button {
+#login-button{
   width: 300px;
 }
 
@@ -134,7 +133,7 @@ button {
   border-top-right-radius: 0px;
 }
 
-.login-container, .signup-container {
+.login-container{
   max-width: 400px;
   margin: 10px auto;
   background: #2c2c2c;
@@ -144,8 +143,39 @@ button {
   margin-top: 7%;
   margin-bottom: 116px;
 }
+.signup-container{
+  max-width: 400px;
+  margin: 10px 30px;
+  background: #2c2c2c;
+  padding: 35px 180px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  margin-top: 7%;
+  margin-bottom: 116px;
+}
 
-input[type=text], input[type=password], input[type=email] {
+.signup-div {
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  flex-direction: row;
+}
+
+#signup-button{
+  margin-top: 30px;
+  margin-left: 10px;
+  padding: 15px 65px;
+}
+
+.first-column{
+  margin-left: -140px;
+  margin-right: 100px;
+}
+.second-column{
+  margin-left: 60px;
+}
+
+input[type=text], input[type=email], input[type=password] {
   width: 93%;
   padding: 15px;
   margin-bottom: 10px;
@@ -153,6 +183,30 @@ input[type=text], input[type=password], input[type=email] {
   background-color: #f1f1f1;
   color: #333;
   border-radius: 3px;
+}
+
+.first-column input[type=text], .first-column input[type=email], .first-column input[type=password]{
+  width: 100%;
+  padding: 15px 55px;
+  margin-bottom: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #333;
+  color: #333;
+  border-radius: 3px;
+}
+
+.second-column input[type=text], .second-column input[type=email], .second-column input[type=password]{
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #333;
+  color: #333;
+  border-radius: 3px;
+}
+
+.login-change{
+  margin-left: 11px;
 }
 
 h3 {
@@ -429,7 +483,9 @@ circle.fg {
   font-size: 20px;
 }
 
-.signup-div {
-  display: flex;
-  flex-direction: row;
+.new-admin-form h2{
+  text-align: center;
+  background-color: #d4af37;
+  border-radius: 4px;
+  color: white;
 }
