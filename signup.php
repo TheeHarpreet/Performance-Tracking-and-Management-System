@@ -78,17 +78,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="signup-container">
             <form class="signup-form" method="post">
                 <h1>Sign Up</h1>
-                <h3>First name</h3>
-                <input type="text" name="fname" required>
-                <h3>Surname</h3>
-                <input type="text" name="lname" required>
-                <h3>Email</h3>
-                <input type="text" name="email" required>
-                <h3>Password</h3>
-                <input type="password" name="password1" required>
-                <h3>Confirm Password</h3>
-                <input type="password" name="password2" required>
-                <button type="submit" id="signup-button">Signup</button>
+                <div class="signup-div">
+                    <div>
+                        <h3>First name</h3>
+                        <input type="text" name="fname" required>
+                        <h3>Surname</h3>
+                        <input type="text" name="lname" required>
+                        <h3>Email</h3>
+                        <input type="text" name="email" required>
+                    </div>
+                    <div>
+                        <h3>Password</h3>
+                        <input type="password" name="password1" required>
+                        <h3>Confirm Password</h3>
+                        <input type="password" name="password2" required>
+                        <button type="submit" id="signup-button">Signup</button>
+                    </div>
+                </div>
                 <?php
                 if (count($errors) > 0) {
                     foreach ($errors as $error) {
