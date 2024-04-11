@@ -489,3 +489,8 @@ circle.fg {
   border-radius: 4px;
   color: white;
 }
+
+.user-search-results {
+  overflow: scroll;
+  height: 500px;
+}
