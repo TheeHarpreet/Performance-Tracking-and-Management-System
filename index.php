@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 } else if ($user->jobRole == "Admin") {
                     header("Location: admin-index.php");
-                } else if ($user->jobRole == "Manager") {
+                } else if ($user->jobRole == "Manager" && !isset($_GET['user_override'])) {
                     header("Location: manager-index.php");
                 }
             ?>
