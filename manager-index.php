@@ -19,8 +19,15 @@ $user = $query->fetch_object();
 <body>
     <?php include_once("includes/header.php") ?>
         <div class="container">
-            <div>
-                <a href="manager-index.php">Hi</a>
+            <div class="managers-user-section">
+                <p>Search user</p>
+                <input type="text">
+                <div class="user-search-results">
+
+                </div>
+            </div>
+            <div class="managers-work-section">
+                <p>Search</p>
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>

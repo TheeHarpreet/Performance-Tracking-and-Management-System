@@ -433,3 +433,7 @@ circle.fg {
   display: flex;
   flex-direction: row;
 }
+
+.user-search-results {
+  overflow: scroll;
+}
