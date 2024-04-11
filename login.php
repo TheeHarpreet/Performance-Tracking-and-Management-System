@@ -9,42 +9,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // make sure email and password are not empty
-    if (empty($email) || empty($password)) {
-        array_push($errors, "Both email and password are required");
-    }
-     else {
+    // I removed a check to see if the email and passwords aren't empty as there is already a check with "required" in the html.
 
-        $sql = "SELECT userID, password FROM users WHERE email = ?";
-        $stmt = $mysqli->prepare($sql);
-        
-        // Bind parameters and execute statement
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        
-        $result = $stmt->get_result();
+    $stmt = $mysqli->prepare("SELECT userID, password FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
 
-        // Check if user exists
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-            $userID = $row['userID'];
-            $passwordHash = $row['password'];
+    // Check if user exists
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $userID = $row['userID'];
+        $passwordHash = $row['password'];
 
-            // Verify password
-            if (password_verify($password, $passwordHash)) {
-                $_SESSION['user_id'] = $userID;
-                header("Location: index.php");
-                exit();
-            } 
-            else {
-                array_push($errors, "Invalid password");
-            }
-        } else {
-            array_push($errors, "User not found");
+        // Verify password
+        if (password_verify($password, $passwordHash)) {
+            $_SESSION['user_id'] = $userID;
+            header("Location: index.php");
+            exit();
+        } 
+        else {
+            array_push($errors, "Invalid password");
         }
-        
-        // Close statement
-        $stmt->close();
+    } else {
+        array_push($errors, "User not found");
     }
 }
 ?>
@@ -64,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <div class="login-input">
                     <h1>Log In</h1>
                     <h3>Email</h3>
-                    <input type="text" name="email" required>
+                    <input type="email" name="email" required>
                     <h3>Password</h3>
                     <input type="password" name="password" required>
                     <button type="submit"  id="signup-button">Login</button>

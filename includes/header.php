@@ -5,7 +5,7 @@
         </div>
         <div class="bottom-header">
             <?php
-            if (basename($_SERVER['PHP_SELF']) == "index.php") {
+            if (basename($_SERVER['PHP_SELF']) == "index.php") { // Only outputs the name on the index page.
                 echo "<p>Hello, $user->fname $user->lname!</p>";
             }
             ?>

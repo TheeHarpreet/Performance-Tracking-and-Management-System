@@ -7,6 +7,7 @@ $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Reloads the page with search contraints for the work.
     $name = "";
     $nameText = $_POST['submissionName'];
     if ($nameText != "") {
@@ -37,37 +38,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container">
             <div class="managers-user-section">
                 <p>Search user</p>
-                <input type="text">
                 <div class="user-search-results">
+                    <table>
                     <tr class="accounts-table">
                         <th>First Name <a class="sort" href="admin-index.php?orderby=fname">Sort by</a></th>
                         <th>Last Name <a class="sort" href="admin-index.php?orderby=lname">Sort by</a></th>
                         <th>Job Role <a class="sort" href="admin-index.php?orderby=jobRole">Sort by</a></th>
                     </tr>
-                    <tr>
                     <?php 
                     $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher'");
-                            
-                    while ($row = mysqli_fetch_assoc($user_accounts))
-                    {
+                    
+                    while ($obj = $user_accounts->fetch_object()) { // Outputs the list of supervisors and researchers. The hyperlink could be changed to cover the entire row.
+                        $rowUserID = $obj->userID;
+                        echo "
+                            <tr>
+                                <td><a href='index.php?user_override=$rowUserID'>$obj->fname</a></td>
+                                <td><a href='index.php?user_override=$rowUserID'>$obj->lname</a></td>
+                                <td><a href='index.php?user_override=$rowUserID'>$obj->jobRole</a></td>
+                            </tr>
+                        ";
+                    }
                     ?>
-                    <?php $userID = $row['userID']; ?>
-                        <a href="index.php?user_override=<?php  echo "$userID"; ?>">
-                            <td><?php echo $row['fname']; ?></td>
-                            <td><?php echo $row['lname']; ?></td>
-                            <td><?php echo $row['jobRole']; ?></td>
-                        </a>
-                    </tr>
-                    <?php
-                        }
-                    ?>                        
-                    </tr>
+                    </table>
                 </div>
             </div>
             <div class="managers-work-section">
                 <p>Search work</p>
                 <form method="post" class="search-paramaters">
-                    <input type="text" name="submissionName">
+                    <input type="text" name="submissionName" placeholder="Search work">
                     <p>Status</p>
                     <select name="status" id="work-type-select">
                         <option value="both">Both</option>
@@ -81,11 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $nameMessage = "";
                 if (isset($_GET['status'])) {
                     $section = $_GET['status'];
-                    if ($section == "1") {
+                    if ($section == "1") { // Both.
                         $sectionMessage = " AND (approved > 0 OR (approved = 0 AND submitted = 1))";
-                    } else if ($section == "2") {
+                    } else if ($section == "2") { // Approved.
                         $sectionMessage = " AND approved > 0";
-                    } else {
+                    } else { // Waiting for approval.
                         $sectionMessage = " AND (approved = 0 AND submitted = 1)";
                     }
                 }
@@ -97,19 +95,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $sectionQuery = $mysqli->query("SELECT * FROM sections");
                 while ($section = $sectionQuery->fetch_object()) {
                     $query = $mysqli->query("SELECT * FROM submission WHERE sectionID = $section->sectionID $sectionMessage $nameMessage");
-                    if (mysqli_num_rows($query) > 0) {
-                        echo "<div class='section-container'>";
-                        echo "<div class='section-name-bar'>";
-                        echo "<h2 class='section-header'>$section->sectionName</h2>";
-                        echo "</div>";
-                        
+                    if (mysqli_num_rows($query) > 0) { // This makes sure the header is only output if there are results in that section.
+                        echo "
+                        <div class='section-container'>
+                        <div class='section-name-bar'>
+                        <h2 class='section-header'>$section->sectionName</h2>
+                        </div>
+                        ";
                         while ($obj = $query->fetch_object()) {
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
                         }
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</div>";
+                        echo "
+                        </div>
+                        </div>
+                        </div>
+                        ";
                     }
                 }
                 ?>

@@ -492,7 +492,7 @@ circle.fg {
 
 .user-search-results {
   overflow: scroll;
-  height: 500px;
+  height: 200px; /* This is fixed to 100px for now but needs to be dynamic for the first few, then fix after a certain amount */
 }
 
 .message{

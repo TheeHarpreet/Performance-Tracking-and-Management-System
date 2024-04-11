@@ -7,18 +7,21 @@ $userID = $_GET['userID'];
 $query = $mysqli->query("SELECT * FROM `users` WHERE userID = $userID");
 $user = $query->fetch_object();
 
+// reset password query
 if (isset($_GET['reset'])) {
-    $passwordHash = password_hash("Password123", PASSWORD_DEFAULT);
+    $newPassword = "Password123";
+    $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
     $stmt = $mysqli->prepare("UPDATE users SET `password` = ? WHERE userID = ?");
     $stmt->bind_param('ss', $passwordHash, $_GET['userID'] );
     $stmt->execute();
 }
 
+// update query
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
-    if ($user->jobRole != "Admin") {
+    if ($user->jobRole != "Admin") { // admins account type is locked, will only update if not an admin.
         $jobRole = $_POST['jobRole'];
         $stmt = $mysqli->prepare("UPDATE users SET fname = ?, lname = ?, email = ?, jobRole = ? WHERE userID = ?");
         $stmt->bind_param("sssss", $fname, $lname, $email, $jobRole, $userID);
@@ -54,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label>Email:</label>
                 <input type="email" name="email" value="<?php echo $user->email; ?>" required>
                 
-                <?php if ($user->jobRole != "Admin") {
+                <?php if ($user->jobRole != "Admin") { // admins account type is locked, will only update if not an admin.
                     echo "
                     <label>Job Role:</label>
                     <select id='select' name='jobRole'>
@@ -69,8 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="submit-button">Update</button>
                 <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link">Reset Password</a></p>
                  <p>Passwords are reset to "Password123"</p>
-                
-                
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>

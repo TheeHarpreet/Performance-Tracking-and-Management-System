@@ -4,6 +4,8 @@ require_once("includes/redirect-login.php");
 ob_clean();
 
 $submissionID = $_SESSION['viewSubmission'];
+
+// Get submission, coauthors, and the author.
 $submissionQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $submissionID");
 $submission = $submissionQuery->fetch_object();
 $coauthorsQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE submissionID = $submissionID");

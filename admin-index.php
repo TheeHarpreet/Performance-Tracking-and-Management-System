@@ -13,7 +13,7 @@ if (isset($_GET["orderby"])) {
 }
 
 // block query 
-if (isset($_GET['block'])){
+if (isset($_GET['block'])){ // Setting the password to nothing stops the account from being accessible.
     $stmt = $mysqli->prepare("UPDATE users SET `password` = '' WHERE userID = ?");
     $stmt->bind_param('s', $_GET['block'] );
     $stmt->execute();
@@ -29,6 +29,7 @@ if (isset($_GET['unblock'])){
     header("Location: admin-index.php");
 }
 
+// redirects the user if they're not an admin.
 if ($user->jobRole != "Admin") {
     header("Location: index.php");
 }
@@ -56,7 +57,7 @@ if ($user->jobRole != "Admin") {
                     $email_verify = mysqli_query($mysqli, "SELECT `email` FROM `users` WHERE `email`='$email'");
 
 
-                    // verifying if the email is already in use or not
+                    // verifying if the email is already in use or not.
                     if (mysqli_num_rows($email_verify) !=0){
                         echo "<div class='message'
                                 <p>This email is already in use, please try another email.</p>
@@ -112,10 +113,11 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['jobRole']; ?></td>
                             <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
-                            <?php if ($row['password'] == "") {
+                            <?php
+                            if ($row['password'] == "") { // a blank password means the account is blocked.
                                 echo "<td><a href='admin-index.php?unblock="; echo $row['userID']; echo "' class='unblock-button'>Unblock</a></td>";
                             } else {
-                                echo " <td><a href='admin-index.php?block="; echo $row['userID']; echo "' class='delete-button'>Block</a></td> ";
+                                echo "<td><a href='admin-index.php?block="; echo $row['userID']; echo "' class='delete-button'>Block</a></td> ";
                             }
                             ?>
                         </tr>

@@ -6,11 +6,6 @@ ob_clean();
 $error = "";
 $successMessage = "";
 
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    $error = "User not logged in.";
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $author = $_SESSION['user_id'];
     $sectionID = $_SESSION['newSubmission'];
@@ -18,67 +13,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comments = $_POST["comments"];
     $dateSubmitted = date("Y-m-d H:i:s");
 
-    // Check if required fields are empty
-    if (empty($title) || empty($comments)) {
-        $error = "Title and comments are required.";
+    // I removed a check to see if the email and passwords aren't empty as there is already a check with "required" in the html.
+
+    $fileUploaded = false;
+
+    // Insert details for submission
+    $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
+    $stmt->bind_param("sisis", $title, $author, $dateSubmitted, $sectionID, $comments);
+    $stmt->execute();
+
+    // Check for errors during query execution
+    if ($stmt->error) {
+        $error = "Database error: " . $stmt->error;
     } else {
-        $fileUploaded = false;
+        $submissionID = $stmt->insert_id;
+        $fileCount = count($_FILES['file']['name']);
 
-        // Insert details for submission
-        $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
-        $stmt->bind_param("sisis", $title, $author, $dateSubmitted, $sectionID, $comments);
-        $stmt->execute();
+        // Loop through each uploaded file
+        for ($i = 0; $i < $fileCount; $i++) {
+            $target_dir = "submissionfiles/"; // Relative path for the upload directory
+            $target_file = $target_dir . basename($_FILES["file"]["name"][$i]);
+            $extension = pathinfo($_FILES["file"]["name"][$i], PATHINFO_EXTENSION);
+            $fileName = $submissionID . "." . $extension; // Use submission ID as part of the file name
 
-        // Check for errors during query execution
-        if ($stmt->error) {
-            $error = "Database error: " . $stmt->error;
-        } else {
-            $submissionID = $stmt->insert_id;
-            $fileCount = count($_FILES['file']['name']);
+            if (move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_dir . $fileName)) {
+                // Insert file details into the file table
+                $stmt = $mysqli->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
+                $stmt->bind_param("ssi", $extension, $fileName, $author);
+                $stmt->execute();
 
-            // Loop through each uploaded file
-            for ($i = 0; $i < $fileCount; $i++) {
-                $target_dir = "submissionfiles/"; // Relative path for the upload directory
-                $target_file = $target_dir . basename($_FILES["file"]["name"][$i]);
-                $extension = pathinfo($_FILES["file"]["name"][$i], PATHINFO_EXTENSION);
-                $fileName = $submissionID . "." . $extension; // Use submission ID as part of the file name
+                // Check for errors during file insertion
+                if ($stmt->error) {
+                    $error = "Database error: " . $stmt->error;
+                    break;
+                } 
+                else {
+                    $fileID = $stmt->insert_id;
 
-                if (move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_dir . $fileName)) {
-                    // Insert file details into the file table
-                    $stmt = $mysqli->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
-                    $stmt->bind_param("ssi", $extension, $fileName, $author);
+                    // Insert details into submissionfile table
+                    $stmt = $mysqli->prepare("INSERT INTO submissionfile (submissionID, fileID) VALUES (?, ?)");
+                    $stmt->bind_param("ii", $submissionID, $fileID);
                     $stmt->execute();
 
-                    // Check for errors during file insertion
+                    // Check for errors during submissionfile insertion
                     if ($stmt->error) {
                         $error = "Database error: " . $stmt->error;
                         break;
-                    } 
-                    else {
-                        $fileID = $stmt->insert_id;
-
-                        // Insert details into submissionfile table
-                        $stmt = $mysqli->prepare("INSERT INTO submissionfile (submissionID, fileID) VALUES (?, ?)");
-                        $stmt->bind_param("ii", $submissionID, $fileID);
-                        $stmt->execute();
-
-                        // Check for errors during submissionfile insertion
-                        if ($stmt->error) {
-                            $error = "Database error: " . $stmt->error;
-                            break;
-                        } else {
-                            $fileUploaded = true;
-                        }
+                    } else {
+                        $fileUploaded = true;
                     }
-                } else {
-                    $error = "File upload failed.";
-                    break;
                 }
+            } else {
+                $error = "File upload failed.";
+                break;
             }
+        }
 
-            if ($fileUploaded) {
-                $successMessage = "Files uploaded successfully.";
-            }
+        if ($fileUploaded) {
+            $successMessage = "Files uploaded successfully.";
         }
     }
 }
