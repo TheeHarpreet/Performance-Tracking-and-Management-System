@@ -29,33 +29,6 @@ if (isset($_GET['unblock'])){
     header("Location: admin-index.php");
 }
 
-// creating an admin account
-if(isset($_POST['submit'])){
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $jobRole = $_POST['jobRole'];
-
-
-// verifying if the email is already in use or not
-$email_verify = mysqli_query($mysqli, "SELECT `email` FROM `users` WHERE `email`='$email'");
-
-if (mysqli_num_rows($email_verify) !=0){
-    echo "<div class='message'
-            <p>This email is already in use, please try another email.</p>
-        </div> <br>";
-    echo "<a href='javascript:script.history.back()'><button class = 'btn'>Go Back</button>";
-}
-else{
-    mysqli_query($mysqli, "INSERT INTO `user_accounts(fname, lname, email, password, jobRole) VALUES ('$fname', '$lname', '$email', '$password', '$jobRole')");
-    echo "<div class='message'
-            <p> Account has been created.</p>
-        </div> <br>";
-    echo "<a href='admin-index.php'><button class = 'btn'>Go Back</button>";
-}
-}else{
-
 if ($user->jobRole != "Admin") {
     header("Location: index.php");
 }
@@ -73,7 +46,28 @@ if ($user->jobRole != "Admin") {
     <?php include_once("includes/header.php") ?>
         <div class="admin-container">
             <div class="create-account">
-                <form action="admin-update.php?userID=<?php echo $id; ?>" method="post" class="new-admin-form">
+                <?php
+                    if($_SERVER["REQUEST_METHOD"] == "POST"){
+                        $fname = $_POST['fname'];
+                        $lname = $_POST['lname'];
+                        $email = $_POST['email'];
+                        $password = $_POST['password'];
+
+                    $email_verify = mysqli_query($mysqli, "SELECT `email` FROM `users` WHERE `email`='$email'");
+
+
+                    // verifying if the email is already in use or not
+                    if (mysqli_num_rows($email_verify) !=0){
+                        echo "<div class='message'
+                                <p>This email is already in use, please try another email.</p>
+                            </div> <br>";
+                    }
+                    else {
+                        mysqli_query($mysqli, "INSERT INTO users(fname, lname, email, password) VALUES ('$fname', '$lname', '$email', '$password')");
+                    }
+                    }
+                ?>
+                <form action="admin-index.php?userID=<?php echo $userID; ?>" method="post" class="new-admin-form">
                 <h2>Create User Account</h2>
                 <div class="new-admin-inputs">
                     <div>
@@ -133,6 +127,5 @@ if ($user->jobRole != "Admin") {
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>
-    <?php } ?>
 </body>
 </html>

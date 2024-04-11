@@ -487,10 +487,14 @@ circle.fg {
   text-align: center;
   background-color: #d4af37;
   border-radius: 4px;
-  color: white;
+  color: #f1f1f1;
 }
 
 .user-search-results {
   overflow: scroll;
   height: 500px;
+}
+
+.message{
+  color: white;
 }
