@@ -86,8 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" name="lname" required>
                         <h3>Email</h3>
                         <input type="text" name="email" required>
-                    </div>
-                    <div>
                         <h3>Password</h3>
                         <input type="password" name="password1" required>
                         <h3>Confirm Password</h3>
