@@ -7,13 +7,13 @@ $error = "";
 $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $author = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-    $type =$_SESSION['newSubmission'];
+    $author = $_SESSION['user_id'];
+    $sectionID =$_SESSION['newSubmission'];
     $title = $_POST["title"];
     $comments = $_POST["comments"];
     $dateSubmitted = date("Y-m-d H:i:s");
 
-    if (empty($title) || empty($comments) || empty($type)) {
+    if (empty($title) || empty($comments)) {
         $error = "Title, comments, and file are required fields.";
     } else {
         $fileUploaded = false;
@@ -24,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Insert details for submission
-        $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, type, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
-        $stmt->bind_param("sisss", $title, $author, $dateSubmitted, $type, $comments);
+        $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
+        $stmt->bind_param("sisis", $title, $author, $dateSubmitted, $sectionID, $comments);
         $stmt->execute();
         $submissionID = $stmt->insert_id;
 
@@ -107,40 +107,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include_once("includes/footer.php") ?> 
 </body>
 </html>
-
-
-
-
-
-
-<?php
-// require_once("includes/config.php");
-// require_once("includes/redirect-login.php");
-// ob_clean();
-
-// $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
-// $user = $query->fetch_object();
-// $section = $_SESSION['newSubmission'];
-
-?>
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Submission</title>
-    <link rel="stylesheet" href="css/mobile.css" />
-    <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
-</head>
-<body>
-    <?php //include_once("includes/header.php") ?>
-        <div class="container">
-            <?php
-            //echo "<p style='color: black;'>$thing</p>";
-            ?>
-        </div>
-    <?php //include_once("includes/footer.php") ?>
-</body>
-</html> -->
 
 
