@@ -441,6 +441,7 @@ circle.fg {
 .submit-button{
   margin-left: auto;
   margin-right: auto;
+  margin-top: auto;
   width: 100%;
   padding: 15px;
   background-color: #d4af37;
@@ -450,4 +451,8 @@ circle.fg {
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.reset-link:hover{
+  color: #d4af37;
+  opacity: 0.9;
 }
