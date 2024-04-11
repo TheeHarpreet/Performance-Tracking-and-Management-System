@@ -49,7 +49,8 @@ $user = $query->fetch_object();
                 </div>
             </div>
             <div class="managers-work-section">
-                <p>Search</p>
+                <p>Search work</p>
+                <input type="text">
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>
