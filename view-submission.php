@@ -11,7 +11,7 @@ $submission = $submissionQuery->fetch_object();
 $coauthorsQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE submissionID = $submissionID");
 $authorQuery = $mysqli->query("SELECT * FROM users WHERE userID = $submission->author");
 $author = $authorQuery->fetch_object();
-$rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submissionID = $submissionID");
+$rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submissionID = $submissionID ORDER BY returnDate DESC");
 
 ?>
 <!DOCTYPE html>
@@ -30,10 +30,14 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                 // status code
                 if ($submission->approved > 0) {
                     $status = "Approved";
-                } else if ($submission->submitted = 1 && $submission->approved = 0) {
+                } else if ($submission->submitted == 1 && $submission->approved == 0) {
                     $status = "Needing Manager approval";
-                } else if ($submission->submitted = 0 && mysqli_num_rows($rejectedQuery) > 0) {
+                } else if ($submission->submitted == 0 && mysqli_num_rows($rejectedQuery) > 0) {
                     $status = "Rejected";
+                    $recent = $mysqli->query("SELECT * FROM submissionreturn, submission WHERE submission.dateSubmitted > submissionreturn.returnDate");
+                    if (mysqli_num_rows($recent) > 0) {
+                        $status = "Needing Supervisor approval";
+                    }
                 } else {
                     $status = "Needing Supervisor approval";
                 }
