@@ -65,16 +65,20 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                 <p><span style='font-weight: bold'>Date Submitted: </span> $dateTimeOutput </p>
                 <h2 class='submission-description'>$submission->comments</h2>
                 <h2>Status: $status</h2>
-                <div class='coauthors'>
-                <h1>Coauthors</h1>
                 ";
-                while ($obj = $coauthorsQuery->fetch_object()) {
-                    $coauthorQuery = $mysqli->query("SELECT * FROM users where userID = $obj->coauthor");
-                    $coauthor = $coauthorQuery->fetch_object();
-                    echo "$coauthor->fname $coauthor->lname";
+                if (mysqli_num_rows($coauthorsQuery)) {
+                    echo "
+                    <div class='coauthors'>
+                    <h1>Coauthors</h1>
+                    ";
+                    while ($obj = $coauthorsQuery->fetch_object()) {
+                        $coauthorQuery = $mysqli->query("SELECT * FROM users where userID = $obj->coauthor");
+                        $coauthor = $coauthorQuery->fetch_object();
+                        echo "$coauthor->fname $coauthor->lname";
+                    }
+                    echo "</div>";
                 }
                 echo "
-                </div>
                 <div class='files'>
                 </div>
                 <div class='manager-review'>
