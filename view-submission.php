@@ -29,6 +29,7 @@ $author = $authorQuery->fetch_object();
                 echo "
                 <h1 class='submission-title'>$submission->title</h1>
                 <h2>By $author->fname $author->lname ($author->jobRole)</h2>
+                <p><span style='font-weight: bold'>Date Submitted: </span>"; echo strval($submission->dateSubmitted); echo " </p>
                 <h2>$submission->comments</h2>
                 <div class='coauthors'>
                 <h1>Coauthors</h1>
