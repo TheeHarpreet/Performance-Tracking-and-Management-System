@@ -26,10 +26,24 @@ $author = $authorQuery->fetch_object();
     <?php include_once("includes/header.php") ?>
         <div class="container">
             <?php
+                $datetime = strval($submission->dateSubmitted);
+                $date = explode(" ", $datetime);
+                $dateValues = explode("-", $date[0]);
+
+                $time = $date[1];
+                $timeValues = explode(":", $time);
+                $timeOfDay = " AM";
+                if ($timeValues[0] >= 12) {
+                    $timeValues[0] = $timeValues[0] % 12;
+                    $timeOfDay = " PM";
+                }
+
+                $dateTimeOutput = $dateValues[2] . "/" . $dateValues[1] . "/" . $dateValues[0] . " AT " . $time . $timeOfDay;
+
                 echo "
                 <h1 class='submission-title'>$submission->title</h1>
                 <h2>By $author->fname $author->lname ($author->jobRole)</h2>
-                <p><span style='font-weight: bold'>Date Submitted: </span>"; echo strval($submission->dateSubmitted); echo " </p>
+                <p><span style='font-weight: bold'>Date Submitted: </span> $dateTimeOutput </p>
                 <h2>$submission->comments</h2>
                 <div class='coauthors'>
                 <h1>Coauthors</h1>
