@@ -65,8 +65,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     ";
                 }
-                if (isset($_GET['user_override'])) {
-                    $userID = $_GET['user_override']; // Sets the ID of the user to output to the user that is being viewed.
+                if (isset($_GET['user_override']) && $user->jobRole != "Researcher") {
+                    // Updates and displays information is another account is being used
+                    $userID = $_GET['user_override'];
+                    $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+                    $user = $userQuery->fetch_object();
+                    echo "<h1>$user->fname $user->lname </h1>";
+                } else if (isset($_GET['user_override']) && $user->jobRole == "Researcher") {
+                    header("Location: index.php");
                 }
             ?>
             <div class="performance">

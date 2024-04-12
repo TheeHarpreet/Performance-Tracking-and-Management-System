@@ -9,7 +9,6 @@ $submissionID = $_SESSION['viewSubmission'];
 $submissionQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $submissionID");
 $submission = $submissionQuery->fetch_object();
 $coauthorsQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE submissionID = $submissionID");
-$coauthors = $coauthorsQuery->fetch_object();
 $authorQuery = $mysqli->query("SELECT * FROM users WHERE userID = $submission->author");
 $author = $authorQuery->fetch_object();
 
@@ -27,10 +26,23 @@ $author = $authorQuery->fetch_object();
     <?php include_once("includes/header.php") ?>
         <div class="container">
             <?php
-                echo "<h1 class='submission-title'>$submission->title</h1>";
-                echo "<h2>$author->fname $author->lname</h2>";
-                echo "<h1>$submission->title</h1>";
-                echo "<h1>$submission->title</h1>";
+                echo "
+                <h1 class='submission-title'>$submission->title</h1>
+                <h2>By $author->fname $author->lname ($author->jobRole)</h2>
+                <h2>$submission->comments</h2>
+                <div class='coauthors'>
+                <h1>Coauthors</h1>
+                ";
+                while ($obj = $coauthorsQuery->fetch_object()) {
+                    $coauthorQuery = $mysqli->query("SELECT * FROM users where userID = $obj->coauthor");
+                    $coauthor = $coauthorQuery->fetch_object();
+                    echo "$coauthor->fname $coauthor->lname";
+                }
+                echo "
+                </div>
+                <div class='files'>
+                </div>
+                ";
             ?>
         </div>
     <?php include_once("includes/footer.php") ?>
