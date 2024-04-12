@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO users (fname, lname, email, password, jobRole) VALUES (?, ?, ?, ?, 'None')";
         $stmt = $mysqli->prepare($sql);
         $stmt->bind_param("ssss", $firstname, $surname, $email, $passwordHash);
-        $stmt->execute()
+        $stmt->execute();
 
         $_SESSION['user_id'] = mysqli_insert_id($mysqli);
         header("Location: index.php");
