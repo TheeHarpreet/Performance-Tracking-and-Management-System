@@ -63,7 +63,7 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                 <h1 class='submission-title'>$submission->title</h1>
                 <h2>By $author->fname $author->lname ($author->jobRole)</h2>
                 <p><span style='font-weight: bold'>Date Submitted: </span> $dateTimeOutput </p>
-                <h2>$submission->comments</h2>
+                <h2 class='submission-description'>$submission->comments</h2>
                 <h2>Status: $status</h2>
                 <div class='coauthors'>
                 <h1>Coauthors</h1>

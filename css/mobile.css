@@ -32,6 +32,10 @@ body {
 }
 
 .bottom-header a {
+  font-size: 20px;
+  padding: 10px 30px;
+  border-radius: 4px;
+  background-color: #d4af37;
   color: white;
 }
 
@@ -57,7 +61,7 @@ h1 #submissions{
 }
 
 h2 {
-  color: #8a6103;
+  color: #f8c51e;
   margin: 25px 50px 5px 50px;
 }
 

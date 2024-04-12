@@ -41,8 +41,29 @@ button {
   margin: 0 auto;
 }
 .new-submission {
+  margin-left: 660px;
   margin-top: 15px;
   width: 250px;
+}
+.view-details{
+  margin-bottom: 20px;
+}
+h2 {
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+.section-header{
+  margin-left: 650px;
+}
+.new-password{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px
+}
+
+.new-password-btn{
+  margin-left: 20px;
 }
 
 /* admin css */
@@ -204,4 +225,35 @@ button {
 
 .login-input input[type=email]{
   padding: 15px 0px;
+}
+
+.container{
+  background-color: #3a3a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 4px;
+  margin: 20px 50px;
+}
+
+.container h1{
+  background-color: #d3ae33;
+  color:#333;
+  border-radius: 4px;
+  padding: 5px 20px;
+}
+
+.coauthors{
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  word-spacing: 10px;
+  line-height: 40px;
+}
+
+.submission-description{
+  border: 2px solid #d3ae33;
+  padding: 40px 60px;
+  font-size: 18px;
 }
