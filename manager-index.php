@@ -6,21 +6,33 @@ ob_clean();
 $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
+if (isset($_GET["orderby"])) {
+    $orderBy = $_GET["orderby"];
+} else {
+    $orderBy = "fname";
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Reloads the page with search contraints for the work.
-    $name = "";
-    $nameText = $_POST['submissionName'];
-    if ($nameText != "") {
-        $name = "&name=$nameText";
-    }
-    if ($_POST['status'] == "both") {
-        $status = "1";
-    } else if ($_POST['status'] == "accepted") {
-        $status = "2";
+    if (isset($_POST['submission-id'])) {
+        $_SESSION['viewSubmission'] = $_POST['submission-id'];
+        header("Location: view-submission.php");
     } else {
-        $status = "3";
+        // Reloads the page with search contraints for the work.
+        $name = "";
+        $nameText = $_POST['submissionName'];
+        if ($nameText != "") {
+            $name = "&name=$nameText";
+        }
+        if ($_POST['status'] == "both") {
+            $status = "1";
+        } else if ($_POST['status'] == "accepted") {
+            $status = "2";
+        } else {
+            $status = "3";
+        }
+        header("Location: manager-index.php?status=$status$name");
     }
-    header("Location: manager-index.php?status=$status$name");
+
 }
 
 ?>
@@ -40,12 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="users-list">
                     <table>
                     <tr class="accounts-table">
-                        <th>First Name <a class="sort" href="admin-index.php?orderby=fname">Sort by</a></th>
-                        <th>Last Name <a class="sort" href="admin-index.php?orderby=lname">Sort by</a></th>
-                        <th>Job Role <a class="sort" href="admin-index.php?orderby=jobRole">Sort by</a></th>
+                        <th>First Name <a class="sort" href="manager-index.php">Sort by</a></th>
+                        <th>Last Name <a class="sort" href="manager-index.php?orderby=lname">Sort by</a></th>
+                        <th>Job Role <a class="sort" href="manager-index.php?orderby=jobRole">Sort by</a></th>
                     </tr>
                     <?php 
-                    $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher'");
+                    $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher' ORDER BY $orderBy");
                     
                     while ($obj = $user_accounts->fetch_object()) { // Outputs the list of supervisors and researchers. The hyperlink could be changed to cover the entire row.
                         $rowUserID = $obj->userID;
