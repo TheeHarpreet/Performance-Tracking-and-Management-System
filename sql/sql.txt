@@ -48,6 +48,7 @@ CREATE TABLE If Not Exists file (
 CREATE TABLE If Not Exists submissionCoauthor (
     submissionID int NOT NULL,
     coauthor int NOT NULL,
+    FOREIGN KEY (submissionID) REFERENCES submission (submissionID),
     FOREIGN KEY (coauthor) REFERENCES users (userID)
 );
 
