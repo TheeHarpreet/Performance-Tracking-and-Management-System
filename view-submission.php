@@ -29,9 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
         $updateStatusQuery = $mysqli->query("UPDATE submission SET submitted = 0 AND approved = 0");
     } else if (isset($_POST['manager-approve'])) {
-        if ($submission->sectionID == 1 || $submission->sectionID == 4) {
-            $assignedPoints = 1;
-        } else {
+        $assignedPoints = 1;
+        if ($submission->sectionID != 1 && $submission->sectionID != 4) {
             $assignedPoints = $_POST['type-select'];
         }
         $assignQuery = $mysqli->prepare("UPDATE submission SET approved = ? WHERE submissionID = ?");
