@@ -134,9 +134,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <?php include("includes/lang-config.php");
 function translate($key) {
     $translations = array(
+        /*
         "en" => array(
             // Things
         ),
+        */
         "bm" => array(
             // Things
         )

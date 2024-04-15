@@ -190,6 +190,7 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
 <?php include("includes/lang-config.php");
 function translate($key) {
     $translations = array(
+        /*
         "en" => array(
             "View Submission" => "View Submission",
             "By" => "By",
@@ -210,6 +211,7 @@ function translate($key) {
             "Supervisor" => "Supervisor",
             "Manager" => "Manager",
         ),
+        */
         "bm" => array(
             "View Submission" => "Lihat Penyerahan",
             "By" => "Oleh",

@@ -135,6 +135,7 @@ if ($user->jobRole != "Admin") {
 <?php include("includes/lang-config.php");
 function translate($key) {
     $translations = array(
+        /*
         "en" => array(
             "Home" => "Home",
             "Create User Account" => "Create User Account",
@@ -153,6 +154,7 @@ function translate($key) {
             "Unblock" => "Unblock",
             "Block" => "Block"
         ),
+        */
         "bm" => array(
             "Home" => "Halaman Utama",
             "Create User Account" => "Cipta Akaun Pengguna",

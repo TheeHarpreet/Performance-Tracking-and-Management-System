@@ -213,6 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <?php include("includes/lang-config.php");
 function translate($key) {
     $translations = array(
+        /*
         "en" => array(
             "Home" => "Home",
             "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Your account doesn't have a role assigned. Please speak to an admin to assign you one.",
@@ -225,32 +226,32 @@ function translate($key) {
             "New Password" => "New Password",
             "Change Password" => "Change Password",
             "Personal Particulars"=>"Personal Particulars",
-            "Professional Achievements"=>"Personal Acivmen",
             "Research And Development"=>"Research And Development",
             "Professional Consultations"=>"Professional Consultations",
             "Research Outcomes"=>"Research Outcomes",
             "Professional Recognition"=>"Professional Recognition",
             "Service To Community"=>"Service To Community"
         ),
-            "bm" => array(
-                "Home" => "Laman Utama",
-                "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Akaun anda tidak mempunyai peranan yang diberikan. Sila bercakap dengan pentadbir untuk memberikan anda satu.",
-                "Select a researcher to view their work" => "Pilih penyelidik untuk melihat kerja mereka",
-                "Not enough data to calculate scores" => "Tidak cukup data untuk mengira skor",
-                "Performance Overview" => "Gambaran Prestasi",
-                "Submissions" => "Penyerahan",
-                "Hide" => "Sembunyi",
-                "Add New Submission" => "Tambah Penyerahan Baru",
-                "New Password" => "Kata Laluan Baru",
-                "Change Password" => "Tukar Kata Laluan",
-                "Personal Particulars"=>"Khusus Peribadi", 
-                "Professional Achievements"=>"Pencapaian Peribadi",
-                "Research And Development"=>"Pembangun Penyilidik", 
-                "Professional Consultations"=>"Perundingan profesional",
-                "Research Outcomes"=>"Hasil Penyelidik", // Here
-                "Professional Recognition"=>"pengiktirafan profesional", 
-                "Service To Community"=>"Servis kepada Komuniti" // Here
-            ),
+        */
+        "bm" => array(
+            "Home" => "Laman Utama",
+            "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Akaun anda tidak mempunyai peranan yang diberikan. Sila bercakap dengan pentadbir untuk memberikan anda satu.",
+            "Select a researcher to view their work" => "Pilih penyelidik untuk melihat kerja mereka",
+            "Not enough data to calculate scores" => "Tidak cukup data untuk mengira skor",
+            "Performance Overview" => "Gambaran Prestasi",
+            "Submissions" => "Penyerahan",
+            "Hide" => "Sembunyi",
+            "Add New Submission" => "Tambah Penyerahan Baru",
+            "New Password" => "Kata Laluan Baru",
+            "Change Password" => "Tukar Kata Laluan",
+            "Personal Particulars"=>"Khusus Peribadi", 
+            "Professional Achievements"=>"Pencapaian Peribadi",
+            "Research And Development"=>"Pembangun Penyilidik", 
+            "Professional Consultations"=>"Perundingan profesional",
+            "Research Outcomes"=>"Hasil Penyelidik",
+            "Professional Recognition"=>"pengiktirafan profesional", 
+            "Service To Community"=>"Servis kepada Komuniti"
+        )
     );
 
     $language = $_SESSION['language'];

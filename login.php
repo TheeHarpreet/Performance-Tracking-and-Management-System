@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <?php include("includes/lang-config.php");
 function translate($key) {
     $translations = array(
+        /*
         "en" => array(
             "Log In" => "Log In",
             "Email" => "Email",
@@ -97,6 +98,7 @@ function translate($key) {
             "English" => "English",
             "BM" => "BM"
         ),
+        */
         "bm" => array(
             "Log In" => "Log Masuk",
             "Email" => "Emel",
