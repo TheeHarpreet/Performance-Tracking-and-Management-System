@@ -39,7 +39,7 @@ if ($user->jobRole != "Admin") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | MIROS</title>
+    <title><?php echo translate("Home"); ?> | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
@@ -60,7 +60,7 @@ if ($user->jobRole != "Admin") {
                     // verifying if the email is already in use or not.
                     if (mysqli_num_rows($email_verify) !=0){
                         echo "<div class='message'
-                                <p>This email is already in use, please try another email.</p>
+                                <p>" . translate("This email is already in use, please try another email.") . "</p>
                             </div> <br>";
                     }
                     else {
@@ -69,36 +69,36 @@ if ($user->jobRole != "Admin") {
                     }
                 ?>
                 <form action="admin-index.php?userID=<?php echo $userID; ?>" method="post" class="new-admin-form">
-                <h2>Create User Account</h2>
+                <h2><?php echo translate("Create User Account"); ?></h2>
                 <div class="new-admin-inputs">
                     <div>
-                        <p>First Name</p>
+                        <p><?php echo translate("First Name"); ?></p>
                         <input type="text" name="fname" id="fname" required>
-                        <p>Last Name</p>
+                        <p><?php echo translate("Last Name"); ?></p>
                         <input type="text" name="lname" id="lname" required>
                     </div>
                     <div>
-                        <p>Email</p>
+                        <p><?php echo translate("Email"); ?></p>
                         <input type="email" name="email" id="email" required>
-                        <p>Password</p>
+                        <p><?php echo translate("Password"); ?></p>
                         <input type="password" name="password" id="password" required>
                     </div>
                 </div>
-                <input type="submit" class="btn" name="submit" value="Create Account" required>
+                <input type="submit" class="btn" name="submit" value="<?php echo translate("Create Account"); ?>" required>
                 </form>
             </div>
             <div class="account-list">
-                <h2>List Of User Accounts</h2>
+                <h2><?php echo translate("List Of User Accounts"); ?></h2>
                 <table>
                     <thead>
                         <tr class="accounts-table">
-                            <th><div>UserID <a class="sort" href="admin-index.php">Sort by</a></div></th>
-                            <th><div>First Name <a class="sort" href="admin-index.php?orderby=fname">Sort by</a></div></th>
-                            <th><div>Last Name <a class="sort" href="admin-index.php?orderby=lname">Sort by</a></div></th>
-                            <th><div>Email <a class="sort" href="admin-index.php?orderby=email">Sort by</a></div></th>
-                            <th><div>Job Role <a class="sort" href="admin-index.php?orderby=jobRole">Sort by</a></div></th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th><div><?php echo translate("UserID"); ?> <a class="sort" href="admin-index.php"><?php echo translate("Sort by"); ?></a></div></th>
+                            <th><div><?php echo translate("First Name"); ?> <a class="sort" href="admin-index.php?orderby=fname"><?php echo translate("Sort by"); ?></a></div></th>
+                            <th><div><?php echo translate("Last Name"); ?> <a class="sort" href="admin-index.php?orderby=lname"><?php echo translate("Sort by"); ?></a></div></th>
+                            <th><div><?php echo translate("Email"); ?> <a class="sort" href="admin-index.php?orderby=email"><?php echo translate("Sort by"); ?></a></div></th>
+                            <th><div><?php echo translate("Job Role"); ?> <a class="sort" href="admin-index.php?orderby=jobRole"><?php echo translate("Sort by"); ?></a></div></th>
+                            <th><?php echo translate("Edit"); ?></th>
+                            <th><?php echo translate("Delete"); ?></th>
                         </tr>
                         <tr>
                         <?php
@@ -112,12 +112,12 @@ if ($user->jobRole != "Admin") {
                             <td><?php echo $row['lname']; ?></td>
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['jobRole']; ?></td>
-                            <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button">Edit</a></td>
+                            <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button"><?php echo translate("Edit"); ?></a></td>
                             <?php
                             if ($row['password'] == "") { // a blank password means the account is blocked.
-                                echo "<td><a href='admin-index.php?unblock="; echo $row['userID']; echo "' class='unblock-button'>Unblock</a></td>";
+                                echo "<td><a href='admin-index.php?unblock=" . $row['userID'] . "' class='unblock-button'>" . translate("Unblock") . "</a></td>";
                             } else {
-                                echo "<td><a href='admin-index.php?block="; echo $row['userID']; echo "' class='delete-button'>Block</a></td> ";
+                                echo "<td><a href='admin-index.php?block=" . $row['userID'] . "' class='delete-button'>" . translate("Block") . "</a></td> ";
                             }
                             ?>
                         </tr>
@@ -136,10 +136,40 @@ if ($user->jobRole != "Admin") {
 function translate($key) {
     $translations = array(
         "en" => array(
-            // Things
+            "Home" => "Home",
+            "Create User Account" => "Create User Account",
+            "This email is already in use, please try another email." => "This email is already in use, please try another email.",
+            "First Name" => "First Name",
+            "Last Name" => "Last Name",
+            "Email" => "Email",
+            "Password" => "Password",
+            "Create Account" => "Create Account",
+            "List Of User Accounts" => "List Of User Accounts",
+            "UserID" => "UserID",
+            "Sort by" => "Sort by",
+            "Job Role" => "Job Role",
+            "Edit" => "Edit",
+            "Delete" => "Delete",
+            "Unblock" => "Unblock",
+            "Block" => "Block"
         ),
         "bm" => array(
-            // Things
+            "Home" => "Halaman Utama",
+            "Create User Account" => "Cipta Akaun Pengguna",
+            "This email is already in use, please try another email." => "Emel ini sudah digunakan, sila cuba emel yang lain.",
+            "First Name" => "Nama Pertama",
+            "Last Name" => "Nama Akhir",
+            "Email" => "Emel",
+            "Password" => "Kata Laluan",
+            "Create Account" => "Cipta Akaun",
+            "List Of User Accounts" => "Senarai Akaun Pengguna",
+            "UserID" => "ID Pengguna",
+            "Sort by" => "Disusun mengikut",
+            "Job Role" => "Peranan Pekerjaan",
+            "Edit" => "Edit",
+            "Delete" => "Padam",
+            "Unblock" => "Buka Kunci",
+            "Block" => "Kunci"
         )
     );
 
