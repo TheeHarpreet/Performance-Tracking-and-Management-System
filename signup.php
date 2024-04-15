@@ -12,9 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password1'];
     $passwordConfirm = $_POST['password2'];
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    
-    // I removed a check to see if the email and passwords aren't empty as there is already a check with "required" in the html.
-    // I removed a check to see if the email is in the correct format as there is already a check with type="email".
 
     // Password length validation
     if (strlen($password) < 8) {

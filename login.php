@@ -9,8 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // I removed a check to see if the email and passwords aren't empty as there is already a check with "required" in the html.
-
     $stmt = $mysqli->prepare("SELECT userID, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();

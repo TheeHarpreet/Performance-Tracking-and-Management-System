@@ -12,14 +12,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST["title"];
     $comments = $_POST["comments"];
     $dateSubmitted = date("Y-m-d H:i:s");
-
-    // I removed a check to see if the email and passwords aren't empty as there is already a check with "required" in the html.
-
     $fileUploaded = false;
 
+    $query = $mysqli->query("SELECT * FROM users WHERE userID = $author");
+    $authorDetails = $query->fetch_object();
+    if ($authorDetails->jobRole = "Researcher") {
+        $submitted = 0;
+    } else {
+        $submitted = 1;
+    }
+
     // Insert details for submission
-    $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
-    $stmt->bind_param("sisis", $title, $author, $dateSubmitted, $sectionID, $comments);
+    $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, ?, 0)");
+    $stmt->bind_param("sisisi", $title, $author, $dateSubmitted, $sectionID, $comments, $submitted);
     $stmt->execute();
 
     // Check for errors during query execution
@@ -34,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $target_dir = "submissionfiles/"; // Relative path for the upload directory
             $target_file = $target_dir . basename($_FILES["file"]["name"][$i]);
             $extension = pathinfo($_FILES["file"]["name"][$i], PATHINFO_EXTENSION);
-            $fileName = $submissionID . "." . $extension; // Use submission ID as part of the file name
+            $fileName = "upload-" . $submissionID . "-" . $i ."." . $extension; // Use submission ID as part of the file name
 
             if (move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_dir . $fileName)) {
                 // Insert file details into the file table
-                $stmt = $mysqli->prepare("INSERT INTO file (fileType, name, author) VALUES (?, ?, ?)");
-                $stmt->bind_param("ssi", $extension, $fileName, $author);
+                $stmt = $mysqli->prepare("INSERT INTO file (address, name, author) VALUES (?, ?, ?)");
+                $stmt->bind_param("ssi", $fileName, $_FILES["file"]["name"][$i], $author);
                 $stmt->execute();
 
                 // Check for errors during file insertion

@@ -3,8 +3,8 @@ require_once("includes/config.php");
 require_once("includes/redirect-login.php");
 ob_clean();
 
-$query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
-$user = $query->fetch_object();
+$userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+$user = $userQuery->fetch_object();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['new-submission'])) {
@@ -12,9 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: new-submission.php");
     } else if (isset($_POST['new-password-button'])) { // change password. Add the code to check the conditions here. I'd recommend doing the conditions as an include and use that here and in signup.
         $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $query = $mysqli->prepare("UPDATE users SET password = ? WHERE userID = $userID");
-        $query->bind_param("s", $passwordHash);
-        $query->execute();
+        $changePasswordQuery = $mysqli->prepare("UPDATE users SET password = ? WHERE userID = $userID");
+        $changePasswordQuery->bind_param("s", $passwordHash);
+        $changePasswordQuery->execute();
     } else {
         $_SESSION['viewSubmission'] = $_POST['submission-id'];
         header("Location: view-submission.php");
@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
     <script src="js/index.js"></script>
-    <script src="js/performance-bars.js" defer></script>
 </head>
 <body>
     <?php include_once("includes/header.php") ?>
@@ -93,18 +92,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $title = $section->sectionName;
                             $sectionID = $loop + 1;
 
-                            $query = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = $sectionID");
-                            $result = $query->fetch_object();
+                            $approvedQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = $sectionID");
+                            $result = $approvedQuery->fetch_object();
                             $currentAmount = $result->amount;
 
                             if ($currentAmount == 0){
                                 echo "<p>$title: Not enough data to calculate scores</p>";
                                 array_push($pointsArray, 0);
                             } else {
-                                if ($minRange != $currentAmount && $minRange != $maxRange) {
+                                if ($maxRange == $currentAmount) {
+                                    $points = $maxPoints;
+                                } else if ($minRange == $currentAmount) {
+                                    $points = $minPoints;
+                                } else  {
                                     $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange))); // Points calculation.
-                                } else {
-                                    $points = $maxPoints; // Points calculation doesn't work properly if the user has the minimum and maximum amount, so this is a workaround.
                                 }
                                 $pointsTotal += $points;
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
@@ -165,13 +166,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         echo "<div id='section-hide$i'>";
                         $sectionID = $i + 1;
-                        $query = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND sectionID = $sectionID");
-                        while ($obj = $query->fetch_object()) { // Outputs all submissions where the user is the author.
+                        $submissionsQuery = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND sectionID = $sectionID");
+                        while ($obj = $submissionsQuery->fetch_object()) { // Outputs all submissions where the user is the author.
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
                         }
-                        $query = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.sectionID = $sectionID");
-                        while ($obj = $query->fetch_object()) { // Outputs all submissions where the user is the coauthor.
+                        $submissionsQuery = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.sectionID = $sectionID");
+                        while ($obj = $submissionsQuery->fetch_object()) { // Outputs all submissions where the user is the coauthor.
                             $isAuthor = false;
                             include("includes/submission-preview-fill.php");
                         }

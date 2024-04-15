@@ -3,7 +3,6 @@
     echo "<div class='submission-preview-box'>";
     if ($isAuthor == false) { // $isAuthor is set before the include is called. Just adds a gray indicator to the left.
         echo "<div class='coauthor-indicator' style='background-color: gray;'>";
-        echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
         echo "</div>";
     }
     echo "<div class='submission-preview-text'>";
@@ -29,7 +28,6 @@
     }
     
     echo "<div class='colour-bar' style='background-color: $backgroundColour';>"; 
-    echo "<p>‎ ‎ ‎ ‎ ‎ ‎</p>";
     echo "</div>";
     echo "</div>";
     echo "<div>";
