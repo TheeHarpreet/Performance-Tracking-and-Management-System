@@ -61,12 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
-    <div class="language"> <!--new buttons -->
-        <form method="post">
-            <button type="submit" name="lang" value="en"><?php echo translate("EN"); ?></button>
-            <button type="submit" name="lang" value="bm"><?php echo translate("BM"); ?></button>
-        </form>
-    </div>
 
     <div class="login-container">
         <form class="login-form" method="post">
