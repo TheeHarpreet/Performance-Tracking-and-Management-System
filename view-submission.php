@@ -117,7 +117,25 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                         }
                     } else {
                         echo "<h2>You can only view details of this task</h2>";
+                    }
+                } else if ($user->jobRole == "Researcher") {
+                    $coauthorQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE coauthor = $userID AND submissionID = $submissionID");
+                    if ($submission->author != $userID && mysqli_num_rows($coauthorQuery) == 0) {
+                        if ($status == "Approved" && $submission->section == 3 || $submission->section == 4 || $submission->section == 5) {
+                            echo "<h2>You can only view the details of this task</h2>";
+                        } else {
+                            header("Location: index.php");
+                        }
+                    } else {
+                        if ($status == "Rejected") {
+                            echo "<button name='resubmit'>Resubmit</button>";
+                        }
+                    }
+                } else if ($user->jobRole == "Manager") {
+                    if ($status = "Needing Manager approval") {
+                        echo "
                         
+                        ";
                     }
                 }
             ?>
