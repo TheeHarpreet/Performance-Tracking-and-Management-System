@@ -6,10 +6,10 @@
         <div class="bottom-header">
             <?php
             if (basename($_SERVER['PHP_SELF']) == "index.php") { // Only outputs the name on the index page.
-                echo "<p>Hello, $user->fname $user->lname!</p>";
+                echo "<p>Hello, $user->fname $user->lname!</p>"; // NeedsTranslation
             }
             ?>
-            <a href="login.php">logout</a>
+            <a href="login.php">logout</a> <!-- NeedsTranslation -->
             <?php 
             echo "
             <div class='language'>

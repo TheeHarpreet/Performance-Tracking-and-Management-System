@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 if ($timeValues[0] >= 12) {
                     $timeOfDay = " PM";
                 }
-                $dateTimeOutput = $dateValues[2] . "/" . $dateValues[1] . "/" . $dateValues[0] . " at " . $hour . ":" . $timeValues[1] . ":" . $timeValues[2] . $timeOfDay;
+                $dateTimeOutput = $dateValues[2] . "/" . $dateValues[1] . "/" . $dateValues[0] . " at " . $hour . ":" . $timeValues[1] . ":" . $timeValues[2] . $timeOfDay;  // NeedsTranslation
 
                 echo "
                 <h1 class='submission-title'>$submission->title</h1>
@@ -156,9 +156,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         ";
                         if ($submission->sectionID != 1 && $submission->sectionID != 4) {
                             echo "<select name='type-select' id='type-select'>";
-                            if ($submission->sectionID == 2 || $submission->sectionID == 5) {
+                            if ($submission->sectionID == 2 || $submission->sectionID == 5) {  // NeedsTranslation All the values in the option tags, some repeat
                                 echo "
-                                <option value='1'>Internal</option>
+                                <option value='1'>Internal</option>  
                                 <option value='2'>National</option>
                                 <option value='3'>International</option>
                                 ";

@@ -168,7 +168,7 @@ function translate($key) {
             "UserID" => "ID Pengguna",
             "Sort by" => "Disusun mengikut",
             "Job Role" => "Peranan Pekerjaan",
-            "Edit" => "Edit",
+            "Edit" => "Edit",  // NeedsTranslation
             "Delete" => "Padam",
             "Unblock" => "Buka Kunci",
             "Block" => "Kunci"

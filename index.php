@@ -249,7 +249,7 @@ function translate($key) {
             "Research And Development"=>"Pembangun Penyilidik", 
             "Professional Consultations"=>"Perundingan profesional",
             "Research Outcomes"=>"Hasil Penyelidik",
-            "Professional Recognition"=>"pengiktirafan profesional", 
+            "Professional Recognition"=>"Pengiktirafan profesional", 
             "Service To Community"=>"Servis kepada Komuniti"
         )
     );

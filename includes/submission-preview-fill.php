@@ -10,7 +10,7 @@
     echo "<p>$obj->title</p>";
     $query = $mysqli->query("SELECT * FROM users WHERE userID = $obj->author");
     $author = $query->fetch_object();
-    echo "<p>By $author->fname $author->lname</p>";
+    echo "<p>By $author->fname $author->lname</p>";  // NeedsTranslation
     echo "</div>";
     echo "</div>";
 
@@ -32,7 +32,7 @@
     echo "</div>";
     echo "<div>";
     echo "<form method='post'>";
-    echo "<button class='view-details' name='submission-id' value='$obj->submissionID'>View Details</button>";
+    echo "<button class='view-details' name='submission-id' value='$obj->submissionID'>View Details</button>";  // NeedsTranslation
     echo "</form>";
     echo "</div>";
     echo "</div>";

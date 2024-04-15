@@ -17,22 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     
     // Basic validation
     if (empty($firstname) || empty($surname) || empty($email) || empty($password) || empty($passwordConfirm)) {
-        array_push($errors, "All fields are required.");
+        array_push($errors, "All fields are required.");  // NeedsTranslation
     }
 
     // Email format validation
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        array_push($errors, "Email is not valid.");
+        array_push($errors, "Email is not valid.");  // NeedsTranslation
     }
 
     // Password length validation
     if (strlen($password) < 8) {
-        array_push($errors, "Password must be at least 8 characters long.");
+        array_push($errors, "Password must be at least 8 characters long.");  // NeedsTranslation
     }
 
     // Password confirmation check
     if ($password !== $passwordConfirm) {
-        array_push($errors, "Passwords do not match.");
+        array_push($errors, "Passwords do not match.");  // NeedsTranslation
     }
 
     $emailCheck = $mysqli->prepare("SELECT * FROM users WHERE email = ?");
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $emailCheck->execute();
     $emailResult = $emailCheck->get_result();
     if (mysqli_num_rows($emailResult) > 0) {
-        array_push($errors, "Email is already in use");
+        array_push($errors, "Email is already in use");  // NeedsTranslation
     }
 
     if (count($errors) == 0) {
@@ -54,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         $stmt->bind_param("ssss", $firstname, $surname, $email, $passwordHash);
 
         if ($stmt->execute()) {
-            echo "<div class='alert alert-success'>You have registered successfully.</div>";
             $_SESSION['user_id'] = mysqli_insert_id($mysqli);
             header("Location: index.php");
             exit();
@@ -78,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
         <div class="signup-container">
             <form class="signup-form" method="post">
-                <h1><?php echo translate("Sign up"); ?></h1>
+                <h1><?php echo translate("Signup"); ?></h1>
                 <div class="signup-div">
                     <div>
                         <h3><?php echo translate("First name"); ?></h3>
@@ -130,7 +129,7 @@ function translate($key) {
             "Passwords do not match." => "Passwords do not match.",
             "Email is already in use" => "Email is already in use",
             "You have registered successfully." => "You have registered successfully.",
-            "Sign up" => "Sign up",
+            "Signup" => "Sign up",
             "First name" => "First name",
             "Surname" => "Surname",
             "Confirm Password" => "Confirm Password",
@@ -156,7 +155,7 @@ function translate($key) {
             "Passwords do not match." => "Kata laluan tidak sepadan.",
             "Email is already in use" => "Emel telah digunakan",
             "You are registered successfully." => "Anda telah berdaftar dengan berjaya.",
-            "Sign up" => "Daftar",
+            "Signup" => "Daftar",
             "First name" => "Nama pertama",
             "Surname" => "Nama keluarga",
             "Confirm Password" => "Sahkan Kata Laluan",

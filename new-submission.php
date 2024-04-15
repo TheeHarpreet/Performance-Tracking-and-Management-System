@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         </div>
         <div class="form-group">
             <label for="file"><?php echo translate("Upload File"); ?>:</label>
-            <input type="file" id="file" name="file[]" multiple required>
+            <input type="file" id="file" name="file[]" multiple required>  <!-- NeedsTranslation for defaults like "Choose files", "No file chosen", and "4 files" -->
         </div>
         <button type="submit" class="submit-button"><?php echo translate("Submit"); ?></button>
     </form>
