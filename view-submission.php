@@ -9,6 +9,14 @@ $userID = $_SESSION['user_id'];
 $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $userQuery->fetch_object();
 
+// Get submission, coauthors, and the author.
+$submissionQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $submissionID");
+$submission = $submissionQuery->fetch_object();
+$coauthorsQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE submissionID = $submissionID");
+$authorQuery = $mysqli->query("SELECT * FROM users WHERE userID = $submission->author");
+$author = $authorQuery->fetch_object();
+$rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submissionID = $submissionID ORDER BY returnDate DESC");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     if (isset($_POST['approve'])) {
         $approveQuery = $mysqli->prepare("UPDATE submission SET submitted = 1 WHERE submissionID = ?");
@@ -21,29 +29,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
         $updateStatusQuery = $mysqli->query("UPDATE submission SET submitted = 0 AND approved = 0");
     } else if (isset($_POST['manager-approve'])) {
-        if ($submission->sectionID == 1) {
-
-        } else if ($submission->sectionID == 2 || 5) {
-
-        } else if ($submission->sectionID == 3) {
-
-        } else if ($submission->sectionID == 4) {
-
-        } else if ($submission->sectionID == 6) {
-
-        } else if ($submission->sectionID == 7) {
-
+        if ($submission->sectionID == 1 || $submission->sectionID == 4) {
+            $assignedPoints = 1;
+        } else {
+            $assignedPoints = $_POST['type-select'];
         }
+        $assignQuery = $mysqli->prepare("UPDATE submission SET approved = ? WHERE submissionID = ?");
+        $assignQuery->bind_param("ss", $assignedPoints, $submissionID);
+        $assignQuery->execute();
     }
+    header("Location: view-submission.php");
 }
-
-// Get submission, coauthors, and the author.
-$submissionQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $submissionID");
-$submission = $submissionQuery->fetch_object();
-$coauthorsQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE submissionID = $submissionID");
-$authorQuery = $mysqli->query("SELECT * FROM users WHERE userID = $submission->author");
-$author = $authorQuery->fetch_object();
-$rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submissionID = $submissionID ORDER BY returnDate DESC");
 
 ?>
 <!DOCTYPE html>
@@ -148,9 +144,9 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                         }
                     }
                 } else if ($user->jobRole == "Manager") {
-                    if ($status = translate("Needing Manager approval")) {
+                    if ($status == translate("Needing Manager approval")) {
                         // Section A, D - A has no coauthor. Approve or deny, 1 point.
-                        // Section B, E - B has no coauthor. MIROS - 1 point. National - 2 points. International - 3 points.
+                        // Section B, E - B has no coauthor. Internal - 1 point. National - 2 points. International - 3 points.
                         // Section C - Internal - 1 point. Operation - 2 points. External - 3 points.
                         // Section F - Supervision - 2 points. Local - 1 point. National - 2 points. International - 3 points.
                         // Section G - Institute - 1 point. District - 2 points. State - 2 points. National - 3 points. International 4 points.
@@ -158,15 +154,37 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                         <form method='post'>
                         <div>
                         ";
-                        if ($submission->sectionID == 2 || $submission->sectionID == 5) {
-                            echo "
-                            ";
-                        } else if ($submission->sectionID == 3) {
-
-                        } else if ($submission->sectionID == 6) {
-
-                        } else if ($submission->sectionID == 7) {
-
+                        if ($submission->sectionID != 1 && $submission->sectionID != 4) {
+                            echo "<select name='type-select' id='type-select'>";
+                            if ($submission->sectionID == 2 || $submission->sectionID == 5) {
+                                echo "
+                                <option value='1'>Internal</option>
+                                <option value='2'>National</option>
+                                <option value='3'>International</option>
+                                ";
+                            } else if ($submission->sectionID == 3) {
+                                echo "
+                                <option value='1'>Internal Project</option>
+                                <option value='3'>External Project</option>
+                                <option value='2'>Operations</option>
+                                ";
+                            } else if ($submission->sectionID == 6) {
+                                echo "
+                                <option value='2'>Project Supervision</option>
+                                <option value='1'>Local</option>
+                                <option value='2'>National</option>
+                                <option value='3'>International</option>
+                                ";
+                            } else if ($submission->sectionID == 7) {
+                                echo "
+                                <option value='1'>Institute</option>
+                                <option value='2'>District</option>
+                                <option value='2'>State</option>
+                                <option value='3'>National</option>
+                                <option value='4'>International</option>
+                                ";
+                            }
+                            echo "</select>";
                         }
                         echo "
                         <button name='manager-approve'>". translate("Approve") . "</button>
@@ -207,7 +225,7 @@ function translate($key) {
             "Return" => "Return",
             "You can only view details of this task" => "You can only view details of this task",
             "Resubmit" => "Resubmit",
-            "Researcher" => "researcher",
+            "Researcher" => "Researcher",
             "Supervisor" => "Supervisor",
             "Manager" => "Manager",
         ),

@@ -86,8 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     <button name="search">Search</button>
                 </form>
                 <?php
-                $sectionMessage = "";
                 $nameMessage = "";
+                $sectionMessage = " AND (approved > 0 OR (approved = 0 AND submitted = 1))";
                 if (isset($_GET['status'])) {
                     $section = $_GET['status'];
                     if ($section == "1") { // Both.
@@ -105,15 +105,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 }
                 $sectionQuery = $mysqli->query("SELECT * FROM sections");
                 while ($section = $sectionQuery->fetch_object()) {
-                    $query = $mysqli->query("SELECT * FROM submission WHERE sectionID = $section->sectionID $sectionMessage $nameMessage");
-                    if (mysqli_num_rows($query) > 0) { // This makes sure the header is only output if there are results in that section.
+                    $submissionQuery = $mysqli->query("SELECT * FROM submission WHERE sectionID = $section->sectionID $sectionMessage $nameMessage");
+                    if (mysqli_num_rows($submissionQuery) > 0) { // This makes sure the header is only output if there are results in that section.
                         echo "
                         <div class='section-container'>
                         <div class='section-name-bar'>
                         <h2 class='section-header'>$section->sectionName</h2>
                         </div>
                         ";
-                        while ($obj = $query->fetch_object()) {
+                        while ($obj = $submissionQuery->fetch_object()) {
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
                         }
