@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
     // Check for errors during query execution
     if ($stmt->error) {
-        $error = "Database error: " . $stmt->error;
+        $error = translate("Database error: ") . $stmt->error;
     } else {
         $submissionID = $stmt->insert_id;
         $fileCount = count($_FILES['file']['name']);
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
                 // Check for errors during file insertion
                 if ($stmt->error) {
-                    $error = "Database error: " . $stmt->error;
+                    $error = translate("Database error: ") . $stmt->error;
                     break;
                 } else {
                     $fileID = $stmt->insert_id;
@@ -56,20 +56,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
                     // Check for errors during submissionfile insertion
                     if ($stmt->error) {
-                        $error = "Database error: " . $stmt->error;
+                        $error = translate("Database error: ") . $stmt->error;
                         break;
                     } else {
                         $fileUploaded = true;
                     }
                 }
             } else {
-                $error = "File upload failed.";
+                $error = translate("File upload failed.");
                 break;
             }
         }
 
         if ($fileUploaded) {
-            $successMessage = "Files uploaded successfully.";
+            $successMessage = translate("Files uploaded successfully.");
         }
     }
 }
@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submission Form</title>
+    <title><?php echo translate("Submission Form"); ?></title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width: 790px)" />
 </head>
@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <?php include_once("includes/header.php") ?>
 
 <div class="submission-form-container">
-    <h2>Submission Form</h2>
+    <h2><?php echo translate("Submission Form"); ?></h2>
     <?php if (!empty($error)) : ?>
         <div class="error-message"><?php echo $error; ?></div>
     <?php endif; ?>
@@ -98,18 +98,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     <?php endif; ?>
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" placeholder="Title" required>
+            <label for="title"><?php echo translate("Title"); ?>:</label>
+            <input type="text" id="title" name="title" placeholder="<?php echo translate("Title"); ?>" required>
         </div>
         <div class="form-group">
-            <label for="comments">Comments:</label>
-            <textarea id="comments" name="comments" placeholder="Comments" rows="3" required></textarea>
+            <label for="comments"><?php echo translate("Comments"); ?>:</label>
+            <textarea id="comments" name="comments" placeholder="<?php echo translate("Comments"); ?>" rows="3" required></textarea>
         </div>
         <div class="form-group">
-            <label for="file">Upload File:</label>
+            <label for="file"><?php echo translate("Upload File"); ?>:</label>
             <input type="file" id="file" name="file[]" multiple required>
         </div>
-        <button type="submit" class="submit-button">Submit</button>
+        <button type="submit" class="submit-button"><?php echo translate("Submit"); ?></button>
     </form>
 </div>
 
@@ -122,10 +122,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 function translate($key) {
     $translations = array(
         "en" => array(
-            // Things
+            "Database error: " => "Database error: ",
+            "File upload failed." => "File upload failed.",
+            "Files uploaded successfully." => "Files uploaded successfully.",
+            "Submission Form" => "Submission Form",
+            "Title" => "Title",
+            "Comments" => "Comments",
+            "Upload File" => "Upload File",
+            "Submit" => "Submit",
+            "Logout" =>"Logout"
         ),
         "bm" => array(
-            // Things
+            "Database error: " => "Ralat pangkalan data: ",
+            "File upload failed." => "Muat naik fail gagal.",
+            "Files uploaded successfully." => "Fail-fail dimuat naik dengan berjaya.",
+            "Submission Form" => "Borang Penyerahan",
+            "Title" => "Tajuk",
+            "Comments" => "Komen",
+            "Upload File" => "Muat Naik Fail",
+            "Submit" => "Hantar",
+            "Logout" =>"Log Keluar"
         )
     );
 
