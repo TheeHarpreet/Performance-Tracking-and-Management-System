@@ -66,13 +66,7 @@ if(isset($_POST['lang'])) {
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
 <body>
-     <div class="language"> <!--new buttons -->
-        <form method="post">
-            <button type="submit" name="lang" value="en"><?php echo translate("English"); ?></button>
-            <button type="submit" name="lang" value="bm"><?php echo translate("BM"); ?></button>
-        </form>
-    </div>
-
+    <?php include("includes/simplified-header.php"); ?>
     <div class="login-container">
         <form class="login-form" method="post">
             <div class="login-input">

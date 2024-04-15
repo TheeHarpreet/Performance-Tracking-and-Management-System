@@ -516,3 +516,22 @@ circle.fg {
 .message{
   color: white;
 }
+
+.translate-container {
+  display: flex;
+}
+
+.translate-en, .translate-bm {
+
+  background-color: #4d4d4d;
+}
+.translate-en {
+  width: 100px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.translate-bm {
+  width: 50px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
