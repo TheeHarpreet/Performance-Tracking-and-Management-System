@@ -10,6 +10,16 @@
             }
             ?>
             <a href="login.php">logout</a>
+            <?php 
+            echo "
+            <div class='language'>
+            <form method='post' class='translate-container'>
+                <button type='submit' name='lang' value='en' class='translate-en'>English</button>
+                <button type='submit' name='lang' value='bm' class='translate-bm'>BM</button>
+            </form>
+            </div>
+            ";
+            ?>
         </div>
     </header>
 </div>

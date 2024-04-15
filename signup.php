@@ -111,13 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
 <body>
-    <div class="language-switcher">
-        <form method="post">
-            <button type="submit" name="lang" value="en"><?php echo translate("English"); ?></button>
-            <button type="submit" name="lang" value="bm"><?php echo translate("BM"); ?></button>
-        </form>
-    </div>
-
     <?php include_once("includes/simplified-header.php") ?>
         <div class="signup-container">
             <form class="signup-form" method="post">
