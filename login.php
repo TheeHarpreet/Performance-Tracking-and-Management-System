@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $stmt->close();
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,24 +59,82 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
-        <div class="login-container">
-            <form class="login-form" method="post">
-                <h1>Log In</h1>
-                <h3>Email</h3>
-                <input type="text" name="email" required>
-                <h3>Password</h3>
+     <div class="language"> <!--new buttons -->
+        <form method="post">
+            <button type="submit" name="lang" value="en"><?php echo translate("EN"); ?></button>
+            <button type="submit" name="lang" value="bm"><?php echo translate("BM"); ?></button>
+        </form>
+    </div>
+
+    <div class="login-container">
+        <form class="login-form" method="post">
+            <div class="login-input">
+                <h1><?php echo translate("Log In"); ?></h1>
+                <h3><?php echo translate("Email"); ?></h3>
+                <input type="email" name="email" required>
+                <h3><?php echo translate("Password"); ?></h3>
                 <input type="password" name="password" required>
-                <button type="submit"  id="signup-button">Login</button>
-                <?php
-                if (count($errors) > 0) {
-                    foreach ($errors as $error) {
-                        echo "<div class='error-message'>$error</div>";
-                    }
-                }
-                ?>
-                <p class="account-link">Don't have an account? <a href="signup.php" class="login-change">Register here</a></p>
-            </form>
-        </div>
+                <button type="submit" id="signup-button"><?php echo translate("Login"); ?></button>
+            </div>
+            <p class="account-link"><?php echo translate("Don't have an account?"); ?> <a href="signup.php" class="login-change"><?php echo translate("Register here"); ?></a></p>
+        </form>
+    </div>
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
+
+
+
+<?php
+session_start();
+
+// Function to set language session variable
+function setLanguage($lang) {
+    $_SESSION['language'] = $lang;
+}
+
+if (!isset($_SESSION['language'])) {
+    $_SESSION['language'] = 'en';
+}
+
+function translate($key) {
+    // translations
+    $translations = array(
+        "en" => array(
+            "Log In" => "Log In",
+            "Email" => "Email",
+            "Password" => "Password",
+            "Invalid password" => "Invalid password",
+            "User not found" => "User not found",
+            "Login" => "Login",
+            "Don't have an account?" => "Don't have an account?",
+            "Register here" => "Register here",
+            "Language" => "Language",
+            "English" => "English",
+            "BM" => "BM"
+        ),
+        "bm" => array(
+            "Log In" => "Log Masuk",
+            "Email" => "Emel",
+            "Password" => "Kata Laluan",
+            "Invalid password" => "Kata Laluan tidak sah",
+            "User not found" => "Pengguna tidak dijumpai",
+            "Login" => "Log Masuk",
+            "Don't have an account?" => "Tiada akaun?",
+            "Register here" => "Daftar di sini",
+            "Language" => "Bahasa",
+            "English" => "Inggeris",
+            "BM" => "BM"
+        )
+    );
+
+    $language = $_SESSION['language'];
+
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+}
+
+
+if(isset($_POST['lang'])) {
+    setLanguage($_POST['lang']);
+}
+?>
