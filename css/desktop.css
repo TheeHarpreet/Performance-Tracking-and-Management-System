@@ -80,6 +80,7 @@ h2 {
   border-collapse: collapse;
 }
 
+
 .admin-container th, .admin-container td {
   text-align: left;
   padding: 10px;
@@ -126,6 +127,23 @@ h2 {
 .edit-button:hover, .delete-button:hover {
   opacity: 0.9;
 }
+
+.create-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto; /* Ensures the container is centered */
+}
+
+/* Now, we make sure the form itself does not stretch too wide. */
+.new-admin-form {
+  width: 100%; /* You can set a max-width if you need */
+  max-width: 500px; /* Adjust this value to suit your design */
+  margin: 0 auto; /* Centers the form in the flex container */
+}
+
+
 
 
 
