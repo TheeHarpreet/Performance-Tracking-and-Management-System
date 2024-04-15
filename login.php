@@ -1,40 +1,61 @@
 <?php
-require_once("includes/config.php");
 session_start();
 
-$errors = array();
-$_SESSION['user_id'] = 0;
+// Function to set language session variable
+function setLanguage($lang) {
+    $_SESSION['language'] = $lang;
+}
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+// Check if language is set in session, default to English if not set
+if (!isset($_SESSION['language'])) {
+    $_SESSION['language'] = 'en';
+}
 
-    $stmt = $mysqli->prepare("SELECT userID, password FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    
-    $result = $stmt->get_result();
+// Function to translate text based on selected language
+function translate($key) {
+    // Define translations
+    $translations = array(
+        "en" => array(
+            "Log In" => "Log In",
+            "Email" => "Email",
+            "Password" => "Password",
+            "Invalid password" => "Invalid password",
+            "User not found" => "User not found",
+            "Login" => "Login",
+            "Don't have an account?" => "Don't have an account?",
+            "Register here" => "Register here",
+            "Language" => "Language",
+            "English" => "English",
+            "BM" => "BM"
+        ),
+        "bm" => array(
+            "Log In" => "Log Masuk",
+            "Email" => "Emel",
+            "Password" => "Kata Laluan",
+            "Invalid password" => "Kata Laluan tidak sah",
+            "User not found" => "Pengguna tidak dijumpai",
+            "Login" => "Log Masuk",
+            "Don't have an account?" => "Tiada akaun?",
+            "Register here" => "Daftar di sini",
+            "Language" => "Bahasa",
+            "English" => "Inggeris",
+            "BM" => "BM"
+        )
+    );
 
-    // Check if user exists
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $userID = $row['userID'];
-        $passwordHash = $row['password'];
+    // Get selected language from session
+    $language = $_SESSION['language'];
 
-        // Verify password
-        if (password_verify($password, $passwordHash)) {
-            $_SESSION['user_id'] = $userID;
-            header("Location: index.php");
-            exit();
-        } 
-        else {
-            array_push($errors, "Invalid password");
-        }
-    } else {
-        array_push($errors, "User not found");
-    }
+    // Return translation if available, otherwise return key itself
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+}
+
+// Check if language selection button is clicked
+if(isset($_POST['lang'])) {
+    setLanguage($_POST['lang']);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,27 +66,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
 <body>
-    <?php include_once("includes/simplified-header.php") ?>
-        <div class="login-container">
-            <form class="login-form" method="post">
-                <div class="login-input">
-                    <h1>Log In</h1>
-                    <h3>Email</h3>
-                    <input type="email" name="email" required>
-                    <h3>Password</h3>
-                    <input type="password" name="password" required>
-                    <button type="submit"  id="signup-button">Login</button>
-                    <?php
-                    if (count($errors) > 0) {
-                        foreach ($errors as $error) {
-                            echo "<div class='error-message'>$error</div>";
-                        }
-                    }
-                    ?>
-                </div>
-                <p class="account-link">Don't have an account? <a href="signup.php" class="login-change">Register here</a></p>
-            </form>
-        </div>
-    <?php include_once("includes/footer.php") ?>
+     <div class="language"> <!--new buttons -->
+        <form method="post">
+            <button type="submit" name="lang" value="en"><?php echo translate("English"); ?></button>
+            <button type="submit" name="lang" value="bm"><?php echo translate("BM"); ?></button>
+        </form>
+    </div>
+
+    <div class="login-container">
+        <form class="login-form" method="post">
+            <div class="login-input">
+                <h1><?php echo translate("Log In"); ?></h1>
+                <h3><?php echo translate("Email"); ?></h3>
+                <input type="email" name="email" required>
+                <h3><?php echo translate("Password"); ?></h3>
+                <input type="password" name="password" required>
+                <button type="submit" id="signup-button"><?php echo translate("Login"); ?></button>
+            </div>
+            <p class="account-link"><?php echo translate("Don't have an account?"); ?> <a href="signup.php" class="login-change"><?php echo translate("Register here"); ?></a></p>
+        </form>
+    </div>
 </body>
 </html>
