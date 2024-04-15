@@ -150,7 +150,7 @@ function translate($key) {
             "BM" => "BM",
             "All fields are required." => "Semua medan diperlukan.",
             "Email is not valid." => "Emel tidak sah.",
-            "Password must be at least 8 characters long." => "Kata laluan mesti sekurang-kurangnya 8 suku kata.",
+            "Password must be at least 8 characters long." => "Kata laluan mesti sekurang-kurangnya 8 aksara.",
             "Passwords do not match." => "Kata laluan tidak sepadan.",
             "Email is already in use" => "Emel telah digunakan",
             "You are registered successfully." => "Anda telah berdaftar dengan berjaya.",

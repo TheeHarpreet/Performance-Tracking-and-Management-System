@@ -48,30 +48,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         <div class="login-container">
             <form method="post">
 
-                <label>FirstName:</label>
+                <label><?php echo translate("FirstName"); ?>:</label>
                 <input type="text" name="fname" value="<?php echo $user->fname; ?>" required>
                 
-                <label>LastName:</label>
+                <label><?php echo translate("LastName"); ?>:</label>
                 <input type="text" name="lname" value="<?php echo $user->lname; ?>" required>
                 
-                <label>Email:</label>
+                <label><?php echo translate("Email"); ?>:</label>
                 <input type="email" name="email" value="<?php echo $user->email; ?>" required>
                 
                 <?php if ($user->jobRole != "Admin") { // admins account type is locked, will only update if not an admin.
-                    echo "
-                    <label>Job Role:</label>
-                    <select id='select' name='jobRole'>
-                        <option value='None'"; if ($user->jobRole == 'None') { echo 'selected'; } echo ">None</option>
-                        <option value='Researcher'"; if ($user->jobRole == 'Researcher') { echo 'selected'; } echo ">Researcher</option>
-                        <option value='Supervisor'"; if ($user->jobRole == 'Supervisor') { echo 'selected'; } echo ">Supervisor</option>
-                        <option value='Manager'"; if ($user->jobRole == 'Manager') { echo 'selected'; } echo ">Manager</option>
-                    </select>
-                    ";
-                }
-                ?>
-                <button type="submit" class="submit-button">Update</button>
-                <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link">Reset Password</a></p>
-                 <p>Passwords are reset to "Password123"</p>
+                echo "<label>" . translate("Job Role") . ":</label>
+                <select id='select' name='jobRole'>
+                    <option value='None'" . ($user->jobRole == 'None' ? ' selected' : '') . ">" . translate("None") . "</option>
+                    <option value='Researcher'" . ($user->jobRole == 'Researcher' ? ' selected' : '') . ">" . translate("Researcher") . "</option>
+                    <option value='Supervisor'" . ($user->jobRole == 'Supervisor' ? ' selected' : '') . ">" . translate("Supervisor") . "</option>
+                    <option value='Manager'" . ($user->jobRole == 'Manager' ? ' selected' : '') . ">" . translate("Manager") . "</option>
+                </select>";
+} ?>
+                <button type="submit" class="submit-button"><?php echo translate("Update"); ?></button>
+                <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link"><?php echo translate("Reset Password"); ?></a></p>
+                 <p><?php echo translate("Passwords are reset to \"Password123\""); ?></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
@@ -82,10 +79,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 function translate($key) {
     $translations = array(
         "en" => array(
-            // Things
+            "FirstName" => "FirstName",
+            "LastName" => "LastName",
+            "Email" => "Email",
+            "Job Role" => "Job Role",
+            "Update" => "Update",
+            "Reset Password" => "Reset Password",
+            "Passwords are reset to \"Password123\"" => "Passwords are reset to \"Password123\"",
+            "None" => "None",
+            "Researcher" => "Researcher",
+            "Supervisor" => "Supervisor",
+            "Manager" => "Manager",
+
         ),
         "bm" => array(
-            // Things
+            "FirstName" => "Nama Pertama",
+            "LastName" => "Nama Akhir",
+            "Email" => "Emel",
+            "Job Role" => "Peranan Pekerjaan",
+            "Update" => "Kemaskini",
+            "Reset Password" => "Tetapkan Semula Kata Laluan",
+            "Passwords are reset to \"Password123\"" => "Kata Laluan telah ditetapkan semula kepada \"Password123\"",
+            "None" => "Tiada",
+            "Researcher" => "Penyelidik",
+            "Supervisor" => "Penyelia",
+            "Manager" => "Pengurus",
         )
     );
 
