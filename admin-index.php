@@ -131,3 +131,18 @@ if ($user->jobRole != "Admin") {
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
+
+<?php include("includes/lang-config.php");
+function translate($key) {
+    $translations = array(
+        "en" => array(
+            // Things
+        ),
+        "bm" => array(
+            // Things
+        )
+    );
+
+    $language = $_SESSION['language'];
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+} ?>

@@ -81,20 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-<?php
-session_start();
-
-// Function to set language session variable
-function setLanguage($lang) {
-    $_SESSION['language'] = $lang;
-}
-
-if (!isset($_SESSION['language'])) {
-    $_SESSION['language'] = 'en';
-}
-
+<?php include("includes/lang-config.php");
 function translate($key) {
-    // translations
     $translations = array(
         "en" => array(
             "Log In" => "Log In",
@@ -125,12 +113,5 @@ function translate($key) {
     );
 
     $language = $_SESSION['language'];
-
     return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
-}
-
-
-if(isset($_POST['lang'])) {
-    setLanguage($_POST['lang']);
-}
-?>
+} ?>

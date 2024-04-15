@@ -9,7 +9,7 @@ $userID = $_SESSION['user_id'];
 $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $userQuery->fetch_object();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     if (isset($_POST['approve'])) {
         $approveQuery = $mysqli->prepare("UPDATE submission SET submitted = 1 WHERE submissionID = ?");
         $approveQuery->bind_param("s", $submissionID);
@@ -125,3 +125,18 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
+
+<?php include("includes/lang-config.php");
+function translate($key) {
+    $translations = array(
+        "en" => array(
+            // Things
+        ),
+        "bm" => array(
+            // Things
+        )
+    );
+
+    $language = $_SESSION['language'];
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+} ?>

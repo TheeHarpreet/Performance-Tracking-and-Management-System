@@ -8,7 +8,7 @@ $query = $mysqli->query("SELECT * FROM `users` WHERE userID = $userID");
 $user = $query->fetch_object();
 
 // reset password query
-if (isset($_GET['reset'])) {
+if (isset($_GET['reset']) && !isset($_POST['lang'])) {
     $newPassword = "Password123";
     $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
     $stmt = $mysqli->prepare("UPDATE users SET `password` = ? WHERE userID = ?");
@@ -17,7 +17,7 @@ if (isset($_GET['reset'])) {
 }
 
 // update query
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
@@ -77,3 +77,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
+
+<?php include("includes/lang-config.php");
+function translate($key) {
+    $translations = array(
+        "en" => array(
+            // Things
+        ),
+        "bm" => array(
+            // Things
+        )
+    );
+
+    $language = $_SESSION['language'];
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+} ?>

@@ -6,7 +6,7 @@ ob_clean();
 $error = "";
 $successMessage = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $author = $_SESSION['user_id'];
     $sectionID = $_SESSION['newSubmission'];
     $title = $_POST["title"];
@@ -117,3 +117,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+
+<?php include("includes/lang-config.php");
+function translate($key) {
+    $translations = array(
+        "en" => array(
+            // Things
+        ),
+        "bm" => array(
+            // Things
+        )
+    );
+
+    $language = $_SESSION['language'];
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+} ?>

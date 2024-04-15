@@ -5,7 +5,7 @@ session_start();
 $errors = array();
 $_SESSION['user_id'] = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $firstname = $_POST['fname'];
     $surname = $_POST['lname'];
     $email = $_POST['email'];
@@ -106,3 +106,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
+
+<?php include("includes/lang-config.php");
+function translate($key) {
+    $translations = array(
+        "en" => array(
+            // Things
+        ),
+        "bm" => array(
+            // Things
+        )
+    );
+
+    $language = $_SESSION['language'];
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+} ?>

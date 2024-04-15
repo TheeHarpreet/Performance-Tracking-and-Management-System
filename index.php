@@ -6,7 +6,7 @@ ob_clean();
 $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $userQuery->fetch_object();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     if (isset($_POST['new-submission'])) {
         $_SESSION['newSubmission'] = $_POST['new-submission'];
         header("Location: new-submission.php");
@@ -209,3 +209,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
+
+<?php include("includes/lang-config.php");
+function translate($key) {
+    $translations = array(
+        "en" => array(
+            // Things
+        ),
+        "bm" => array(
+            // Things
+        )
+    );
+
+    $language = $_SESSION['language'];
+    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
+} ?>
