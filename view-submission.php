@@ -105,7 +105,9 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                             echo "
                             <h2>Please review work</h2>
                             <form method='post'>
-                                <button name='approve'>Approve</button>
+                            <button name='approve'>Approve</button>
+                            </form>
+                            <form method='post'>
                                 <div class='decline-div'>
                                     <input type='text' placeholder='Comments (For declines only)' name='return-comments' required>
                                     <button name='return'>Return</button>
