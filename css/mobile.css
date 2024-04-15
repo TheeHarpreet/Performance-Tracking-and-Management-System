@@ -220,114 +220,111 @@ h3 {
 
 /* admin mobile css */
 
-@media only screen and (max-width: 768px) {
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+
+.admin-container {
+  padding: 5px;
+  margin: 0 auto;
+  background-color: #000;
+}
+
+
+.new-admin-form input[type="text"],
+.new-admin-form input[type="email"],
+.new-admin-form input[type="password"],
+.new-admin-form input[type="submit"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  color: black;
+  background-color: rgb(255, 253, 253);
+  border: 1px solid #fdfdfd;
+}
+
+
+.new-admin-form input[type="submit"] {
+  padding: 10px;
+  background-color: #efc640;
+  color: rgb(253, 253, 253);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.account-list {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; 
+}
+
+table {
+  width: auto; 
+  min-width: 100%; 
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #0a0a0a;
+}
+
+
+th {
+  background-color: #080808;
+}
+
+
+.sort {
+  font-size: 0.8em;
+}
+
+
+.message {
+  padding: 10px;
+  font-size: 1em;
+  color: #d9534f;
+}
+
+
+header, footer {
+  padding: 10px;
+  text-align: center;
+}
+
+
+
+
+
+.edit-button {
+  background-color: green; 
+  color: white; 
+  padding: 5px 10px; 
+  text-decoration: none; 
+  border-radius: 4px; 
   
-  html, body {
-      width: 100%;
-      overflow-x: hidden;
-      font-family: 'Arial', sans-serif;
-  }
+}
 
+.delete-button, .block-button, .unblock-button {
+  background-color: red; 
+  color: white; 
+  padding: 5px 10px; 
+  text-decoration: none; 
+  border-radius: 4px; 
   
-  .admin-container {
-      padding: 5px;
-      margin: 0 auto;
-      background-color: #000;
-  }
-
-  
-  .new-admin-form input[type="text"],
-  .new-admin-form input[type="email"],
-  .new-admin-form input[type="password"],
-  .new-admin-form input[type="submit"] {
-      width: 100%;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-      color: black;
-      background-color: rgb(255, 253, 253);
-      border: 1px solid #fdfdfd;
-  }
-
-  
-  .new-admin-form input[type="submit"] {
-      padding: 10px;
-      background-color: #efc640;
-      color: rgb(253, 253, 253);
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-  }
-
-  
-  .account-list {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch; 
-  }
-
-  table {
-      width: auto; 
-      min-width: 100%; 
-      border-collapse: collapse;
-  }
-
-  th, td {
-      padding: 8px;
-      border-bottom: 1px solid #0a0a0a;
-  }
-
-  
-  th {
-      background-color: #080808;
-  }
-
-  
-  .sort {
-      font-size: 0.8em;
-  }
-
-  
-  .message {
-      padding: 10px;
-      font-size: 1em;
-      color: #d9534f;
-  }
-
-  
-  header, footer {
-      padding: 10px;
-      text-align: center;
-  }
+}
 
 
-  
-
- 
-  .edit-button {
-      background-color: green; 
-      color: white; 
-      padding: 5px 10px; 
-      text-decoration: none; 
-      border-radius: 4px; 
-      
-  }
-
-  .delete-button, .block-button, .unblock-button {
-      background-color: red; 
-      color: white; 
-      padding: 5px 10px; 
-      text-decoration: none; 
-      border-radius: 4px; 
-      
-  }
-
-  
-  td a.edit-button, 
-  td a.delete-button, 
-  td a.block-button, 
-  td a.unblock-button {
-      display: inline-block; 
-      margin-right: 4px; 
-  }
+td a.edit-button, 
+td a.delete-button, 
+td a.block-button, 
+td a.unblock-button {
+  display: inline-block; 
+  margin-right: 4px; 
 }
 .section-name-bar {
   display: flex;

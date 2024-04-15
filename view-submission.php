@@ -5,6 +5,22 @@ ob_clean();
 
 $submissionID = $_SESSION['viewSubmission'];
 
+$userID = $_SESSION['user_id'];
+$userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+$user = $userQuery->fetch_object();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['approve'])) {
+        $approveQuery = $mysqli->prepare("UPDATE submission SET submitted = 1 WHERE submissionID = ?");
+        $approveQuery->bind_param("s", $submissionID);
+        $approveQuery->execute();
+    } else if (isset($_POST['return'])) {
+        $returnQuery = $mysqli->prepare("INSERT INTO submissionreturn (submissionID, returner, comments) VALUES (?, ?, ?)");
+        $returnQuery->bind_param("sss", $submissionID, $userID, $_POST['return-comments']);
+        $returnQuery->execute();
+    }
+}
+
 // Get submission, coauthors, and the author.
 $submissionQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $submissionID");
 $submission = $submissionQuery->fetch_object();
@@ -81,10 +97,27 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                 echo "
                 <div class='files'>
                 </div>
-                <div class='manager-review'>
-
-                </div>
                 ";
+                if ($user->jobRole == "Supervisor") {
+                    $supervisorQuery = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $author->userID AND supervisorID = $user->userID");
+                    if (mysqli_num_rows($supervisorQuery) > 0 ) {
+                        if ($status == "Needing Supervisor approval") { // Checks for $status instead of ($submission->submitted = 0) as the latter would immediately allow the supervisor to resubmit after rejected.
+                            echo "
+                            <h2>Please review work</h2>
+                            <form method='post'>
+                                <button name='approve'>Approve</button>
+                                <div class='decline-div'>
+                                    <input type='text' placeholder='Comments (For declines only)' name='return-comments' required>
+                                    <button name='return'>Return</button>
+                                </div>
+                            </form>
+                            ";
+                        }
+                    } else {
+                        echo "<h2>You can only view details of this task</h2>";
+                        
+                    }
+                }
             ?>
         </div>
     <?php include_once("includes/footer.php") ?>
