@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         echo "
                         <div class='section-container'>
                         <div class='section-name-bar'>
-                        <h2 class='section-header'>$section->sectionName</h2>
+                        <h2 class='section-header'>".translate($section->sectionName)."</h2>
                         <button onclick='hideSection($i)' id='toggle-button$i'>" . translate("Hide") . "</button>
                         </div>
                         ";
