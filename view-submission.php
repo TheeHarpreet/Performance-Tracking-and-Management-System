@@ -50,7 +50,7 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                     $status = "Needing Manager approval";
                 } else if ($submission->submitted == 0 && mysqli_num_rows($rejectedQuery) > 0) {
                     $status = "Rejected";
-                    $recent = $mysqli->query("SELECT * FROM submissionreturn, submission WHERE submission.dateSubmitted > submissionreturn.returnDate");
+                    $recent = $mysqli->query("SELECT * FROM submissionreturn, submission WHERE submission.dateSubmitted > submissionreturn.returnDate AND submission.submissionID = submissionreturn.submissionID");
                     if (mysqli_num_rows($recent) > 0) {
                         $status = "Needing Supervisor approval";
                     }
