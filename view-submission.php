@@ -51,7 +51,7 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Submission</title>
+    <title><?php echo translate("View Submission"); ?></title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
@@ -61,17 +61,17 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
             <?php
                 // status code
                 if ($submission->approved > 0) {
-                    $status = "Approved";
+                    $status = translate("Approved");
                 } else if ($submission->submitted == 1 && $submission->approved == 0) {
-                    $status = "Needing Manager approval";
+                    $status = translate("Needing Manager approval");
                 } else if ($submission->submitted == 0 && mysqli_num_rows($rejectedQuery) > 0) {
-                    $status = "Rejected";
+                    $status = translate("Rejected");
                     $recent = $mysqli->query("SELECT * FROM submissionreturn, submission WHERE submission.dateSubmitted > submissionreturn.returnDate AND submission.submissionID = submissionreturn.submissionID");
                     if (mysqli_num_rows($recent) > 0) {
-                        $status = "Needing Supervisor approval";
+                        $status = translate("Needing Supervisor approval");
                     }
                 } else {
-                    $status = "Needing Supervisor approval";
+                    $status = translate("Needing Supervisor approval");
                 }
             
                 // datetime code
@@ -93,15 +93,15 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
 
                 echo "
                 <h1 class='submission-title'>$submission->title</h1>
-                <h2>By $author->fname $author->lname ($author->jobRole)</h2>
-                <p><span style='font-weight: bold'>Date Submitted: </span> $dateTimeOutput </p>
+                <h2>". translate("By") . " $author->fname $author->lname (". translate($author->jobRole) .")</h2>
+                <p><span style='font-weight: bold'>". translate("Date Submitted") . ": </span> $dateTimeOutput </p>
                 <h2 class='submission-description'>$submission->comments</h2>
-                <h2>Status: $status</h2>
+                <h2>". translate("Status") . ": $status</h2>
                 ";
                 if (mysqli_num_rows($coauthorsQuery)) {
                     echo "
                     <div class='coauthors'>
-                    <h1>Coauthors</h1>
+                    <h1>". translate("Coauthors") . "</h1>
                     ";
                     while ($obj = $coauthorsQuery->fetch_object()) {
                         $coauthorQuery = $mysqli->query("SELECT * FROM users where userID = $obj->coauthor");
@@ -117,38 +117,38 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                 if ($user->jobRole == "Supervisor") {
                     $supervisorQuery = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $author->userID AND supervisorID = $user->userID");
                     if (mysqli_num_rows($supervisorQuery) > 0 ) {
-                        if ($status == "Needing Supervisor approval") { // Checks for $status instead of ($submission->submitted = 0) as the latter would immediately allow the supervisor to resubmit after rejected.
+                        if ($status == translate("Needing Supervisor approval")) { // Checks for $status instead of ($submission->submitted = 0) as the latter would immediately allow the supervisor to resubmit after rejected.
                             echo "
-                            <h2>Please review work</h2>
+                            <h2>". translate("Please review work") . "</h2>
                             <form method='post'>
-                            <button name='approve'>Approve</button>
+                            <button name='approve'>". translate("Approve") . "</button>
                             </form>
                             <form method='post'>
                                 <div class='decline-div'>
-                                    <input type='text' placeholder='Comments (For declines only)' name='return-comments' required>
-                                    <button name='return'>Return</button>
+                                    <input type='text' placeholder='". translate("Comments (For declines only)") . "' name='return-comments' required>
+                                    <button name='return'>". translate("Return") . "</button>
                                 </div>
                             </form>
                             ";
                         }
                     } else {
-                        echo "<h2>You can only view details of this task</h2>";
+                        echo "<h2>". translate("You can only view details of this task") . "</h2>";
                     }
                 } else if ($user->jobRole == "Researcher") {
                     $coauthorQuery = $mysqli->query("SELECT * FROM submissioncoauthor WHERE coauthor = $userID AND submissionID = $submissionID");
                     if ($submission->author != $userID && mysqli_num_rows($coauthorQuery) == 0) {
-                        if ($status == "Approved" && $submission->section == 3 || $submission->section == 4 || $submission->section == 5) {
-                            echo "<h2>You can only view the details of this task</h2>";
+                        if ($status == translate("Approved") && $submission->section == 3 || $submission->section == 4 || $submission->section == 5) {
+                            echo "<h2>". translate("You can only view the details of this task") . "</h2>";
                         } else {
                             header("Location: index.php");
                         }
                     } else {
-                        if ($status == "Rejected") {
-                            echo "<button name='resubmit'>Resubmit</button>";
+                        if ($status == translate("Rejected")) {
+                            echo "<button name='resubmit'>". translate("Resubmit") . "</button>";
                         }
                     }
                 } else if ($user->jobRole == "Manager") {
-                    if ($status = "Needing Manager approval") {
+                    if ($status = translate("Needing Manager approval")) {
                         // Section A, D - A has no coauthor. Approve or deny, 1 point.
                         // Section B, E - B has no coauthor. MIROS - 1 point. National - 2 points. International - 3 points.
                         // Section C - Internal - 1 point. Operation - 2 points. External - 3 points.
@@ -169,13 +169,13 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
 
                         }
                         echo "
-                        <button name='manager-approve'>Approve</button>
+                        <button name='manager-approve'>". translate("Approve") . "</button>
                         </div>
                         </form>
                         <form method='post'>
                             <div class='decline-div'>
-                                <input type='text' placeholder='Comments (For declines only)' name='return-comments' required>
-                                <button name='return'>Return</button>
+                                <input type='text' placeholder='". translate("Comments (For declines only)") . "' name='return-comments' required>
+                                <button name='return'>". translate("Return") . "</button>
                             </div>
                         </form>
                         ";
@@ -191,10 +191,44 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
 function translate($key) {
     $translations = array(
         "en" => array(
-            // Things
+            "View Submission" => "View Submission",
+            "By" => "By",
+            "Date Submitted" => "Date Submitted",
+            "Status" => "Status",
+            "Approved" => "Approved",
+            "Needing Manager approval" => "Needing Manager approval",
+            "Rejected" => "Rejected",
+            "Needing Supervisor approval" => "Needing Supervisor approval",
+            "Coauthors" => "Coauthors",
+            "Please review work" => "Please review work",
+            "Approve" => "Approve",
+            "Comments (For declines only)" => "Comments (For declines only)",
+            "Return" => "Return",
+            "You can only view details of this task" => "You can only view details of this task",
+            "Resubmit" => "Resubmit",
+            "Researcher" => "researcher",
+            "Supervisor" => "Supervisor",
+            "Manager" => "Manager",
         ),
         "bm" => array(
-            // Things
+            "View Submission" => "Lihat Penyerahan",
+            "By" => "Oleh",
+            "Date Submitted" => "Tarikh Penyerahan",
+            "Status" => "Status",
+            "Approved" => "Diluluskan",
+            "Needing Manager approval" => "Memerlukan kelulusan Pengurus",
+            "Rejected" => "Ditolak",
+            "Needing Supervisor approval" => "Memerlukan kelulusan Penyelia",
+            "Coauthors" => "Penulis Bersama",
+            "Please review work" => "Sila semak kerja",
+            "Approve" => "Luluskan",
+            "Comments (For declines only)" => "Komen (Hanya untuk penolakan)",
+            "Return" => "Kembali",
+            "You can only view details of this task" => "Anda hanya boleh melihat butiran tugasan ini",
+            "Resubmit" => "Serah semula",
+            "Researcher" => "Penyelidik",
+            "Supervisor" => "Penyelia",
+            "Manager" => "Pengurus",
         )
     );
 
