@@ -5,7 +5,7 @@ session_start();
 $errors = array();
 $_SESSION['user_id'] = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $firstname = $_POST['fname'];
     $surname = $_POST['lname'];
     $email = $_POST['email'];
