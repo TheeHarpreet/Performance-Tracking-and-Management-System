@@ -218,22 +218,18 @@ h3 {
   size: 10px;
 }
 
-/* Media thing being removed starts here */
+/* Media thing being removed starts here 
 
 html, body {
   width: 100%;
   overflow-x: hidden;
   font-family: 'Arial', sans-serif;
 }
-
-
 .admin-container {
   padding: 5px;
   margin: 0 auto;
   background-color: #000;
 }
-
-
 .new-admin-form input[type="text"],
 .new-admin-form input[type="email"],
 .new-admin-form input[type="password"],
@@ -245,8 +241,6 @@ html, body {
   background-color: rgb(255, 253, 253);
   border: 1px solid #fdfdfd;
 }
-
-
 .new-admin-form input[type="submit"] {
   padding: 10px;
   background-color: #efc640;
@@ -255,51 +249,34 @@ html, body {
   border-radius: 4px;
   cursor: pointer;
 }
-
-
 .account-list {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; 
 }
-
 table {
   width: auto; 
   min-width: 100%; 
   border-collapse: collapse;
 }
-
 th, td {
   padding: 8px;
   border-bottom: 1px solid #0a0a0a;
 }
-
-
 th {
   background-color: #080808;
 }
-
-
 .sort {
   font-size: 0.8em;
 }
-
-
 .message {
   padding: 10px;
   font-size: 1em;
   color: #d9534f;
 }
-
-
 header, footer {
   padding: 10px;
   text-align: center;
 }
-
-
-
-
-
 .edit-button {
   background-color: green; 
   color: white; 
@@ -308,7 +285,6 @@ header, footer {
   border-radius: 4px; 
   
 }
-
 .delete-button, .block-button, .unblock-button {
   background-color: red; 
   color: white; 
@@ -318,7 +294,7 @@ header, footer {
   
 }
 
-/* Media thing being removed ends here */
+Media thing being removed ends here */
 
 
 td a.edit-button, 
