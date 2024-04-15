@@ -149,25 +149,19 @@ $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submission
                     }
                 } else if ($user->jobRole == "Manager") {
                     if ($status = "Needing Manager approval") {
-                        // Section A - No coauthor. Approve or deny, 1 point.
+                        // Section A, D - A has no coauthor. Approve or deny, 1 point.
                         // Section B, E - B has no coauthor. MIROS - 1 point. National - 2 points. International - 3 points.
                         // Section C - Internal - 1 point. Operation - 2 points. External - 3 points.
-                        // Section D - Approve or deny, 1 point.
                         // Section F - Supervision - 2 points. Local - 1 point. National - 2 points. International - 3 points.
                         // Section G - Institute - 1 point. District - 2 points. State - 2 points. National - 3 points. International 4 points.
                         echo "
                         <form method='post'>
                         <div>
                         ";
-                        if ($submission->sectionID == 1) {
-                            echo "
-                            ";
-                        } else if ($submission->sectionID == 2 || 5) {
+                        if ($submission->sectionID == 2 || $submission->sectionID == 5) {
                             echo "
                             ";
                         } else if ($submission->sectionID == 3) {
-
-                        } else if ($submission->sectionID == 4) {
 
                         } else if ($submission->sectionID == 6) {
 
