@@ -68,7 +68,7 @@ if(isset($_POST['lang'])) {
 <body>
      <div class="language"> <!--new buttons -->
         <form method="post">
-            <button type="submit" name="lang" value="en"><?php echo translate("English"); ?></button>
+            <button type="submit" name="lang" value="en"><?php echo translate("EN"); ?></button>
             <button type="submit" name="lang" value="bm"><?php echo translate("BM"); ?></button>
         </form>
     </div>
