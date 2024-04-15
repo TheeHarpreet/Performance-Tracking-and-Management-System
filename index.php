@@ -109,8 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                                 }
                                 $pointsTotal += $points;
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
-                                echo "
-                                <p>$title:</p>
+                                echo 
+                                "<p>" . translate($title) . ":</p>
                                 <div class='percent-bar'>
                                 <p class='point-boundary'>$minPoints</p>
                                 <div class='progress-bar-container'>
@@ -243,13 +243,13 @@ function translate($key) {
                 "Add New Submission" => "Tambah Penyerahan Baru",
                 "New Password" => "Kata Laluan Baru",
                 "Change Password" => "Tukar Kata Laluan",
-                "Personal Particulars"=>"", // Here
-                "Professional Achievements"=>"Personal Acivmen",
-                "Research And Development"=>"", // Here
-                "Professional Consultations"=>"", // Here
-                "Research Outcomes"=>"", // Here
-                "Professional Recognition"=>"", // Here
-                "Service To Community"=>"" // Here
+                "Personal Particulars"=>"Khusus Peribadi", 
+                "Professional Achievements"=>"Pencapaian Peribadi",
+                "Research And Development"=>"Pembangun Penyilidik", 
+                "Professional Consultations"=>"Perundingan profesional",
+                "Research Outcomes"=>"Hasil Penyelidik", // Here
+                "Professional Recognition"=>"pengiktirafan profesional", 
+                "Service To Community"=>"Servis kepada Komuniti" // Here
             ),
     );
 
