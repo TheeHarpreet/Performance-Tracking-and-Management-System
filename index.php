@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                             $currentAmount = $result->amount;
 
                             if ($currentAmount == 0){
-                                echo "<p>$title: " . translate("Not enough data to calculate scores") . "</p>";
+                                echo "<p>" . translate($title) . ": " . translate("Not enough data to calculate scores") . "</p>";
                                 array_push($pointsArray, 0);
                             } else {
                                 if ($maxRange == $currentAmount) {
@@ -223,7 +223,14 @@ function translate($key) {
             "Hide" => "Hide",
             "Add New Submission" => "Add New Submission",
             "New Password" => "New Password",
-            "Change Password" => "Change Password"
+            "Change Password" => "Change Password",
+            "Personal Particulars"=>"Personal Particulars",
+            "Professional Achievements"=>"Personal Acivmen",
+            "Research And Development"=>"Research And Development",
+            "Professional Consultations"=>"Professional Consultations",
+            "Research Outcomes"=>"Research Outcomes",
+            "Professional Recognition"=>"Professional Recognition",
+            "Service To Community"=>"Service To Community"
         ),
             "bm" => array(
                 "Home" => "Laman Utama",
@@ -236,7 +243,13 @@ function translate($key) {
                 "Add New Submission" => "Tambah Penyerahan Baru",
                 "New Password" => "Kata Laluan Baru",
                 "Change Password" => "Tukar Kata Laluan",
-                "Professional Achivement"=>" personal acivmen",
+                "Personal Particulars"=>"", // Here
+                "Professional Achievements"=>"Personal Acivmen",
+                "Research And Development"=>"", // Here
+                "Professional Consultations"=>"", // Here
+                "Research Outcomes"=>"", // Here
+                "Professional Recognition"=>"", // Here
+                "Service To Community"=>"" // Here
             ),
     );
 
