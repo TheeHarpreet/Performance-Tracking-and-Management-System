@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | MIROS</title>
+    <title><?php echo translate("Home"); ?> | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
     <script src="js/index.js"></script>
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             <?php
                 if ($user->jobRole == "None") {
                     echo "
-                    <p class='invalid-role'>Your account doesn't have a role assigned. Please speak to an admin to assign you one.</p>
+                    <p class='invalid-role'>" . translate("Your account doesn't have a role assigned. Please speak to an admin to assign you one.") . "</p>
                     </div>";
                     include_once("includes/footer.php");
                     exit();
@@ -50,9 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             <?php
                 if ($user->jobRole == "Supervisor") { // Options for supervisors to view the accounts of users they supervise.
                     echo "
-                    <h1>Select a researcher to view their work</h1>
+                    <h1>" . translate("Select a researcher to view their work") . "</h1>
                     <div class='supervisor-user-selection'>
-                    <p><a href='index.php'>View your own work</a></p>
+                    <p><a href='index.php'>" . translate("View your own work") . "</a></p>
                     ";
                     $results = $mysqli->query("SELECT * FROM users, researcherssupervisor WHERE supervisorID = $userID and researcherID = userID");
                     echo "<div class='researchers-names'>";
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 }
             ?>
             <div class="performance">
-                <h1>Performance Overview</h1>
+                <h1><?php echo translate("Performance Overview"); ?></h1>
                 <div class="performance-overview">
                     <div class="performance-section">
                         <?php
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                             $currentAmount = $result->amount;
 
                             if ($currentAmount == 0){
-                                echo "<p>$title: Not enough data to calculate scores</p>";
+                                echo "<p>$title: " . translate("Not enough data to calculate scores") . "</p>";
                                 array_push($pointsArray, 0);
                             } else {
                                 if ($maxRange == $currentAmount) {
@@ -152,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     $i = 0;
                     $sectionQuery = $mysqli->query("SELECT * FROM sections");
 
-                    echo "<h1>Submissions</h1>";
+                    echo "<h1>" . translate("Submissions") . "</h1>";
 
                     while ($i < 7) { // A loop for each section in the submissions view.
                         $section = $sectionQuery->fetch_object();
@@ -160,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         <div class='section-container'>
                         <div class='section-name-bar'>
                         <h2 class='section-header'>$section->sectionName</h2>
-                        <button onclick='hideSection($i)' id='toggle-button$i'>Hide</button>
+                        <button onclick='hideSection($i)' id='toggle-button$i'>" . translate("Hide") . "</button>
                         </div>
                         ";
                         
@@ -181,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         <form method='post'>
                         ";
                         if (!isset($_GET['user_override'])) { // Only gives the option for new submission if you're logged into the account being displayed.
-                            echo "<button class='new-submission' name='new-submission' value='$section->sectionID'>+ Add New Submission</button>";
+                            echo "<button class='new-submission' name='new-submission' value='$section->sectionID'>+ " . translate("Add New Submission") . "</button>";
                         }
                         echo "
                         </form>
@@ -198,8 +198,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 if (!isset($_GET['user_override'])) {
                 echo "
                 <form method='post'>
-                <input type='password' placeholder='New Password' name='password'>
-                <button type='submit' class='new-password-btn' name='new-password-button'>Change Password</button>
+                <input type='password' placeholder='" . translate("New Password") . "' name='password'>
+                <button type='submit' class='new-password-btn' name='new-password-button'>" . translate("Change Password") . "</button>
                 </form>
                 ";
                 }
@@ -214,11 +214,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 function translate($key) {
     $translations = array(
         "en" => array(
-            // Things
+            "Home" => "Home",
+            "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Your account doesn't have a role assigned. Please speak to an admin to assign you one.",
+            "Select a researcher to view their work" => "Select a researcher to view their work",
+            "Not enough data to calculate scores" => "Not enough data to calculate scores",
+            "Performance Overview" => "Performance Overview",
+            "Submissions" => "Submissions",
+            "Hide" => "Hide",
+            "Add New Submission" => "Add New Submission",
+            "New Password" => "New Password",
+            "Change Password" => "Change Password"
         ),
-        "bm" => array(
-            // Things
-        )
+            "bm" => array(
+                "Home" => "Laman Utama",
+                "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Akaun anda tidak mempunyai peranan yang diberikan. Sila bercakap dengan pentadbir untuk memberikan anda satu.",
+                "Select a researcher to view their work" => "Pilih penyelidik untuk melihat kerja mereka",
+                "Not enough data to calculate scores" => "Tidak cukup data untuk mengira skor",
+                "Performance Overview" => "Gambaran Prestasi",
+                "Submissions" => "Penyerahan",
+                "Hide" => "Sembunyi",
+                "Add New Submission" => "Tambah Penyerahan Baru",
+                "New Password" => "Kata Laluan Baru",
+                "Change Password" => "Tukar Kata Laluan",
+                "Professional Achivement"=>" personal acivmen",
+            ),
     );
 
     $language = $_SESSION['language'];
