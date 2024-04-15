@@ -5,7 +5,7 @@ session_start();
 $errors = array();
 $_SESSION['user_id'] = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstname = $_POST['fname'];
     $surname = $_POST['lname'];
     $email = $_POST['email'];
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         $stmt->bind_param("ssss", $firstname, $surname, $email, $passwordHash);
 
         if ($stmt->execute()) {
-            echo "<div class='alert alert-success'>You are registered successfully.</div>";
+            echo "<div class='alert alert-success'>You have registered successfully.</div>";
             $_SESSION['user_id'] = mysqli_insert_id($mysqli);
             header("Location: index.php");
             exit();
@@ -75,22 +75,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
+
         <div class="signup-container">
             <form class="signup-form" method="post">
-                <h1>Sign Up</h1>
+                <h1><?php echo translate("Sign up"); ?></h1>
                 <div class="signup-div">
                     <div>
-                        <h3>First name</h3>
+                        <h3><?php echo translate("First name"); ?></h3>
                         <input type="text" name="fname" required>
-                        <h3>Surname</h3>
+                        <h3><?php echo translate("Surname"); ?></h3>
                         <input type="text" name="lname" required>
-                        <h3>Email</h3>
+                        <h3><?php echo translate("Email"); ?></h3>
                         <input type="text" name="email" required>
-                        <h3>Password</h3>
+                        <h3><?php echo translate("Password"); ?></h3>
                         <input type="password" name="password1" required>
-                        <h3>Confirm Password</h3>
+                        <h3><?php echo translate("Confirm Password"); ?></h3>
                         <input type="password" name="password2" required>
-                        <button type="submit" id="signup-button">Signup</button>
+                        <button type="submit" id="signup-button"><?php echo translate("Signup"); ?></button>
                     </div>
                 </div>
                 <?php
@@ -100,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     }
                 }
                 ?>
-                <p>Have an account? <a href="login.php" class="login-change">Login</a></p>
+                <p class="account-link"><?php echo translate("Have an account?"); ?> <a href="login.php" class="login-change"><?php echo translate("Login"); ?></a></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
@@ -134,6 +135,7 @@ function translate($key) {
             "Confirm Password" => "Confirm Password",
             "Have an account?" => "Have an account?",
             "Login" => "Login"
+
         ),
         "bm" => array(
             "Log In" => "Log Masuk",
