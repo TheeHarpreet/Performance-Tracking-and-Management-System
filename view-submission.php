@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 <h2>". translate("By") . " $author->fname $author->lname (". translate($author->jobRole) .")</h2>
                 <p><span style='font-weight: bold'>". translate("Date Submitted") . ": </span> $dateTimeOutput </p>
                 <h2 class='submission-description'>$submission->comments</h2>
-                <h2>". translate("Status") . ": $status</h2>
+                <div class='submission-status'><h2>". translate("Status") . ": $status</h2></div>
                 ";
                 if (mysqli_num_rows($coauthorsQuery)) {
                     echo "
