@@ -41,7 +41,7 @@ button {
   margin: 0 auto;
 }
 .new-submission {
-  margin-left: 660px;
+  margin-left: 60px;
   margin-top: 15px;
   width: 250px;
 }
@@ -52,9 +52,7 @@ h2 {
   margin-bottom: 30px;
   margin-left: 50px;
 }
-.section-header{
-  margin-left: 650px;
-}
+
 .new-password{
   display: flex;
   justify-content: center;
@@ -142,9 +140,10 @@ h2 {
   max-width: 500px; /* Adjust this value to suit your design */
   margin: 0 auto; /* Centers the form in the flex container */
 }
-
-
-
+.performance-section{
+  margin-right: 470px;
+  margin-left: -350px;
+}
 
 
 .submission-form-container {
