@@ -54,9 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         echo "
                         <div>
                         <h1>Work to review</h1>";
-                        while ($submissionToReview = $needingReviewQuery->fetch_object()) {
+                        while ($obj = $needingReviewQuery->fetch_object()) {
                             echo "<div>";
-                            echo "$submissionToReview->title";
+                            $isAuthor = true;
+                            include("includes/submission-preview-fill.php");
                             echo "</div>";
                         }
                         echo "</div>";
