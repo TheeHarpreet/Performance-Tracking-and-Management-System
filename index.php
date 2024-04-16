@@ -48,6 +48,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 }
             ?>
             <?php
+                if (!isset($_GET['user_override'])) {
+                    $resetQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+                    $passwordCheck = $resetQuery->fetch_object();
+                    if (password_verify("katalaluan123", $passwordCheck->password)) {
+                        echo "
+                        <div class='change-password'>
+                        <h1>Please reset your password</h1>
+                        <p>Your password has been reset, your account is not secure until the password has been changed</p>
+                        <form method='post'>
+                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password'>
+                        <button type='submit' class='new-password-btn' name='new-password-button'>" . translate("Change Password") . "</button>
+                        </form>
+                        </div>
+                        ";
+                    }
+                }
                 if ($user->jobRole == "Supervisor") { // Options for supervisors to view the accounts of users they supervise.
                     $needingReviewQuery = $mysqli->query("SELECT * FROM submission, researcherssupervisor, submissionreturn WHERE researcherssupervisor.supervisorID = $userID AND researcherssupervisor.researcherID = submission.author AND submitted = 0 AND submission.submissionID NOT IN (SELECT submission.submissionID FROM submission, submissionReturn WHERE submissionReturn.returnDate > submission.dateSubmitted)");
                     if (mysqli_num_rows($needingReviewQuery) > 0) {
@@ -209,18 +225,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         ";
                         $i++;
                     }
-                ?>
-            </div>
-            <div class="new-password">
-                <?php 
-                if (!isset($_GET['user_override'])) {
-                echo "
-                <form method='post'>
-                <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password'>
-                <button type='submit' class='new-password-btn' name='new-password-button'>" . translate("Change Password") . "</button>
-                </form>
-                ";
-                }
                 ?>
             </div>
         </div>

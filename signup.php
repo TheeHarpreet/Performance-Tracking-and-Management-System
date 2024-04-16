@@ -4,6 +4,10 @@ session_start();
 
 $errors = array();
 $_SESSION['user_id'] = 0;
+if (!isset($_SESSION['language'])) {
+    $_SESSION['language'] = "en";
+}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST['lang'])) {

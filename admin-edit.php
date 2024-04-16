@@ -9,7 +9,7 @@ $user = $query->fetch_object();
 
 // reset password query
 if (isset($_GET['reset']) && !isset($_POST['lang'])) {
-    $newPassword = "Password123";
+    $newPassword = "katalaluan123";
     $passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
     $stmt = $mysqli->prepare("UPDATE users SET `password` = ? WHERE userID = ?");
     $stmt->bind_param('ss', $passwordHash, $_GET['userID'] );
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 } ?>
                 <button type="submit" class="submit-button"><?php echo translate("Update"); ?></button>
                 <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link"><?php echo translate("Reset Password"); ?></a></p>
-                 <p><?php echo translate("Passwords are reset to \"Password123\""); ?></p>
+                 <p><?php echo translate("Passwords are reset to \"katalaluan123\""); ?></p>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
