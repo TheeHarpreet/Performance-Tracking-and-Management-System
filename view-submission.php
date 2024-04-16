@@ -95,7 +95,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 echo "<div class='files'>";
                 $files = $mysqli->query("SELECT * FROM file, submissionfile WHERE file.fileID = submissionfile.fileID AND submissionfile.submissionID = $submissionID");
                 while ($file = $files->fetch_object()) {
-                    echo "<p>$file->name</p>";
+                    echo "
+                    <p>$file->name</p>
+                    <a href='submissionfiles/" . htmlspecialchars($file->address) . "' download='" . basename($file->name) . "'>" . translate("Download File") . "</a>
+                    ";
                     
                 }
                 echo "</div>";
