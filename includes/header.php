@@ -9,7 +9,7 @@
                 echo "<p>Hello, $user->fname $user->lname!</p>"; // NeedsTranslation
             }
             ?>
-            <a href="login.php">logout</a> <!-- NeedsTranslation -->
+            <a href="login.php" class="logout-button-header">Logout</a> <!-- NeedsTranslation -->
             <?php 
             echo "
             <div class='language'>

@@ -49,6 +49,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             ?>
             <?php
                 if ($user->jobRole == "Supervisor") { // Options for supervisors to view the accounts of users they supervise.
+                    $needingReviewQuery = $mysqli->query("SELECT * FROM submission, researcherssupervisor WHERE researcherssupervisor.supervisorID = $userID AND researcherssupervisor.researcherID = submission.author AND submitted = 0");
+                    if (mysqli_num_rows($needingReviewQuery) > 0) {
+                        echo "
+                        <div>
+                        <h1>Work to review</h1>";
+                        while ($obj = $needingReviewQuery->fetch_object()) {
+                            echo "<div>";
+                            $isAuthor = true;
+                            include("includes/submission-preview-fill.php");
+                            echo "</div>";
+                        }
+                        echo "</div>";
+                    }
+
                     echo "
                     <h1>" . translate("Select a researcher to view their work") . "</h1>
                     <div class='supervisor-user-selection'>
