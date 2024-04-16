@@ -550,3 +550,80 @@ circle.fg {
 .return-div {
   border: solid white 3px;
 }
+
+/* View submission */
+.view-submission-container {
+  background-color: #4d4d4d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 10px; 
+  box-shadow: 0 4px 8px black;
+  width: 95%; 
+  max-width: 960px;
+}
+
+.view-submission-container h1, .view-submission-container h2 {
+  color: #fbfbfb;
+  margin: 10px 0;
+  font-size: 18px; }
+
+.view-submission-container h1 {
+  background-color: #d4af37;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+
+.coauthors, .submission-description, .files {
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.submission-description {
+  border: none;
+  background-color: #fbfbfb;
+  padding: 10px; 
+  border-left: 5px solid #4d4d4d;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.files {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 10px; 
+  margin: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.files h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.files p {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.files a {
+  background-color: #d4af37;
+  color: #333;
+  padding: 8px 10px; 
+  font-size: 14px; 
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.files a:hover {
+  background-color: #b29b37;
+}
