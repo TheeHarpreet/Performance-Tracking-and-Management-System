@@ -70,21 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 }
             
                 // datetime code
-                $datetime = strval($submission->dateSubmitted);
-                $date = explode(" ", $datetime);
-                $dateValues = explode("-", $date[0]);
-                $time = $date[1];
-                $timeValues = explode(":", $time);
-                $timeOfDay = " AM";
-                $hour = intval($timeValues[0]);
-                $hour = $hour % 12;
-                if ($hour == 0) {
-                    $hour = 12;
-                }
-                if ($timeValues[0] >= 12) {
-                    $timeOfDay = " PM";
-                }
-                $dateTimeOutput = $dateValues[2] . "/" . $dateValues[1] . "/" . $dateValues[0] . " at " . $hour . ":" . $timeValues[1] . ":" . $timeValues[2] . $timeOfDay;  // NeedsTranslation
+                $timeToTranslate = $submission->dateSubmitted;
+                include("includes/format-date.php");
 
                 echo "
                 <h1 class='submission-title'>$submission->title</h1>
@@ -195,6 +182,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                                 <button name='return'>". translate("Return") . "</button>
                             </div>
                         </form>
+                        ";
+                    }
+                }
+                if (mysqli_num_rows($rejectedQuery) > 0) {
+                    echo "<h1>Rejection History:</h1>";
+                    while ($rejection = $rejectedQuery->fetch_object()) {
+                        $returnerQuery = $mysqli->query("SELECT * FROM users WHERE userID = $rejection->returner");
+                        $returner = $returnerQuery->fetch_object();
+                        $timeToTranslate = $rejection->returnDate;
+                        include("includes/format-date.php");
+                        echo "
+                            <div class='return-div'>
+                                <p>Returned by $returner->fname $returner->lname</p>
+                                <p>Date returned: $dateTimeOutput</p>
+                                <p>Reason: $rejection->comments</p>
+                            </div>
                         ";
                     }
                 }
