@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         }
                         ?>
                     </div>
-                    <div class="performance-section">
+                    <div class="performance-section2">
                     <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p> <?php // 42 is the minimum if you have something in all categories. ?>
                     <?php $total = 0; $deg = "deg"; ?>
                     <div id="arc"></div>
@@ -216,7 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 if (!isset($_GET['user_override'])) {
                 echo "
                 <form method='post'>
-                <input type='password' placeholder='" . translate("New Password") . "' name='password'>
+                <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password'>
                 <button type='submit' class='new-password-btn' name='new-password-button'>" . translate("Change Password") . "</button>
                 </form>
                 ";

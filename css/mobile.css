@@ -110,6 +110,12 @@ a {
 .new-submission {
   margin-top: 15px;
   width: 250px;
+  margin-bottom: 10px;
+}
+
+.new-password-input{
+  margin: 0 10px;
+  margin-top: 10px;
 }
 
 button {
@@ -129,9 +135,8 @@ button {
 }
 
 .view-details {
-  width: calc(100% - 400px);
-  margin-left: 200px;
-  margin-right: 200px;
+  width: calc(100% - 300px);
+  margin-left: 150px;
   background-color: #afafaf;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -317,7 +322,6 @@ td a.unblock-button {
   width: 75px;
   height: 25px;
   padding: 0px;
-  margin: 25px 0px 0px 0px;
 }
 .progress-bar-container{
   width: 100%;
@@ -333,11 +337,13 @@ td a.unblock-button {
   background-color:#d4af37;
   border-radius:10px;
 }
-.performance-overview {
-  gap: 400px;
-}
+
 .performance-section {
-  width: 500px;
+  width: 350px;
+}
+.performance-section2 {
+  margin-bottom: 300px;
+  margin-left: 12px;
 }
 .percent-bar {
   display: flex;
