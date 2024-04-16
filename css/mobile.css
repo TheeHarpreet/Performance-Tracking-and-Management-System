@@ -62,7 +62,7 @@ h1 #submissions{
 
 h2 {
   color: #f8c51e;
-  margin: 25px 50px 5px 50px;
+  margin: 25px 40px 40px 0px;
 }
 
 .account-link{
@@ -108,8 +108,9 @@ a {
 }
 
 .new-submission {
-  margin-top: 15px;
-  width: 250px;
+  margin-left: 90px;
+  margin-top: 25px;
+  width: 60%;
   margin-bottom: 10px;
 }
 
@@ -311,17 +312,24 @@ td a.unblock-button {
 }
 .section-name-bar {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-basis: 100%;
-  text-decoration:underline;
-  text-decoration-color:#000 ;
-  text-decoration-thickness: 1.5px;
+  justify-content: center;
+  align-items: center;
 }
 
+.section-header{
+  border-bottom: solid #000000;
+  text-align: center;
+  width: 70%;
+  margin-left: 40px;
+}
 .section-name-bar button {
   width: 75px;
-  height: 25px;
-  padding: 0px;
+  height: 0px;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  padding-bottom: 25px;
 }
 .progress-bar-container{
   width: 100%;
