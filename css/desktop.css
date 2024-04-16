@@ -277,3 +277,145 @@ h2 {
   font-size: 18px;
 }
 
+#manager-index {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+
+#manager-index .flex {
+  display: flex;
+}
+
+#manager-index .justify-between {
+  justify-content: space-between;
+}
+
+#manager-index .align-center {
+  align-items: center;
+}
+
+
+#manager-index .header-container {
+  background-color: #ffffff;
+  padding: 1em 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#manager-index .logo {
+  max-width: 150px;
+  margin-left: 1em 0;
+}
+
+
+#manager-index .manager-container {
+  max-width: 1200px;
+  margin: 2em auto;
+  padding: 1em;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+
+#manager-index .managers-user-section,
+#manager-index .managers-work-section {
+  margin-bottom: 2em;
+}
+
+
+#manager-index .users-list table {
+  width: 100%;
+  margin-top: 1em;
+  border-collapse: collapse;
+}
+
+#manager-index .users-list th,
+#manager-index .users-list td {
+  text-align: left;
+  padding: 0.75em 1em;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#manager-index .users-list th {
+  background-color: #d4af37;
+  color: #333;
+  font-weight: bold;
+}
+
+
+#manager-index button,
+#manager-index input[type="text"],
+#manager-index select {
+  padding: 0.75em 1em;
+  border: 1px solid #4d4d4d;
+  border-radius: 4px;
+  margin: 0.25em 0;
+}
+
+#manager-index button {
+  background-color: #d4af37;
+  color: #ffffff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#manager-index button:hover {
+  background-color: #b29b37;
+}
+
+
+#manager-index .search-parameters {
+  margin-bottom: 2em;
+}
+
+#manager-index .search-parameters input[type="text"] {
+  width: calc(100% - 2em); 
+  margin-right: 1em;
+}
+
+#manager-index .search-parameters button {
+  width: auto; 
+}
+
+
+#manager-index th a.sort {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #f5f5f5;
+  color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+#manager-index th a.sort:hover {
+  background-color: #e0e0e0;
+}
+
+
+#manager-index .footer-container {
+  background: #000;
+  color: #d4af37;
+  text-align: center;
+  padding: 1em 0;
+}
+
+
+#manager-index .section-header {
+  font-size: 1.5em;
+  color: #333;
+  padding: 0.5em 0;
+}
+
+
+#manager-index .admin-container {
+  background: #3a3a3a;
+  color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

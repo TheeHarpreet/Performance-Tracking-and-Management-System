@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
-<body>
+<body id="manager-index">
     <?php include_once("includes/header.php") ?>
         <div class="container">
             <div class="managers-user-section">
