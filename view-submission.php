@@ -92,10 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     }
                     echo "</div>";
                 }
-                echo "
-                <div class='files'>
-                </div>
-                ";
+                echo "<div class='files'>";
+                $files = $mysqli->query("SELECT * FROM file, submissionfile WHERE file.fileID = submissionfile.fileID AND submissionfile.submissionID = $submissionID");
+                while ($file = $files->fetch_object()) {
+                    echo "<p>$file->name</p>";
+                    
+                }
+                echo "</div>";
                 if ($user->jobRole == "Supervisor") {
                     $supervisorQuery = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $author->userID AND supervisorID = $user->userID");
                     if (mysqli_num_rows($supervisorQuery) > 0 ) {
