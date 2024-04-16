@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 </head>
 <body>
     <?php include_once("includes/header.php") ?>
-        <div class="container">
             <?php
                 // status code
                 if ($submission->approved > 0) {
@@ -68,13 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 } else {
                     $status = translate("Needing Supervisor approval");
                 }
-            
                 // datetime code
                 $timeToTranslate = $submission->dateSubmitted;
                 include("includes/format-date.php");
-
                 echo "
                 <h1 class='submission-title'>$submission->title</h1>
+                <div class='view-submission-container'>
                 <h2>". translate("By") . " $author->fname $author->lname (". translate($author->jobRole) .")</h2>
                 <p><span style='font-weight: bold'>". translate("Date Submitted") . ": </span> $dateTimeOutput </p>
                 <h2 class='submission-description'>$submission->comments</h2>
