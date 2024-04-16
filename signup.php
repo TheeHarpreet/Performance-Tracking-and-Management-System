@@ -19,16 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
         // Hashing algorithm
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        
-        // Basic validation
-        if (empty($firstname) || empty($surname) || empty($email) || empty($password) || empty($passwordConfirm)) {
-            array_push($errors, "All fields are required.");  // NeedsTranslation
-        }
-    
-        // Email format validation
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            array_push($errors, "Email is not valid.");  // NeedsTranslation
-        }
     
         // Password length validation
         if (strlen($password) < 8) {

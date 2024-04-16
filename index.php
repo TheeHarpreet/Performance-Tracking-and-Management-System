@@ -3,6 +3,7 @@ require_once("includes/config.php");
 require_once("includes/redirect-login.php");
 ob_clean();
 
+$errors = array();
 $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $userQuery->fetch_object();
 
@@ -10,11 +11,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     if (isset($_POST['new-submission'])) {
         $_SESSION['newSubmission'] = $_POST['new-submission'];
         header("Location: new-submission.php");
-    } else if (isset($_POST['new-password-button'])) { // change password. Add the code to check the conditions here. I'd recommend doing the conditions as an include and use that here and in signup.
-        $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $changePasswordQuery = $mysqli->prepare("UPDATE users SET password = ? WHERE userID = $userID");
-        $changePasswordQuery->bind_param("s", $passwordHash);
-        $changePasswordQuery->execute();
+    } else if (isset($_POST['new-password-button'])) {
+        $password = $_POST['password1'];
+        $passwordConfirm = $_POST['password2'];
+
+        // Password length validation
+        if (strlen($password) < 8) {
+            array_push($errors, "Password must be at least 8 characters long.");  // NeedsTranslation
+        }
+    
+        // Password confirmation check
+        if ($password !== $passwordConfirm) {
+            array_push($errors, "Passwords do not match.");  // NeedsTranslation
+        }
+
+        if (count($errors) == 0) {
+            $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $changePasswordQuery = $mysqli->prepare("UPDATE users SET password = ? WHERE userID = $userID");
+            $changePasswordQuery->bind_param("s", $passwordHash);
+            $changePasswordQuery->execute();
+        }
     } else {
         $_SESSION['viewSubmission'] = $_POST['submission-id'];
         header("Location: view-submission.php");
@@ -57,7 +73,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         <h1>Please reset your password</h1>
                         <p>Your password has been reset, your account is not secure until the password has been changed</p>
                         <form method='post'>
-                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password'>
+                        <p>Password</p>
+                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password1'>
+                        <p>Confirm Password</p>
+                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password2'>
+                        ";
+                        if (count($errors) > 0) {
+                            foreach ($errors as $error) {
+                                echo "<div class='error-message'>$error</div>";
+                            }
+                        }
+                        echo "
                         <button type='submit' class='new-password-btn' name='new-password-button'>" . translate("Change Password") . "</button>
                         </form>
                         </div>
