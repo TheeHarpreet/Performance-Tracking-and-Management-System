@@ -72,7 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="password" name="password" required>
                 <button type="submit" id="signup-button"><?php echo translate("Login"); ?></button>
             </div>
-            <p class="account-link"><?php echo translate("Don't have an account?"); ?> <a href="signup.php" class="login-change"><?php echo translate("Register here"); ?></a></p>
+            <p class="account-link"><?php echo translate("Don't have an account?"); ?></p>
+            <a href="signup.php" class="login-change"><?php echo translate("Register here"); ?></a>
         </form>
     </div>
     <?php include_once("includes/footer.php") ?>

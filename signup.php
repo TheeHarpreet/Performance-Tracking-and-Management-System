@@ -5,7 +5,7 @@ session_start();
 $errors = array();
 $_SESSION['user_id'] = 0;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST['lang'])) {
         $firstname = $_POST['fname'];
         $surname = $_POST['lname'];
@@ -102,7 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     }
                 }
                 ?>
-                <p class="account-link"><?php echo translate("Have an account?"); ?> <a href="login.php" class="login-change"><?php echo translate("Login"); ?></a></p>
+                <p class="account-link"><?php echo translate("Have an account?"); ?></p>
+                <a href="login.php" class="login-change"><?php echo translate("Login"); ?></a>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
