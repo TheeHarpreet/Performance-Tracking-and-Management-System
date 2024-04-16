@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         }
 
         if (count($errors) == 0) {
-            $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $passwordHash = password_hash($_POST['password1'], PASSWORD_DEFAULT);
             $changePasswordQuery = $mysqli->prepare("UPDATE users SET password = ? WHERE userID = $userID");
             $changePasswordQuery->bind_param("s", $passwordHash);
             $changePasswordQuery->execute();

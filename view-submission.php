@@ -36,6 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         $assignQuery = $mysqli->prepare("UPDATE submission SET approved = ? WHERE submissionID = ?");
         $assignQuery->bind_param("ss", $assignedPoints, $submissionID);
         $assignQuery->execute();
+    } else if (isset($_POST['resubmit'])) {
+        $_SESSION['resubmit'] = $submissionID;
+        $_SESSION['newSubmission'] = $submission->section;
+        header("Location: new-submission.php");
     }
     header("Location: view-submission.php");
 }
