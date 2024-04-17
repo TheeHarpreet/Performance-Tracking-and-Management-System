@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     <title><?php echo translate("Home"); ?> | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
-    <script src="js/index.js"></script>
+    <script src="js/hide-sections.js"></script>
 </head>
 <body>
     <?php include_once("includes/header.php") ?>

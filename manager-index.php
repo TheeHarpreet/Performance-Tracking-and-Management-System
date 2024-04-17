@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     <title>Home | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
+    <script src="js/hide-sections.js"></script>
 </head>
 <body id="manager-index">
     <?php include_once("includes/header.php") ?>
@@ -104,6 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     $nameMessage = " AND  title LIKE '$name'";
                 }
                 $sectionQuery = $mysqli->query("SELECT * FROM sections");
+                $i = 1;
                 while ($section = $sectionQuery->fetch_object()) {
                     $submissionQuery = $mysqli->query("SELECT * FROM submission WHERE sectionID = $section->sectionID $sectionMessage $nameMessage");
                     if (mysqli_num_rows($submissionQuery) > 0) { // This makes sure the header is only output if there are results in that section.
@@ -111,8 +113,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         <div class='section-container'>
                         <div class='section-name-bar'>
                         <h2 class='section-header'>$section->sectionName</h2>
-                        </div>
-                        ";
+                        <button onclick='hideSection($i)' id='toggle-button$i'>" . translate("Hide") . "</button>
+                        </div>";
+                        echo "<div id ='section-hide$i'>";
                         while ($obj = $submissionQuery->fetch_object()) {
                             $isAuthor = true;
                             include("includes/submission-preview-fill.php");
@@ -121,8 +124,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         </div>
                         </div>
                         </div>
+                        </div>
                         ";
                     }
+                    $i++;
                 }
                 ?>
             </div>
