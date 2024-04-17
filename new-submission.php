@@ -21,12 +21,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
     $stmt->bind_param("sisis", $title, $author, $dateSubmitted, $sectionID, $comments);
     $stmt->execute();
+    $submissionID = $stmt->insert_id;
+    $_SESSION['viewSubmission'] = $submissionID;
+
+    if (isset($_POST['coauthors'])) {
+        $i = 1;
+        $queryText = "INSERT INTO submissioncoauthor VALUES ";
+        foreach ($_POST['coauthors'] as $coauthor) {
+            $queryText .= "($submissionID, $coauthor)";
+            $queryText .= ($i == count($_POST['coauthors']) ? ";" : ",");
+            $i++;
+        }
+        $coauthorInsert = $mysqli->query($queryText);
+    }
 
     // Check for errors during query execution
     if ($stmt->error) {
         $error = translate("Database error: ") . $stmt->error;
     } else {
-        $submissionID = $stmt->insert_id;
         $fileCount = count($_FILES['file']['name']);
 
         // Loop through each uploaded file
@@ -89,13 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <?php include_once("includes/header.php") ?>
 
 <div class="submission-form-container">
-    <h2><?php echo translate("Submission Form"); ?></h2>
-    <?php if (!empty($error)) : ?>
-        <div class="error-message"><?php echo $error; ?></div>
-    <?php endif; ?>
-    <?php if (!empty($successMessage)) : ?>
-        <div class="success-message"><?php echo $successMessage; ?></div>
-    <?php endif; ?>
+    <?php echo "<h2>" . translate("Submission Form") . "</h2>";?>
+    <?php if (!empty($successMessage)) {
+        header("Location: view-submission.php");
+    } ?>
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title"><?php echo translate("Title"); ?>:</label>
@@ -110,6 +119,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             <input type="file" id="file" name="file[]" multiple required>  <!-- NeedsTranslation for defaults like "Choose files", "No file chosen", and "4 files" -->
         </div>
         <button type="submit" class="submit-button"><?php echo translate("Submit"); ?></button>
+        <table>
+            <tr class="add-coauthors-table">
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Coauthor</th>
+            </tr>
+            <?php
+            $possibleCoauthorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $userID AND jobRole != 'Admin' AND jobRole != 'Manager'");
+            echo "<h1>Add Coauthors</h1>";
+            while ($coauthor = $possibleCoauthorsQuery->fetch_object()) {
+                echo "
+                <tr>
+                <td>$coauthor->fname</td>
+                <td>$coauthor->lname</td>
+                <td>$coauthor->email</td>
+                <td><input type='checkbox' name='coauthors[]' value='" . $coauthor->userID . "'></td>
+                </tr>
+                ";
+            }
+            ?>
+        </table>
     </form>
 </div>
 

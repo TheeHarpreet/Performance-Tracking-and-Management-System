@@ -22,7 +22,7 @@ if (isset($_GET['block'])){ // Setting the password to nothing stops the account
 
 // unblock query
 if (isset($_GET['unblock'])){
-    $passwordHash = password_hash("password123", PASSWORD_DEFAULT);
+    $passwordHash = password_hash("katalaluan123", PASSWORD_DEFAULT);
     $stmt = $mysqli->prepare("UPDATE users SET `password` = ? WHERE userID = ?");
     $stmt->bind_param('ss', $passwordHash, $_GET['unblock'] );
     $stmt->execute();
@@ -102,28 +102,23 @@ if ($user->jobRole != "Admin") {
                         </tr>
                         <tr>
                         <?php
-                        $user_accounts = mysqli_query($mysqli, "SELECT * FROM users ORDER BY $orderBy");
-                            
-                            while ($row = mysqli_fetch_assoc($user_accounts))
-                            {
+                        $userAccounts = mysqli_query($mysqli, "SELECT * FROM users ORDER BY $orderBy");
+                        while ($row = $userAccounts->fetch_object())
+                        {
+                            echo "
+                            <tr>
+                            <td>$row->userID</td>
+                            <td>$row->fname</td>
+                            <td>$row->lname</td>
+                            <td>$row->email</td>
+                            <td>$row->jobRole</td>
+                            <td><a href='admin-edit.php?userID=$row->userID' class='edit-button'>" . translate("Edit") . "</a></td>
+                            <td><a href='admin-index.php?" . ($row->password == '' ? 'unblock=' . $row->userID . "' class='unblock-button'>" . translate("Unblock") : 'block=' . $row->userID . "' class='delete-button'>" . translate("Block")) . "</a></td>
+                            </tr>
+                            ";
+                        }
                         ?>
-                            <td><?php echo $row['userID']; ?></td>
-                            <td><?php echo $row['fname']; ?></td>
-                            <td><?php echo $row['lname']; ?></td>
-                            <td><?php echo $row['email']; ?></td>
-                            <td><?php echo $row['jobRole']; ?></td>
-                            <td><a href="admin-edit.php?userID=<?php echo $row['userID']; ?>" class="edit-button"><?php echo translate("Edit"); ?></a></td>
-                            <?php
-                            if ($row['password'] == "") { // a blank password means the account is blocked.
-                                echo "<td><a href='admin-index.php?unblock=" . $row['userID'] . "' class='unblock-button'>" . translate("Unblock") . "</a></td>";
-                            } else {
-                                echo "<td><a href='admin-index.php?block=" . $row['userID'] . "' class='delete-button'>" . translate("Block") . "</a></td> ";
-                            }
-                            ?>
                         </tr>
-                        <?php
-                            }
-                        ?>
                     </thead>
                 </table>
             </div>
