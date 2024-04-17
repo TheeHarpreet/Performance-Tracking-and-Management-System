@@ -1,0 +1,411 @@
+.bottom-header {
+  gap: 500px;
+}
+
+.supervisor-user-selection, .performance-overview, .submission-preview-box {
+  flex-direction: row;
+}
+
+.coauthor-indicator, .colour-bar {
+  max-height: 1000px;
+  height: auto;
+  max-width: 15px;
+}
+
+.submission-preview-text{
+  flex-direction: row;
+  display: flex;
+}
+
+input[type=text], input[type=password] {
+  padding: 15px;
+  border: 1px solid #4d4d4d;
+}
+button {
+  width: calc(100% - 30px);
+  padding: 15px;
+  font-size: 16px;
+}
+.footer-container {
+  position: bottom;
+  background: #000;
+  color: #d4af37;
+  padding: 10px 0;
+}
+.header-container {
+  background: #ffffff;
+  text-align: center;
+}
+.logo {
+  max-width: 150px;
+  margin: 0 auto;
+}
+.new-submission {
+  margin-left: 60px;
+  margin-top: 15px;
+  width: 250px;
+}
+.view-details{
+  margin-bottom: 20px;
+}
+h2 {
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+
+.new-password{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px
+}
+
+.new-password-btn{
+  margin-left: 20px;
+}
+
+/* admin css */
+.admin-container {
+  background: #3a3a3a;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 15px;
+}
+
+.admin-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.admin-container th, .admin-container td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.account-list h2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0px;
+  margin: 5px 500px;
+}
+
+.admin-container th {
+  background-color: #d4af37;
+  color: #333;
+}
+
+.edit-button, .delete-button, .btn, .unblock-button{
+  padding: 5px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+}
+
+.edit-button {
+  background-color: #0c7400;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+}
+
+.unblock-button{
+  background-color:coral;
+}
+
+.btn{
+  margin: 10px 205px;
+  background-color: #d4af37;
+}
+
+.edit-button:hover, .delete-button:hover {
+  opacity: 0.9;
+}
+
+.create-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto; /* Ensures the container is centered */
+}
+
+/* Now, we make sure the form itself does not stretch too wide. */
+.new-admin-form {
+  width: 100%; /* You can set a max-width if you need */
+  max-width: 500px; /* Adjust this value to suit your design */
+  margin: 0 auto; /* Centers the form in the flex container */
+}
+.performance-section{
+  margin-right: 470px;
+  margin-left: -350px;
+}
+
+
+.submission-form-container {
+  width: 80%;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.submission-form-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.submission-form-container form {
+  margin-top: 20px;
+}
+
+.submission-form-container label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.submission-form-container input[type="text"],
+.submission-form-container textarea,
+.submission-form-container input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submission-form-container button {
+  display: block; 
+  width: auto; 
+  padding: 15px 30px; 
+  background-color: #d4af37;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 10px auto; 
+  transition: background-color 0.3s; 
+}
+
+.submission-form-container button:hover {
+  background-color: #b29b37;
+}
+
+.signup-div{
+  margin-left: 30px;
+  flex-direction: row;
+}
+
+.login-container{
+  margin: 132.5px auto;
+}
+
+.signup-container{
+  margin: 65px auto;
+  padding: 20px;
+}
+
+#signup-button{
+  margin-left: 10px;
+}
+
+.first-column{
+  margin-left: -90px;
+  margin-right: 10px;
+}
+
+.second-column{
+  margin-right: -30px;
+  margin-left: 110px;
+}
+
+.login-change{
+  margin-left: 37%;
+}
+
+.signup-container{
+  padding: 100px;
+}
+
+.first-column input[type=text], .first-column input[type=email]{
+  padding: 15px 50px;
+}
+
+.login-input input[type=email]{
+  padding: 15px 0px;
+}
+
+/* viev submission CSS */
+
+.view-submission-container {
+  padding: 20px; 
+  width: 80%; 
+}
+
+.view-submission-container h1, .view-submission-container h2 {
+  font-size: 24px; 
+}
+
+.submission-description, .files {
+  padding: 20px; 
+}
+
+.files a {
+  padding: 10px 15px; 
+  font-size: 16px; 
+}
+
+
+/* Manager Index */
+
+#manager-index {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+
+#manager-index .flex {
+  display: flex;
+}
+
+#manager-index .justify-between {
+  justify-content: space-between;
+}
+
+#manager-index .align-center {
+  align-items: center;
+}
+
+
+#manager-index .header-container {
+  background-color: #ffffff;
+  padding: 1em 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#manager-index .logo {
+  max-width: 150px;
+  margin-left: 1em 0;
+}
+
+
+#manager-index .manager-container {
+  max-width: 1200px;
+  margin: 2em auto;
+  padding: 1em;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+
+#manager-index .managers-user-section,
+#manager-index .managers-work-section {
+  margin-bottom: 2em;
+}
+
+
+#manager-index .users-list table {
+  width: 100%;
+  margin-top: 1em;
+  border-collapse: collapse;
+}
+
+#manager-index .users-list th,
+#manager-index .users-list td {
+  text-align: left;
+  padding: 0.75em 1em;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#manager-index .users-list th {
+  background-color: #d4af37;
+  color: #333;
+  font-weight: bold;
+}
+
+
+#manager-index button,
+#manager-index input[type="text"],
+#manager-index select {
+  padding: 0.75em 1em;
+  border: 1px solid #4d4d4d;
+  border-radius: 4px;
+  margin: 0.25em 0;
+}
+
+#manager-index button {
+  background-color: #d4af37;
+  color: #ffffff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#manager-index button:hover {
+  background-color: #b29b37;
+}
+
+
+#manager-index .search-parameters {
+  margin-bottom: 2em;
+}
+
+#manager-index .search-parameters input[type="text"] {
+  width: calc(100% - 2em); 
+  margin-right: 1em;
+}
+
+#manager-index .search-parameters button {
+  width: auto; 
+}
+
+
+#manager-index th a.sort {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #f5f5f5;
+  color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+#manager-index th a.sort:hover {
+  background-color: #e0e0e0;
+}
+
+
+#manager-index .footer-container {
+  background: #000;
+  color: #d4af37;
+  text-align: center;
+  padding: 1em 0;
+}
+
+
+#manager-index .section-header {
+  font-size: 1.5em;
+  color: #333;
+  padding: 0.5em 0;
+}
+
+
+#manager-index .admin-container {
+  background: #3a3a3a;
+  color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
