@@ -5,6 +5,8 @@ ob_clean();
 
 $error = "";
 $successMessage = "";
+$userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
+$user = $userQuery->fetch_object();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $author = $_SESSION['user_id'];
@@ -12,14 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $title = $_POST["title"];
     $comments = $_POST["comments"];
     $dateSubmitted = date("Y-m-d H:i:s");
+    ($user->jobRole == "Supervisor" ? $submitted = 1 : $submitted = 0);
 
     // I removed a check to see if the email and passwords aren't empty as there is already a check with "required" in the html.
 
     $fileUploaded = false;
 
     // Insert details for submission
-    $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, 0, 0)");
-    $stmt->bind_param("sisis", $title, $author, $dateSubmitted, $sectionID, $comments);
+    $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, ?, 0)");
+    $stmt->bind_param("sisiss", $title, $author, $dateSubmitted, $sectionID, $comments, $submitted);
     $stmt->execute();
     $submissionID = $stmt->insert_id;
     $_SESSION['viewSubmission'] = $submissionID;

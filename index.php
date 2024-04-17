@@ -181,12 +181,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                                 </div>
                                 ";
                                 array_push($pointsArray, $points);
+                                $pointsTotal += $points;
                             }
                         }
                         ?>
                     </div>
                     <div class="performance-section2">
-                    <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p> <?php // 42 is the minimum if you have something in all categories. ?>
+                    <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p>
                     <?php $total = 0; $deg = "deg"; ?>
                     <div id="arc"></div>
                     <div id="arc7"></div>

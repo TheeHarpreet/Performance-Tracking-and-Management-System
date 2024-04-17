@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
         $minRange = 0;
         $maxRange = 0;
-        $allUsersQuery = $mysqli->query("SELECT * FROM users WHERE jobRole = 'Researcher' OR jobRole = 'Supervisor'")
+        $allUsersQuery = $mysqli->query("SELECT * FROM users WHERE jobRole = 'Researcher' OR jobRole = 'Supervisor'");
 
         while ($user = $allUsersQuery->fetch_object()) {
             // Gets the points where author
@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 $minRange = $currentAmount;
             }
         }
+        $mysqli->query("UPDATE sections SET minRange = $minRange, maxRange = $maxRange WHERE sectionID = $submission->sectionID");
     } else if (isset($_POST['resubmit'])) {
         $_SESSION['resubmit'] = $submissionID;
         $_SESSION['newSubmission'] = $submission->section;
@@ -87,8 +88,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     $status = translate("Needing Manager approval");
                 } else if ($submission->submitted == 0 && mysqli_num_rows($rejectedQuery) > 0) {
                     $status = translate("Rejected");
-                    $recent = $mysqli->query("SELECT * FROM submissionreturn, submission WHERE submission.dateSubmitted > submissionreturn.returnDate AND submission.submissionID = submissionreturn.submissionID");
-                    if (mysqli_num_rows($recent) > 0) {
+                    $recent = $mysqli->query("SELECT * FROM submission, submissionreturn WHERE submission.submissionID = submissionreturn.submissionID AND submissionreturn.returnDate > submission.dateSubmitted");
+                    $amount = mysqli_num_rows($recent); echo $amount;
+                    if (mysqli_num_rows($recent) == 0) {
                         $status = translate("Needing Supervisor approval");
                     }
                 } else {

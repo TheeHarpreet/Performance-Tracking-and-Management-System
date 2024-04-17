@@ -13,6 +13,16 @@ CREATE TABLE If Not Exists users (
     PRIMARY KEY (userID)
 );
 
+CREATE TABLE If Not Exists sections (
+    sectionID INT NOT NULL,
+    sectionName text NOT NULL,
+    minPoints int NOT NULL,
+    maxPoints int NOT NULL,
+    minRange int NOT NULL,
+    maxRange int NOT NULL,
+    PRIMARY KEY (sectionID)
+);
+
 CREATE TABLE If Not Exists submission (
     submissionID int NOT NULL AUTO_INCREMENT,
     title text NOT NULL,
@@ -64,16 +74,6 @@ CREATE TABLE If Not Exists researchersSupervisor (
     supervisorID int NOT NULL,
     FOREIGN KEY (researcherID) REFERENCES users (userID),
     FOREIGN KEY (supervisorID) REFERENCES users (userID)
-);
-
-CREATE TABLE If Not Exists sections (
-    sectionID INT NOT NULL,
-    sectionName text NOT NULL,
-    minPoints int NOT NULL,
-    maxPoints int NOT NULL,
-    minRange int NOT NULL,
-    maxRange int NOT NULL,
-    PRIMARY KEY (sectionID)
 );
 
 INSERT INTO Sections (sectionID, sectionName, minPoints, maxPoints, minRange, maxRange) VALUES
