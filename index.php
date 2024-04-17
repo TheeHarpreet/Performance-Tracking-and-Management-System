@@ -229,16 +229,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         
                         echo "<div id='section-hide$i'>";
                         $sectionID = $i + 1;
-                        $submissionsQuery = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND sectionID = $sectionID");
+
+                        $coauthersQuery = $mysqli->query("SELECT submission.submissionID FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.sectionID = $sectionID");
+                        $array = "";
+                        if (mysqli_num_rows($coauthersQuery) > 0) {
+                            $array = " OR submissionID IN (";
+                            $i = 1;
+                            while ($coauthorSubmission = $coauthersQuery->fetch_object()) {
+                                $array = $array . "'" . $coauthorSubmission->submissionID. "'";
+                                if ($i != mysqli_num_rows($coauthersQuery)) {
+                                    $array .= ", ";
+                                }
+                                $i++;
+                            }
+                            $array .= ")";
+                        }
+                        echo $array;
+                        $submissionsQuery = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND sectionID = $sectionID $array");
                         while ($obj = $submissionsQuery->fetch_object()) { // Outputs all submissions where the user is the author.
-                            $isAuthor = true;
+                            $isAuthorQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $obj->submissionID AND author = $userID");
+                            $isAuthor = false;
+                            if (mysqli_num_rows($isAuthorQuery) > 0) {
+                                $isAuthor = true;
+                            }
                             include("includes/submission-preview-fill.php");
                         }
+                        /*
                         $submissionsQuery = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.sectionID = $sectionID");
                         while ($obj = $submissionsQuery->fetch_object()) { // Outputs all submissions where the user is the coauthor.
                             $isAuthor = false;
                             include("includes/submission-preview-fill.php");
                         }
+                        */
                         echo "
                         <div>
                         <form method='post'>
