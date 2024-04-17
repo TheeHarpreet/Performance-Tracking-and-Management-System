@@ -30,6 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         $stmt->bind_param("ssss", $fname, $lname, $email, $userID);
     }
     $stmt->execute();
+
+    $mysqli->query("DELETE FROM researcherssupervisor WHERE researcherID = $userID");
+
+    if (isset($_POST['supervisors'])) {
+        $i = 1;
+        $queryText = "INSERT INTO researcherssupervisor VALUES ";
+        foreach ($_POST['supervisors'] as $supervisor) {
+            $queryText .= "($userID, $supervisor)";
+            $queryText .= ($i == count($_POST['supervisors']) ? ";" : ",");
+            $i++;
+        }
+        $supervisorInsert = $mysqli->query($queryText);
+    }
+
     header("Location: admin-index.php");
 }
 ?>
@@ -65,10 +79,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     <option value='Supervisor'" . ($user->jobRole == 'Supervisor' ? ' selected' : '') . ">" . translate("Supervisor") . "</option>
                     <option value='Manager'" . ($user->jobRole == 'Manager' ? ' selected' : '') . ">" . translate("Manager") . "</option>
                 </select>";
-} ?>
+                } ?>
                 <button type="submit" class="submit-button"><?php echo translate("Update"); ?></button>
                 <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link"><?php echo translate("Reset Password"); ?></a></p>
-                 <p><?php echo translate("Passwords are reset to \"katalaluan123\""); ?></p>
+                <p><?php echo translate("Passwords are reset to \"katalaluan123\""); ?></p>
+                <?php 
+                if ($user->jobRole == "Researcher") {
+                    echo "
+                    <table>
+                    <tr class='assign-supervisor-table'>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Supervisor</th>
+                    </tr>
+                    ";
+                    $possibleSupervisorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $user->userID AND jobRole = 'Supervisor'");
+                    while ($supervisor = $possibleSupervisorsQuery->fetch_object()) {
+                        echo "
+                        <tr>
+                        <td>$supervisor->fname</td>
+                        <td>$supervisor->lname</td>
+                        <td>$supervisor->email</td>
+                        <td><input type='checkbox' name='supervisors[]' value='" . $supervisor->userID . "' ";
+                        $selectedCheck = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $userID AND supervisorID = $supervisor->userID");
+                        if (mysqli_num_rows($selectedCheck) > 0) {
+                            echo "checked";
+                        }
+                        echo "></td>
+                        </tr>
+                        </table>
+                        ";
+                    }
+                }
+                ?>
             </form>
         </div>
     <?php include_once("includes/footer.php") ?>
