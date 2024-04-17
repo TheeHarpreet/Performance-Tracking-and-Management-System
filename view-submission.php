@@ -17,6 +17,12 @@ $authorQuery = $mysqli->query("SELECT * FROM users WHERE userID = $submission->a
 $author = $authorQuery->fetch_object();
 $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submissionID = $submissionID ORDER BY returnDate DESC");
 
+if (isset($_REQUEST['resubmit'])) {
+    $_SESSION['resubmit'] = $submissionID;
+    $_SESSION['newSubmission'] = $submission->section;
+    header("Location: new-submission.php");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     if (isset($_POST['approve'])) {
         $approveQuery = $mysqli->prepare("UPDATE submission SET submitted = 1 WHERE submissionID = ?");
@@ -60,10 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             }
         }
         $mysqli->query("UPDATE sections SET minRange = $minRange, maxRange = $maxRange WHERE sectionID = $submission->sectionID");
-    } else if (isset($_POST['resubmit'])) {
-        $_SESSION['resubmit'] = $submissionID;
-        $_SESSION['newSubmission'] = $submission->section;
-        header("Location: new-submission.php");
     }
     header("Location: view-submission.php");
 }
@@ -156,10 +158,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         } else {
                             header("Location: index.php");
                         }
-                    } else {
-                        if ($status == translate("Rejected")) {
-                            echo "<button name='resubmit'>". translate("Resubmit") . "</button>";
-                        }
+                    } else if ($status == translate("Rejected")) {
+                        echo "
+                        <form method='request'>
+                        <button name='resubmit'>". translate("Resubmit") . "</button>
+                        </form>
+                        ";
                     }
                 } else if ($user->jobRole == "Manager") {
                     if ($status == translate("Needing Manager approval")) {

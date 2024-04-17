@@ -3,6 +3,8 @@ require_once("includes/config.php");
 require_once("includes/redirect-login.php");
 ob_clean();
 
+$_SESSION['resubmit'] = 0;
+
 $errors = array();
 $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $userQuery->fetch_object();

@@ -8,7 +8,22 @@ $successMessage = "";
 $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $userQuery->fetch_object();
 
+if (isset($_SESSION['resubmit'])) {
+    if ($_SESSION['resubmit'] != 0) {
+        $overrideSubmissionID = $_SESSION['resubmit'];
+        $overrideSubmission = $mysqli->query("SELECT * FROM submission WHERE submissionID = $overrideSubmissionID")->fetch_object();
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
+    if (isset($overrideSubmissionID)) {
+        $files = $mysqli->query("SELECT file.fileID FROM file, submissionfile WHERE file.fileID = submissionfile.fileID AND submissionfile.submissionID = $overrideSubmissionID");
+        $mysqli->query("DELETE FROM submissionfile WHERE submissionID = $overrideSubmissionID");
+        while ($file = $files->fetch_object()) {
+            $mysqli->query("DELETE FROM file WHERE fileID = $file->fileID");
+        }
+        $mysqli->query("DELETE FROM submissioncoauthor WHERE submissionID = $overrideSubmissionID");
+    }
     $author = $_SESSION['user_id'];
     $sectionID = $_SESSION['newSubmission'];
     $title = $_POST["title"];
@@ -16,16 +31,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $dateSubmitted = date("Y-m-d H:i:s");
     ($user->jobRole == "Supervisor" ? $submitted = 1 : $submitted = 0);
 
-    // I removed a check to see if the email and passwords aren't empty as there is already a check with "required" in the html.
-
     $fileUploaded = false;
 
-    // Insert details for submission
-    $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, ?, 0)");
-    $stmt->bind_param("sisiss", $title, $author, $dateSubmitted, $sectionID, $comments, $submitted);
-    $stmt->execute();
-    $submissionID = $stmt->insert_id;
-    $_SESSION['viewSubmission'] = $submissionID;
+    if (!isset($overrideSubmissionID)) {
+        // Insert details for submission
+        $stmt = $mysqli->prepare("INSERT INTO submission (title, author, dateSubmitted, sectionID, comments, submitted, approved) VALUES (?, ?, ?, ?, ?, ?, 0)");
+        $stmt->bind_param("sisiss", $title, $author, $dateSubmitted, $sectionID, $comments, $submitted);
+        $stmt->execute();
+        $submissionID = $stmt->insert_id;
+        $_SESSION['viewSubmission'] = $submissionID;
+    } else {
+        $stmt = $mysqli->prepare("UPDATE submission SET title = ?, dateSubmitted = NOW(), comments = ?, submitted = ?, approved = 0 WHERE submissionID = ?");
+        $stmt->bind_param("ssii", $title, $comment, $submitted, $overrideSubmissionID);
+        $stmt->execute();
+        $submissionID = $overrideSubmissionID;
+        $_SESSION['viewSubmission'] = $submissionID;
+    }
 
     if (isset($_POST['coauthors'])) {
         $i = 1;
@@ -121,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             <label for="file"><?php echo translate("Upload File"); ?>:</label>
             <input type="file" id="file" name="file[]" multiple required>  <!-- NeedsTranslation for defaults like "Choose files", "No file chosen", and "4 files" -->
         </div>
-        <button type="submit" class="submit-button"><?php echo translate("Submit"); ?></button>
+        <button type="submit" class="submit-button" name='check'><?php echo translate("Submit"); ?></button>
         <table>
             <tr class="add-coauthors-table">
                 <th>First name</th>
