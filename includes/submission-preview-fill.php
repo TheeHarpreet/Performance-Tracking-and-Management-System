@@ -14,17 +14,19 @@
     echo "</div>";
     echo "</div>";
 
-    $backgroundColour = "gray"; // gray = submitted to supervisor.
-    $returns = $mysqli->query ("SELECT * FROM submissionreturn WHERE submissionID = $obj->submissionID ORDER BY returnDate ASC");
-    if (mysqli_num_rows($returns) > 0 && $obj->submitted == 0) {
-        $latestReturn = $returns->fetch_object();
-        $backgroundColour = "red"; // red = rejected.
-    }
-    if ($obj->submitted == 1) {
-        $backgroundColour = "orange"; // orange = submitted to manager.
-    }
-    if ($obj->approved > 0 ) {
-        $backgroundColour = "green"; // green = accepted.
+    $rejectedQuery = $mysqli->query("SELECT * FROM submissionreturn WHERE submissionID = $obj->submissionID ORDER BY returnDate DESC");
+    if ($obj->approved > 0) {
+        $backgroundColour = "green";
+    } else if ($obj->submitted == 1 && $obj->approved == 0) {
+        $backgroundColour = "orange";
+    } else if ($obj->submitted == 0 && mysqli_num_rows($rejectedQuery) > 0) {
+        $backgroundColour = "red";
+        $recent = $mysqli->query("SELECT * FROM submission, submissionreturn WHERE submission.submissionID = submissionreturn.submissionID AND submissionreturn.returnDate > submission.dateSubmitted AND submission.submissionID = $obj->submissionID");
+        if (mysqli_num_rows($recent) == 0) {
+            $backgroundColour = "yellow";
+        }
+    } else {
+        $backgroundColour = "yellow";
     }
     
     echo "<div class='colour-bar' style='background-color: $backgroundColour';>"; 

@@ -88,8 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     $status = translate("Needing Manager approval");
                 } else if ($submission->submitted == 0 && mysqli_num_rows($rejectedQuery) > 0) {
                     $status = translate("Rejected");
-                    $recent = $mysqli->query("SELECT * FROM submission, submissionreturn WHERE submission.submissionID = submissionreturn.submissionID AND submissionreturn.returnDate > submission.dateSubmitted");
-                    $amount = mysqli_num_rows($recent); echo $amount;
+                    $recent = $mysqli->query("SELECT * FROM submission, submissionreturn WHERE submission.submissionID = submissionreturn.submissionID AND submissionreturn.returnDate > submission.dateSubmitted AND submission.submissionID = $submissionID");
                     if (mysqli_num_rows($recent) == 0) {
                         $status = translate("Needing Supervisor approval");
                     }
