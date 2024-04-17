@@ -117,28 +117,31 @@ if ($user->jobRole != "Admin") {
                     }
                     }
                 ?>
-                <form action="admin-index.php?userID=<?php echo $userID; ?>" method="post" class="new-admin-form">
-                <h2><?php echo translate("Create User Account"); ?></h2>
-                <div class="new-admin-inputs">
-                    <div>
-                        <p><?php echo translate("First Name"); ?></p>
-                        <input type="text" name="fname" id="fname" required>
-                        <p><?php echo translate("Last Name"); ?></p>
-                        <input type="text" name="lname" id="lname" required>
-                    </div>
-                    <div>
-                        <p><?php echo translate("Email"); ?></p>
-                        <input type="email" name="email" id="email" required>
-                        <p><?php echo translate("Password"); ?></p>
-                        <input type="password" name="password" id="password" required>
-                    </div>
+                <h1 class="segment-header"><?php echo translate("Create Admin Account"); ?></h1>
+                <div class="segment-container">
+                    <form action="admin-index.php?userID=<?php echo $userID; ?>" method="post" class="new-admin-form">
+                        <div class="new-admin-inputs">
+                            <div>
+                                <p><?php echo translate("First Name"); ?></p>
+                                <input type="text" name="fname" id="fname" required>
+                                <p><?php echo translate("Last Name"); ?></p>
+                                <input type="text" name="lname" id="lname" required>
+                            </div>
+                            <div>
+                                <p><?php echo translate("Email"); ?></p>
+                                <input type="email" name="email" id="email" required>
+                                <p><?php echo translate("Password"); ?></p>
+                                <input type="password" name="password" id="password" required>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn" name="submit" value="<?php echo translate("Create Account"); ?>" required>
+                    </form>
                 </div>
-                <input type="submit" class="btn" name="submit" value="<?php echo translate("Create Account"); ?>" required>
-                </form>
+
             </div>
             <div class="account-list">
-                <h2><?php echo translate("List Of User Accounts"); ?></h2>
-                <table>
+                <h1 class="segment-header"><?php echo translate("List Of User Accounts"); ?></h1>
+                <table class="segment-container">
                     <thead>
                         <tr class="accounts-table">
                             <th><div><?php echo translate("UserID"); ?> <a class="sort" href="admin-index.php"><?php echo translate("Sort by"); ?></a></div></th>

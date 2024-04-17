@@ -49,43 +49,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <body id="manager-index">
     <?php include_once("includes/header.php") ?>
         <div class="container">
-            <div class="managers-user-section">
-                <div class="users-list">
-                    <table>
-                    <tr class="accounts-table">
-                        <th>First Name <a class="sort" href="manager-index.php">Sort by</a></th>
-                        <th>Last Name <a class="sort" href="manager-index.php?orderby=lname">Sort by</a></th>
-                        <th>Job Role <a class="sort" href="manager-index.php?orderby=jobRole">Sort by</a></th>
-                    </tr>
-                    <?php 
-                    $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher' ORDER BY $orderBy");
-                    
-                    while ($obj = $user_accounts->fetch_object()) { // Outputs the list of supervisors and researchers. The hyperlink could be changed to cover the entire row.
-                        $rowUserID = $obj->userID;
-                        echo "
-                            <tr>
-                                <td><a href='index.php?user_override=$rowUserID'>$obj->fname</a></td>
-                                <td><a href='index.php?user_override=$rowUserID'>$obj->lname</a></td>
-                                <td><a href='index.php?user_override=$rowUserID'>$obj->jobRole</a></td>
-                            </tr>
-                        ";
-                    }
-                    ?>
-                    </table>
-                </div>
+            <h1 class="segment-header">View Users Work</h1>
+            <div class="segment-container">
+                <table>
+                <tr class="accounts-table">
+                    <th>First Name <a class="sort" href="manager-index.php">Sort by</a></th>
+                    <th>Last Name <a class="sort" href="manager-index.php?orderby=lname">Sort by</a></th>
+                    <th>Job Role <a class="sort" href="manager-index.php?orderby=jobRole">Sort by</a></th>
+                </tr>
+                <?php 
+                $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher' ORDER BY $orderBy");
+                
+                while ($obj = $user_accounts->fetch_object()) { // Outputs the list of supervisors and researchers. The hyperlink could be changed to cover the entire row.
+                    $rowUserID = $obj->userID;
+                    echo "
+                        <tr>
+                            <td><a href='index.php?user_override=$rowUserID'>$obj->fname</a></td>
+                            <td><a href='index.php?user_override=$rowUserID'>$obj->lname</a></td>
+                            <td><a href='index.php?user_override=$rowUserID'>$obj->jobRole</a></td>
+                        </tr>
+                    ";
+                }
+                ?>
+                </table>
             </div>
             <div class="managers-work-section">
-                <p>Search work</p>
-                <form method="post" class="search-paramaters">
-                    <input type="text" name="submissionName" placeholder="Search work">
-                    <p>Status</p>
-                    <select name="status" id="work-type-select">
-                        <option value="both">Both</option>
-                        <option value="not-accepted">Needing Review</option>
-                        <option value="accepted">Accepted</option>
-                    </select>
-                    <button name="search">Search</button>
-                </form>
+                <h1 class="segment-header">Search For Work</h1>
+                <div class="segment-container">
+                    <form method="post" class="search-paramaters">
+                        <input type="text" name="submissionName" placeholder="Search for work by title">
+                        <p>Status</p>
+                        <select name="status" id="work-type-select">
+                            <option value="both">Both</option>
+                            <option value="not-accepted">Needing Review</option>
+                            <option value="accepted">Accepted</option>
+                        </select>
+                        <button name="search">Search</button>
+                    </form>
+                </div>
                 <?php
                 $nameMessage = "";
                 $sectionMessage = " AND (approved > 0 OR (approved = 0 AND submitted = 1))";
@@ -112,8 +113,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         echo "
                         <div class='section-container'>
                         <div class='section-name-bar'>
-                        <h2 class='section-header'>$section->sectionName</h2>
-                        <button onclick='hideSection($i)' id='toggle-button$i'>" . translate("Hide") . "</button>
+                        <h1 class='section-header'>$section->sectionName</h1>
+                        <button onclick='hideSection($i)' id='toggle-button$i' class='hide'>" . translate("Hide") . "</button>
                         </div>";
                         echo "<div id ='section-hide$i'>";
                         while ($obj = $submissionQuery->fetch_object()) {

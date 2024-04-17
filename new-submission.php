@@ -125,46 +125,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <?php include_once("includes/header.php") ?>
 
 <div class="submission-form-container">
-    <?php echo "<h2>" . translate("Submission Form") . "</h2>";?>
+    <?php echo "<h1 class='segment-header'>" . translate("New Submission") . "</h1>";?>
     <?php if (!empty($successMessage)) {
         header("Location: view-submission.php");
     } ?>
+    <div>
+        
+    </div>
     <form method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="title"><?php echo translate("Title"); ?>:</label>
-            <input type="text" id="title" name="title" placeholder="<?php echo translate("Title"); ?>" required>
+        <div class="segment-container">
+            <div class="form-group">
+                <label for="title"><?php echo translate("Title"); ?>:</label>
+                <input type="text" id="title" name="title" placeholder="<?php echo translate("Title"); ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="comments"><?php echo translate("Comments"); ?>:</label>
+                <textarea id="comments" name="comments" placeholder="<?php echo translate("Comments"); ?>" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="file"><?php echo translate("Upload File"); ?>:</label>
+                <input type="file" id="file" name="file[]" multiple required>  <!-- NeedsTranslation for defaults like "Choose files", "No file chosen", and "4 files" -->
+            </div>
+            <button type="submit" class="submit-button" name='check'><?php echo translate("Submit"); ?></button>
         </div>
-        <div class="form-group">
-            <label for="comments"><?php echo translate("Comments"); ?>:</label>
-            <textarea id="comments" name="comments" placeholder="<?php echo translate("Comments"); ?>" rows="3" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="file"><?php echo translate("Upload File"); ?>:</label>
-            <input type="file" id="file" name="file[]" multiple required>  <!-- NeedsTranslation for defaults like "Choose files", "No file chosen", and "4 files" -->
-        </div>
-        <button type="submit" class="submit-button" name='check'><?php echo translate("Submit"); ?></button>
-        <table>
-            <tr class="add-coauthors-table">
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Email</th>
-                <th>Coauthor</th>
-            </tr>
-            <?php
-            $possibleCoauthorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $userID AND jobRole != 'Admin' AND jobRole != 'Manager'");
-            echo "<h1>Add Coauthors</h1>";
-            while ($coauthor = $possibleCoauthorsQuery->fetch_object()) {
-                echo "
-                <tr>
-                <td>$coauthor->fname</td>
-                <td>$coauthor->lname</td>
-                <td>$coauthor->email</td>
-                <td><input type='checkbox' name='coauthors[]' value='" . $coauthor->userID . "'></td>
+        <h1 class = 'segment-header'>Add Coauthors</h1>
+        <div class='segment-container'>
+            <table>
+                <tr class="add-coauthors-table">
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Coauthor</th>
                 </tr>
-                ";
-            }
-            ?>
-        </table>
+                <?php
+                $possibleCoauthorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $userID AND jobRole != 'Admin' AND jobRole != 'Manager'");
+                while ($coauthor = $possibleCoauthorsQuery->fetch_object()) {
+                    echo "
+                    <tr>
+                    <td>$coauthor->fname</td>
+                    <td>$coauthor->lname</td>
+                    <td>$coauthor->email</td>
+                    <td><input type='checkbox' name='coauthors[]' value='" . $coauthor->userID . "'></td>
+                    </tr>
+                    ";
+                }
+                ?>
+            </table>
+        </div>
     </form>
 </div>
 

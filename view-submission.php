@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             $pointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $user->userID AND sectionID = $submission->sectionID");
             
             // Gets the points where coauthor, and the amount
-            $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $user->userID AND sectionID = $submission->sectionID");
+            $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $user->userID AND sectionID = $submission->sectionID AND submission.approved > 0");
             $coauthorPoints = $coauthorPointsQuery->fetch_object();
             
             // Coauthors get 1 less point than coauthor. So calculation is points where author + points where coauthor - amount of coauthor submissions
@@ -101,7 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 $timeToTranslate = $submission->dateSubmitted;
                 include("includes/format-date.php");
                 echo "
-                <h1 class='submission-title'>$submission->title</h1>
+                <h1 class='segment-header'>$submission->title</h1>
+                <div class='segment-container'>
                 <div class='view-submission-container'>
                 <h2>". translate("By") . " $author->fname $author->lname (". translate($author->jobRole) .")</h2>
                 <p><span style='font-weight: bold'>". translate("Date Submitted") . ": </span> $dateTimeOutput </p>
@@ -127,15 +128,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     <p>$file->name</p>
                     <a href='submissionfiles/" . htmlspecialchars($file->address) . "' download='" . basename($file->name) . "'>" . translate("Download File") . "</a>
                     ";
-                    
                 }
-                echo "</div>";
+                echo "</div></div></div>";
                 if ($user->jobRole == "Supervisor") {
                     $supervisorQuery = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $author->userID AND supervisorID = $user->userID");
                     if (mysqli_num_rows($supervisorQuery) > 0 ) {
                         if ($status == translate("Needing Supervisor approval")) { // Checks for $status instead of ($submission->submitted = 0) as the latter would immediately allow the supervisor to resubmit after rejected.
                             echo "
-                            <h2>". translate("Please review work") . "</h2>
+                            <h1 class='segment-header'>". translate("Review Work") . "</h1><div class='segment-container'>
                             <form method='post'>
                             <button name='approve'>". translate("Approve") . "</button>
                             </form>
@@ -145,6 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                                     <button name='return'>". translate("Return") . "</button>
                                 </div>
                             </form>
+                            </div>
                             ";
                         }
                     } else {
@@ -173,6 +174,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         // Section F - Supervision - 2 points. Local - 1 point. National - 2 points. International - 3 points.
                         // Section G - Institute - 1 point. District - 2 points. State - 2 points. National - 3 points. International 4 points.
                         echo "
+                        <h1 class='segment-header'>Review Work</h1>
+                        <div class='segment-container'>
                         <form method='post'>
                         <div>
                         ";
@@ -218,11 +221,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                                 <button name='return'>". translate("Return") . "</button>
                             </div>
                         </form>
+                        </div>
                         ";
                     }
                 }
                 if (mysqli_num_rows($rejectedQuery) > 0) {
-                    echo "<h1>Rejection History:</h1>";
+                    echo "<h1 class='segment-header'>Rejection History:</h1><div class='segment-container'>";
                     while ($rejection = $rejectedQuery->fetch_object()) {
                         $returnerQuery = $mysqli->query("SELECT * FROM users WHERE userID = $rejection->returner");
                         $returner = $returnerQuery->fetch_object();
@@ -236,6 +240,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                             </div>
                         ";
                     }
+                    echo "</div>";
                 }
             ?>
         </div>

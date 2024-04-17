@@ -71,14 +71,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     $passwordCheck = $resetQuery->fetch_object();
                     if (password_verify("katalaluan123", $passwordCheck->password)) {
                         echo "
-                        <div class='change-password'>
-                        <h1>Please reset your password</h1>
-                        <p>Your password has been reset, your account is not secure until the password has been changed</p>
+                        <h1 class='segment-header'>Please reset your password</h1>
+                        <div class='segment-container'>
+                        <p class='text-align-centre'>Your password has been reset, your account is not secure until the password has been changed</p>
                         <form method='post'>
                         <p>Password</p>
-                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password1'>
+                        <input type='password' class='change-password-input' placeholder='" . translate("New Password") . "' name='password1'>
                         <p>Confirm Password</p>
-                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password2'>
+                        <input type='password' class='change-password-input' placeholder='" . translate("New Password") . "' name='password2'>
                         ";
                         if (count($errors) > 0) {
                             foreach ($errors as $error) {
@@ -97,8 +97,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     if (mysqli_num_rows($needingReviewQuery) > 0) {
                         $usedSubmissions = array ();
                         echo "
-                        <div>
-                        <h1>Work to review</h1>";
+                        <h1 class='segment-header'>Work to review</h1>
+                        ";
                         while ($obj = $needingReviewQuery->fetch_object()) {
                             if (!in_array($obj->submissionID, $usedSubmissions)) {
                                 echo "<div>";
@@ -108,12 +108,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                                 array_push($usedSubmissions, $obj->submissionID);
                             }
                         }
-                        echo "</div>";
                     }
 
                     echo "
-                    <h1>" . translate("Select a researcher to view their work") . "</h1>
-                    <div class='supervisor-user-selection'>
+                    <h1 class='segment-header'>" . translate("Select a researcher to view their work") . "</h1>
+                    <div class='segment-container supervisor-researchers-list'>
                     <p><a href='index.php'>" . translate("View your own work") . "</a></p>
                     ";
                     $results = $mysqli->query("SELECT * FROM users, researcherssupervisor WHERE supervisorID = $userID and researcherID = userID");
@@ -131,14 +130,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     $userID = $_GET['user_override'];
                     $userQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
                     $user = $userQuery->fetch_object();
-                    echo "<h1>$user->fname $user->lname </h1>";
+                    echo "<h1 class='segment-header'>$user->fname $user->lname </h1>";
                 } else if (isset($_GET['user_override']) && $user->jobRole == "Researcher") {
                     header("Location: index.php");
                 }
             ?>
             <div class="performance">
-                <h1><?php echo translate("Performance Overview"); ?></h1>
-                <div class="performance-overview">
+                <h1 class='segment-header'><?php echo translate("Performance Overview"); ?></h1>
+                <div class="performance-overview segment-container">
                     <div class="performance-section">
                         <?php
                         $sectionQuery = $mysqli->query("SELECT * FROM sections");
@@ -155,9 +154,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                             $sectionID = $loop + 1;
 
                             $pointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = $sectionID");
-                            $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $author AND sectionID = $sectionID");
+                            $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $author AND sectionID = $sectionID AND submission.approved > 0");
+                            $authorPoints = $pointsQuery->fetch_object();
                             $coauthorPoints = $coauthorPointsQuery->fetch_object();
-                            $currentAmount = $pointsQuery->fetch_object()->amount + $coauthorPoints->amount - $coauthorPoints->count;
+                            $currentAmount =  $authorPoints->amount + $coauthorPoints->amount - $coauthorPoints->count;
 
                             if ($currentAmount == 0){
                                 echo "<p>" . translate($title) . ": " . translate("Not enough data to calculate scores") . "</p>";
@@ -215,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     $i = 0;
                     $sectionQuery = $mysqli->query("SELECT * FROM sections");
 
-                    echo "<h1>" . translate("Submissions") . "</h1>";
+                    echo "<h1 class='segment-header'>" . translate("Submissions") . "</h1>";
 
                     while ($i < 7) { // A loop for each section in the submissions view.
                         $section = $sectionQuery->fetch_object();
@@ -223,7 +223,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         <div class='section-container'>
                         <div class='section-name-bar'>
                         <h2 class='section-header'>".translate($section->sectionName)."</h2>
-                        <button onclick='hideSection($i)' id='toggle-button$i'>" . translate("Hide") . "</button>
+                        <button onclick='hideSection($i)' id='toggle-button$i' class='hide'>" . translate("Hide") . "</button>
                         </div>
                         ";
                         
@@ -234,17 +234,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         $array = "";
                         if (mysqli_num_rows($coauthersQuery) > 0) {
                             $array = " OR submissionID IN (";
-                            $i = 1;
+                            $j = 1;
                             while ($coauthorSubmission = $coauthersQuery->fetch_object()) {
                                 $array = $array . "'" . $coauthorSubmission->submissionID. "'";
-                                if ($i != mysqli_num_rows($coauthersQuery)) {
+                                if ($j != mysqli_num_rows($coauthersQuery)) {
                                     $array .= ", ";
                                 }
-                                $i++;
+                                $j++;
                             }
                             $array .= ")";
                         }
-                        echo $array;
                         $submissionsQuery = $mysqli->query("SELECT * FROM submission WHERE author = $userID AND sectionID = $sectionID $array");
                         while ($obj = $submissionsQuery->fetch_object()) { // Outputs all submissions where the user is the author.
                             $isAuthorQuery = $mysqli->query("SELECT * FROM submission WHERE submissionID = $obj->submissionID AND author = $userID");

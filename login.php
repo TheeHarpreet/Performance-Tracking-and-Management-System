@@ -57,11 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
-
-    <div class="login-container">
+    <h1 class="segment-header"><?php echo translate("Log In"); ?></h1>
+    <div class="segment-container">
         <form class="login-form" method="post">
             <div class="login-input">
-                <h1><?php echo translate("Log In"); ?></h1>
+                
                 <h3><?php echo translate("Email"); ?></h3>
                 <input type="email" name="email" required>
                 <h3><?php echo translate("Password"); ?></h3>

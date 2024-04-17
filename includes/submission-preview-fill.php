@@ -1,6 +1,6 @@
 <?php
     echo "<div class='submission-preview'>";
-    echo "<div class='submission-preview-box'>";
+    echo "<div class='segment-container submission-preview-box'>";
     if ($isAuthor == false) { // $isAuthor is set before the include is called. Just adds a gray indicator to the left.
         echo "<div class='coauthor-indicator' style='background-color: gray;'>";
         echo "</div>";

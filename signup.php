@@ -70,36 +70,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
-
-        <div class="signup-container">
-            <form class="signup-form" method="post">
-                <h1><?php echo translate("Signup"); ?></h1>
-                <div class="signup-div">
-                    <div>
-                        <h3><?php echo translate("First name"); ?></h3>
-                        <input type="text" name="fname" required>
-                        <h3><?php echo translate("Surname"); ?></h3>
-                        <input type="text" name="lname" required>
-                        <h3><?php echo translate("Email"); ?></h3>
-                        <input type="text" name="email" required>
-                        <h3><?php echo translate("Password"); ?></h3>
-                        <input type="password" name="password1" required>
-                        <h3><?php echo translate("Confirm Password"); ?></h3>
-                        <input type="password" name="password2" required>
-                        <button type="submit" id="signup-button"><?php echo translate("Signup"); ?></button>
-                    </div>
+    <h1 class="segment-header"><?php echo translate("Signup"); ?></h1>
+    <div class="segment-container">
+        <form class="signup-form" method="post">
+            
+            <div class="signup-div">
+                <div>
+                    <h3><?php echo translate("First name"); ?></h3>
+                    <input type="text" name="fname" required>
+                    <h3><?php echo translate("Surname"); ?></h3>
+                    <input type="text" name="lname" required>
+                    <h3><?php echo translate("Email"); ?></h3>
+                    <input type="text" name="email" required>
                 </div>
-                <?php
-                if (count($errors) > 0) {
-                    foreach ($errors as $error) {
-                        echo "<div class='error-message'>$error</div>";
-                    }
+                <div>
+                    <h3><?php echo translate("Password"); ?></h3>
+                    <input type="password" name="password1" required>
+                    <h3><?php echo translate("Confirm Password"); ?></h3>
+                    <input type="password" name="password2" required>
+                    <button type="submit" id="signup-button"><?php echo translate("Signup"); ?></button>
+                </div>
+            </div>
+            <?php
+            if (count($errors) > 0) {
+                foreach ($errors as $error) {
+                    echo "<div class='error-message'>$error</div>";
                 }
-                ?>
-                <p class="account-link"><?php echo translate("Have an account?"); ?></p>
-                <a href="login.php" class="login-change"><?php echo translate("Login"); ?></a>
-            </form>
-        </div>
+            }
+            ?>
+            <p class="account-link"><?php echo translate("Have an account?"); ?></p>
+            <a href="login.php" class="login-change"><?php echo translate("Login"); ?></a>
+        </form>
+    </div>
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>

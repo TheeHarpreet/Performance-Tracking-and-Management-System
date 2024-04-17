@@ -59,61 +59,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 </head>
 <body>
     <?php include_once("includes/simplified-header.php") ?>
-        <div class="login-container">
-            <form method="post">
+        <div class="admin-edit-container">
+            <h1 class="segment-header"><?php echo $user->fname . " " . $user->lname ?></h1>
+            <div class="segment-container">
+                <form method="post">
+                    <p><?php echo translate("First Name"); ?>:</p>
+                    <input type="text" name="fname" value="<?php echo $user->fname; ?>" required>
 
-                <label><?php echo translate("FirstName"); ?>:</label>
-                <input type="text" name="fname" value="<?php echo $user->fname; ?>" required>
-                
-                <label><?php echo translate("LastName"); ?>:</label>
-                <input type="text" name="lname" value="<?php echo $user->lname; ?>" required>
-                
-                <label><?php echo translate("Email"); ?>:</label>
-                <input type="email" name="email" value="<?php echo $user->email; ?>" required>
-                
-                <?php if ($user->jobRole != "Admin") { // admins account type is locked, will only update if not an admin.
-                echo "<label>" . translate("Job Role") . ":</label>
-                <select id='select' name='jobRole'>
-                    <option value='None'" . ($user->jobRole == 'None' ? ' selected' : '') . ">" . translate("None") . "</option>
-                    <option value='Researcher'" . ($user->jobRole == 'Researcher' ? ' selected' : '') . ">" . translate("Researcher") . "</option>
-                    <option value='Supervisor'" . ($user->jobRole == 'Supervisor' ? ' selected' : '') . ">" . translate("Supervisor") . "</option>
-                    <option value='Manager'" . ($user->jobRole == 'Manager' ? ' selected' : '') . ">" . translate("Manager") . "</option>
-                </select>";
-                } ?>
-                <button type="submit" class="submit-button"><?php echo translate("Update"); ?></button>
-                <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link"><?php echo translate("Reset Password"); ?></a></p>
-                <p><?php echo translate("Passwords are reset to \"katalaluan123\""); ?></p>
-                <?php 
-                if ($user->jobRole == "Researcher") {
-                    echo "
-                    <table>
-                    <tr class='assign-supervisor-table'>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Email</th>
-                        <th>Supervisor</th>
-                    </tr>
-                    ";
-                    $possibleSupervisorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $user->userID AND jobRole = 'Supervisor'");
-                    while ($supervisor = $possibleSupervisorsQuery->fetch_object()) {
+                    <p><?php echo translate("Last Name"); ?>:</p>
+                    <input type="text" name="lname" value="<?php echo $user->lname; ?>" required>
+
+                    <p><?php echo translate("Email"); ?>:</p>
+                    <input type="email" name="email" value="<?php echo $user->email; ?>" required>
+
+                    <?php if ($user->jobRole != "Admin") { // admins account type is locked, will only update if not an admin.
+                    echo "<p>" . translate("Job Role") . ":</p>
+                    <select id='select' name='jobRole'>
+                        <option value='None'" . ($user->jobRole == 'None' ? ' selected' : '') . ">" . translate("None") . "</option>
+                        <option value='Researcher'" . ($user->jobRole == 'Researcher' ? ' selected' : '') . ">" . translate("Researcher") . "</option>
+                        <option value='Supervisor'" . ($user->jobRole == 'Supervisor' ? ' selected' : '') . ">" . translate("Supervisor") . "</option>
+                        <option value='Manager'" . ($user->jobRole == 'Manager' ? ' selected' : '') . ">" . translate("Manager") . "</option>
+                    </select>";
+                    } ?>
+                    <button type="submit" class="submit-button"><?php echo translate("Update"); ?></button>
+                    <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link"><?php echo translate("Reset Password"); ?></a></p>
+                    <p><?php echo translate("Passwords are reset to \"katalaluan123\""); ?></p>
+
+                </form>
+            </div>
+            <div class="segment-container">
+            <?php 
+                    if ($user->jobRole == "Researcher") {
                         echo "
-                        <tr>
-                        <td>$supervisor->fname</td>
-                        <td>$supervisor->lname</td>
-                        <td>$supervisor->email</td>
-                        <td><input type='checkbox' name='supervisors[]' value='" . $supervisor->userID . "' ";
-                        $selectedCheck = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $userID AND supervisorID = $supervisor->userID");
-                        if (mysqli_num_rows($selectedCheck) > 0) {
-                            echo "checked";
-                        }
-                        echo "></td>
+                        <table>
+                        <tr class='assign-supervisor-table'>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Email</th>
+                            <th>Supervisor</th>
                         </tr>
-                        </table>
                         ";
+                        $possibleSupervisorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $user->userID AND jobRole = 'Supervisor'");
+                        while ($supervisor = $possibleSupervisorsQuery->fetch_object()) {
+                            echo "
+                            <tr>
+                            <td>$supervisor->fname</td>
+                            <td>$supervisor->lname</td>
+                            <td>$supervisor->email</td>
+                            <td><input type='checkbox' name='supervisors[]' value='" . $supervisor->userID . "' ";
+                            $selectedCheck = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $userID AND supervisorID = $supervisor->userID");
+                            if (mysqli_num_rows($selectedCheck) > 0) {
+                                echo "checked";
+                            }
+                            echo "></td>
+                            </tr>
+                            </table>
+                            ";
+                        }
                     }
-                }
-                ?>
-            </form>
+                    ?>
+            </div>
         </div>
     <?php include_once("includes/footer.php") ?>
 </body>
@@ -139,8 +144,8 @@ function translate($key) {
         ),
         */
         "bm" => array(
-            "FirstName" => "Nama Pertama",
-            "LastName" => "Nama Akhir",
+            "First Name" => "Nama Pertama",
+            "Last Name" => "Nama Akhir",
             "Email" => "Emel",
             "Job Role" => "Peranan Pekerjaan",
             "Update" => "Kemaskini",

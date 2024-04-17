@@ -1,0 +1,281 @@
+/* Body */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: white;
+}
+
+/* Header */
+.bottom-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  background: #000;
+  padding: 20px 0;
+  text-align: center;
+  color: white;
+}
+
+/* Footer */
+.footer-container {
+  position: bottom;
+  background: #000;
+  color: #d4af37;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Logo */
+.logo {
+  width: 250px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+/* Invalid text */
+.invalid-role { /* This should be the only text ever displayed on a white background */
+  color: black;
+  text-align: center;
+  padding: 35px 10px 35px 10px;
+}
+
+/* Segment */
+.segment-header {
+  border-bottom: solid #000000;
+  text-align: center;
+  width: 70%;
+  margin-left: 40px;
+  color: #d4af37;
+}
+.segment-container {
+  background-color: #4d4d4d;
+  margin: 0px 50px;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Section */
+.section-header {
+  border-bottom: solid #000000;
+  text-align: center;
+  width: 50%;
+  margin-left: 40px;
+  color: #d4af37;
+}
+.view-details {
+  width: calc(100% - 300px);
+  margin-left: 150px;
+  height: 35px;
+  background-color: #afafaf;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-width: 0px;
+}
+
+/* Text align centre */
+.text-align-centre {
+  text-align: center;
+}
+
+/* Hyperlinks */
+a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Supervisor select researcher */
+.supervisor-researchers-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Performance Overview */
+.percent-bar {
+  display: flex;
+  flex-direction: row;
+}
+.point-boundary {
+  margin: 5px;
+}
+.progress-bar-container{
+  width: 100%;
+  height:24px;
+  background-color:#817c7c;
+  border-radius:10px;
+  display: flex;
+  flex-direction: row;
+}
+.progress-bar{
+  width: var(--percent) + '%';
+  height:100%;
+  background-color:#d4af37;
+  border-radius:10px;
+}
+.performance-section2 {
+  margin-bottom: 300px;
+  margin-left: 12px;
+}
+#arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6, #arc7,
+#arc::before, #arc1::before, #arc2::before, #arc3::before, #arc4::before, #arc5::before, #arc6::before, #arc7::before {
+  box-sizing: border-box;
+  border-radius: 100%;
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  background-color: transparent;
+}
+#arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6, #arc7 {
+  border: solid transparent 20px;
+  clip: rect(0px, 250px, 125px, 0px);
+  margin: 40px;
+}
+#arc::before {
+  content: '';
+  border: solid #a0a0a0 20px;
+  top: -20px;
+  left: -20px;
+  clip: rect(0px, 250px, 125px, 0px);
+  transform: rotate(0deg);
+}
+#arc1::before, #arc2::before, #arc3::before, #arc4::before, #arc5::before, #arc6::before, #arc7::before {
+  content: '';
+  top: -20px;
+  left: -20px;
+  clip: rect(0px, 250px, 125px, 0px);
+}
+#arc1::before {
+  border: solid #fff0bd 20px;
+}
+#arc2::before {
+  border: solid #ffe284 20px;
+}
+#arc3::before {
+  border: solid #fdda67 20px;
+}
+#arc4::before {
+  border: solid #ffd64f 20px;
+}
+#arc5::before {
+  border: solid #f8c51e 20px;
+}
+#arc6::before {
+  border: solid #ffc400 20px;
+}
+#arc7::before {
+  border: solid #ffc400 20px;
+}
+.performance-points {
+  position: absolute;
+  margin: 115px 0px 0px 40px;
+  font-size: 35px;
+  text-align: center;
+  width: 250px;
+}
+
+/* Hide section and sort */
+.hide, .sort {
+  background-color: #d4af37;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 2px;
+}
+.sort {
+  margin-left: 15px;
+}
+
+/* Language buttons */
+.translate-en, .translate-bm {
+  width: 45px;
+  height: 25px;
+  background-color: #4d4d4d;
+  border: none;
+  color: #1a1a1a;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.translate-en {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.translate-bm {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+/* Submission preview fill */
+.coauthor-indicator, .colour-bar { /* I dunno what happened, but coauthor and colour bar need fixing, they're not displaying */
+  max-height: 15px;
+  max-width: 1000px;
+  width: auto;
+}
+.submission-preview-text{
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+}
+.submission-preview-box div {
+  flex-basis: 100%;
+}
+
+/* New admin form */
+.new-admin-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  margin: 0 15px;
+}
+
+/* Admin accounts table */
+.accounts-table th div {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Admin table buttons */
+.edit-button, .delete-button, .unblock-button{
+  padding: 5px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+}
+.edit-button {
+  background-color: #0c7400;
+}
+.delete-button {
+  background-color: #e74c3c;
+}
+.unblock-button{
+  background-color:coral;
+}
+
+/* Signup */
+.signup-div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* New submission button */
+.new-submission {
+  margin-left: 90px;
+  margin-top: 25px;
+  width: 60%;
+  margin-bottom: 10px;
+}

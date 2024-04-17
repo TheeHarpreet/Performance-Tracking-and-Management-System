@@ -1,3 +1,4 @@
+/* Body */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -6,7 +7,8 @@ body {
   color: white;
 }
 
-.bottom-header, .footer-container {
+/* Header */
+.bottom-header{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,27 +20,16 @@ body {
   color: white;
 }
 
+/* Footer */
 .footer-container {
-  margin-top: 25px;
+  position: bottom;
+  background: #000;
+  color: #d4af37;
+  padding: 10px 0;
+  text-align: center;
 }
 
-.footer-container p {
-  margin: 0;
-}
-
-.submission-preview {
-  display: flex;
-  flex-direction: column;
-}
-
-.bottom-header a {
-  font-size: 20px;
-  padding: 10px 30px;
-  border-radius: 4px;
-  background-color: #d4af37;
-  color: white;
-}
-
+/* Logo */
 .logo {
   width: 250px;
   height: auto;
@@ -47,38 +38,22 @@ body {
   padding: 15px;
 }
 
-h1 {
-  color: #f8b822;
-  margin: 25px 50px 5px 50px;
-  border: 0px 0px 5px 0px;
-  border-color: #2c2c2c;
-  border-bottom-style: solid;
+/* Invalid text */
+.invalid-role { /* This should be the only text ever displayed on a white background */
+  color: black;
   text-align: center;
+  padding: 35px 10px 35px 10px;
 }
 
-h1 #submissions{
-  width: auto;
+/* Segment */
+.segment-header {
+  border-bottom: solid #000000;
+  text-align: center;
+  width: 70%;
+  margin-left: 40px;
+  color: #d4af37;
 }
-
-h2 {
-  color: #f8c51e;
-  margin: 25px 40px 40px 0px;
-}
-
-.account-link{
-text-align: center;
-}
-
-a {
-  text-decoration: none;
-  color: white;
-}
-
-.login-change {
-  text-decoration: underline;
-}
-
-.supervisor-user-selection, .performance-overview, .submission-preview-box, .account-list {
+.segment-container {
   background-color: #4d4d4d;
   margin: 0px 50px;
   padding: 5px;
@@ -91,245 +66,48 @@ a {
   gap: 30px;
 }
 
-.coauthor-indicator, .colour-bar {
-  max-height: 15px;
-  max-width: 1000px;
-  width: auto;
-}
-
-.submission-preview-box div {
-  flex-basis: 100%;
-}
-
-.submission-preview-text{
-  flex-direction: column;
-  display: flex;
+/* Section */
+.section-header {
+  border-bottom: solid #000000;
   text-align: center;
+  width: 50%;
+  margin-left: 40px;
+  color: #d4af37;
 }
-
-.new-submission {
-  margin-left: 90px;
-  margin-top: 25px;
-  width: 60%;
-  margin-bottom: 10px;
-}
-
-.new-password-input{
-  margin: 0 10px;
-  margin-top: 10px;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  background-color: #d4af37;
-  border: none;
-  color: #1a1a1a;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-#login-button{
-  width: 300px;
-}
-
 .view-details {
   width: calc(100% - 300px);
   margin-left: 150px;
+  height: 35px;
   background-color: #afafaf;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-width: 0px;
 }
 
-.login-container{
-  max-width: 400px;
-  margin: 10px auto;
-  background: #2c2c2c;
-  padding: 35px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  margin-top: 7%;
-  margin-bottom: 116px;
-}
-.signup-container{
-  max-width: 400px;
-  margin: 10px 30px;
-  background: #2c2c2c;
-  padding: 35px 180px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  margin-top: 7%;
-  margin-bottom: 116px;
-}
-
-.signup-div {
-  display: flex;
-  justify-content: space-between;
-  align-items:flex-start;
-  flex-direction: row;
-}
-
-#signup-button{
-  margin-top: 30px;
-  margin-left: 10px;
-  padding: 15px 65px;
-}
-
-.first-column{
-  margin-left: -140px;
-  margin-right: 100px;
-}
-.second-column{
-  margin-left: 60px;
-}
-
-input[type=text], input[type=email], input[type=password] {
-  width: 93%;
-  padding: 15px;
-  margin-bottom: 10px;
-  border: 1px solid #333;
-  background-color: #f1f1f1;
-  color: #333;
-  border-radius: 3px;
-}
-
-.first-column input[type=text], .first-column input[type=email], .first-column input[type=password]{
-  width: 100%;
-  padding: 15px 55px;
-  margin-bottom: 10px;
-  background-color: #f1f1f1;
-  border: 1px solid #333;
-  color: #333;
-  border-radius: 3px;
-}
-
-.second-column input[type=text], .second-column input[type=email], .second-column input[type=password]{
-  width: 100%;
-  padding: 15px;
-  margin-bottom: 10px;
-  background-color: #f1f1f1;
-  border: 1px solid #333;
-  color: #333;
-  border-radius: 3px;
-}
-
-.login-change{
-margin-left: 37%;
-}
-
-h3 {
-  margin: 10px 0px 0px 0px;
-  size: 10px;
-}
-
-/* Media thing being removed starts here 
-
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-  font-family: 'Arial', sans-serif;
-}
-.admin-container {
-  padding: 5px;
-  margin: 0 auto;
-  background-color: #000;
-}
-.new-admin-form input[type="text"],
-.new-admin-form input[type="email"],
-.new-admin-form input[type="password"],
-.new-admin-form input[type="submit"] {
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-  color: black;
-  background-color: rgb(255, 253, 253);
-  border: 1px solid #fdfdfd;
-}
-.new-admin-form input[type="submit"] {
-  padding: 10px;
-  background-color: #efc640;
-  color: rgb(253, 253, 253);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.account-list {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; 
-}
-table {
-  width: auto; 
-  min-width: 100%; 
-  border-collapse: collapse;
-}
-th, td {
-  padding: 8px;
-  border-bottom: 1px solid #0a0a0a;
-}
-th {
-  background-color: #080808;
-}
-.sort {
-  font-size: 0.8em;
-}
-.message {
-  padding: 10px;
-  font-size: 1em;
-  color: #d9534f;
-}
-header, footer {
-  padding: 10px;
+/* Text align centre */
+.text-align-centre {
   text-align: center;
 }
-.edit-button {
-  background-color: green; 
-  color: white; 
-  padding: 5px 10px; 
-  text-decoration: none; 
-  border-radius: 4px; 
-  
-}
-.delete-button, .block-button, .unblock-button {
-  background-color: red; 
-  color: white; 
-  padding: 5px 10px; 
-  text-decoration: none; 
-  border-radius: 4px; 
-  
+
+/* Hyperlinks */
+a {
+  color: white;
+  text-decoration: none;
 }
 
-Media thing being removed ends here */
-
-
-td a.edit-button, 
-td a.delete-button, 
-td a.block-button, 
-td a.unblock-button {
-  display: inline-block; 
-  margin-right: 4px; 
-}
-.section-name-bar {
+/* Supervisor select researcher */
+.supervisor-researchers-list {
   display: flex;
   flex-direction: column;
-  flex-basis: 100%;
-  justify-content: center;
-  align-items: center;
 }
 
-.section-header{
-  border-bottom: solid #000000;
-  text-align: center;
-  width: 70%;
-  margin-left: 40px;
+/* Performance Overview */
+.percent-bar {
+  display: flex;
+  flex-direction: row;
 }
-.section-name-bar button {
-  width: 75px;
-  height: 0px;
-  margin-top: -15px;
-  margin-bottom: 20px;
-  padding-bottom: 25px;
+.point-boundary {
+  margin: 5px;
 }
 .progress-bar-container{
   width: 100%;
@@ -345,64 +123,10 @@ td a.unblock-button {
   background-color:#d4af37;
   border-radius:10px;
 }
-
-.performance-section {
-  width: 350px;
-}
 .performance-section2 {
   margin-bottom: 300px;
   margin-left: 12px;
 }
-.percent-bar {
-  display: flex;
-  flex-direction: row;
-}
-
-circle.fg {
-  transform: rotate(-90deg);
-  transform-origin: 125px 125px;
-}
-.point-boundary {
-  margin: 5px;
-}
-.new-admin-inputs {
-  display: flex;
-  flex-direction: row;
-  gap: 100px;
-  margin: 0 15px;
-}
-.new-admin-inputs p, .new-admin-inputs input {
-  margin: 0px;
-}
-.new-admin-inputs p {
-  height: 25px;
-}
-.new-admin-inputs input {
-  height: 0px;
-}
-.sort {
-  background-color: #efc640;  
-  color: #333;
-  padding: 3px 6px; 
-  margin: 0 3px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 12px;  
-  border: 1px solid #333;  
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.sort:hover {
-  background-color: #d4af37;  
-  border-color: #333;
-}
-.accounts-table th div {
-  display: flex;
-  flex-direction: row;
-}
-
 #arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6, #arc7,
 #arc::before, #arc1::before, #arc2::before, #arc3::before, #arc4::before, #arc5::before, #arc6::before, #arc7::before {
   box-sizing: border-box;
@@ -460,84 +184,31 @@ circle.fg {
   width: 250px;
 }
 
-.submission-form-container {
-  padding: 20px;
-  background-color: #fff;
-}
-
-.submission-form-container h2 {
-  color: #333;
-  text-align: center;
-  font-size: 1.5rem; 
-}
-
-.submission-form-container input[type="text"],
-.submission-form-container textarea,
-.submission-form-container input[type="file"],
-.submission-form-container button {
-  width: 100%;
-  margin-bottom: 15px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.submission-form-container button {
+/* Hide section and sort */
+.hide, .sort {
   background-color: #d4af37;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  padding: 2px;
+}
+.sort {
+  margin-left: 15px;
 }
 
-.submission-form-container .error-message,
-.submission-form-container .success-message {
-  color: #fff;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.submission-form-container .error-message {
-  background-color: #e74c3c;
-}
-
-.submission-form-container .success-message {
-  background-color: #4cbb17;
-}
-.invalid-role{
-  display: flex;
-  justify-content: center;
-  color: #000;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.new-admin-form h2{
-  text-align: center;
-  background-color: #d4af37;
-  border-radius: 4px;
-  color: #f1f1f1;
-}
-
-.user-search-results {
-  overflow: scroll;
-  height: 200px; /* This is fixed to 100px for now but needs to be dynamic for the first few, then fix after a certain amount */
-}
-
-.message{
-  color: white;
-}
-
-.translate-container {
-  display: flex;
-}
-
+/* Language buttons */
 .translate-en, .translate-bm {
-  width: 55px;
+  width: 45px;
+  height: 25px;
   background-color: #4d4d4d;
+  border: none;
+  color: #1a1a1a;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 .translate-en {
   border-top-right-radius: 0px;
@@ -547,83 +218,64 @@ circle.fg {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
-.return-div {
-  border: solid white 3px;
-}
 
-/* View submission */
-.view-submission-container {
-  background-color: #4d4d4d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Submission preview fill */
+.coauthor-indicator, .colour-bar { /* I dunno what happened, but coauthor and colour bar need fixing, they're not displaying */
+  max-height: 15px;
+  max-width: 1000px;
+  width: auto;
+}
+.submission-preview-text{
   flex-direction: column;
-  border-radius: 4px;
-  margin: 20px auto;
-  padding: 10px; 
-  box-shadow: 0 4px 8px black;
-  width: 95%; 
-  max-width: 960px;
-}
-
-.view-submission-container h1, .view-submission-container h2 {
-  color: #fbfbfb;
-  margin: 10px 0;
-  font-size: 18px; }
-
-.view-submission-container h1 {
-  background-color: #d4af37;
-  color: white;
-  border-radius: 4px;
-  padding: 8px 16px;
-}
-
-.coauthors, .submission-description, .files {
+  display: flex;
   text-align: center;
-  margin-bottom: 20px;
-  width: 100%;
+}
+.submission-preview-box div {
+  flex-basis: 100%;
 }
 
-.submission-description {
-  border: none;
-  background-color: #fbfbfb;
-  padding: 10px; 
-  border-left: 5px solid #4d4d4d;
-  font-size: 16px;
-  line-height: 1.5;
+/* New admin form */
+.new-admin-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  margin: 0 15px;
 }
 
-.files {
-  background-color: #f4f4f4;
-  border-radius: 8px;
-  padding: 10px; 
-  margin: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Admin accounts table */
+.accounts-table th div {
+  display: flex;
+  flex-direction: row;
 }
 
-.files h2 {
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.files p {
-  color: #333;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.files a {
-  background-color: #d4af37;
-  color: #333;
-  padding: 8px 10px; 
-  font-size: 14px; 
+/* Admin table buttons */
+.edit-button, .delete-button, .unblock-button{
+  padding: 5px 15px;
+  border-radius: 6px;
   text-decoration: none;
-  border-radius: 4px;
-  display: inline-block;
-  margin-top: 5px;
-  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
+}
+.edit-button {
+  background-color: #0c7400;
+}
+.delete-button {
+  background-color: #e74c3c;
+}
+.unblock-button{
+  background-color:coral;
 }
 
-.files a:hover {
-  background-color: #b29b37;
+/* Signup */
+.signup-div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* New submission button */
+.new-submission {
+  margin-left: 90px;
+  margin-top: 25px;
+  width: 60%;
+  margin-bottom: 10px;
 }
