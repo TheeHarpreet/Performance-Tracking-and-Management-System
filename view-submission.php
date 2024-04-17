@@ -37,16 +37,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         $assignQuery->bind_param("ss", $assignedPoints, $submissionID);
         $assignQuery->execute();
 
-        $pointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author->userID AND sectionID = $submission->sectionID");
-        $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $author->userID AND sectionID = $submission->sectionID");
-        $coauthorPoints = $coauthorPointsQuery->fetch_object();
-        $currentAmount = $pointsQuery->fetch_object()->amount + $coauthorPoints->amount - $coauthorPoints->count;
+        $minRange = 0;
+        $maxRange = 0;
+        $allUsersQuery = $mysqli->query("SELECT * FROM users WHERE jobRole = 'Researcher' OR jobRole = 'Supervisor'")
 
-        $maxQuery = $mysqli->query("SELECT maxRange FROM sections WHERE sectionID = $submission->sectionID");
-        if ($currentAmount > $maxQuery->fetch_object()->maxRange) {
-            $mysqli->query("UPDATE sections SET maxRange = $currentAmount WHERE sectionID = $submission->sectionID");
+        while ($user = $allUsersQuery->fetch_object()) {
+            // Gets the points where author
+            $pointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $user->userID AND sectionID = $submission->sectionID");
+            
+            // Gets the points where coauthor, and the amount
+            $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $user->userID AND sectionID = $submission->sectionID");
+            $coauthorPoints = $coauthorPointsQuery->fetch_object();
+            
+            // Coauthors get 1 less point than coauthor. So calculation is points where author + points where coauthor - amount of coauthor submissions
+            $currentAmount = $pointsQuery->fetch_object()->amount + $coauthorPoints->amount - $coauthorPoints->count;
+
+            if ($maxRange < $currentAmount) {
+                $maxRange = $currentAmount;
+            }
+            if (($minRange == 0 && $currentAmount > 0) || ($minRange > $currentAmount && $currentAmount != 0)) {
+                $minRange = $currentAmount;
+            }
         }
-
     } else if (isset($_POST['resubmit'])) {
         $_SESSION['resubmit'] = $submissionID;
         $_SESSION['newSubmission'] = $submission->section;
