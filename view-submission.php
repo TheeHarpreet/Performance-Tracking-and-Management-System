@@ -36,6 +36,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         $assignQuery = $mysqli->prepare("UPDATE submission SET approved = ? WHERE submissionID = ?");
         $assignQuery->bind_param("ss", $assignedPoints, $submissionID);
         $assignQuery->execute();
+
+        $pointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author->userID AND sectionID = $submission->sectionID");
+        $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $author->userID AND sectionID = $submission->sectionID");
+        $coauthorPoints = $coauthorPointsQuery->fetch_object();
+        $currentAmount = $pointsQuery->fetch_object()->amount + $coauthorPoints->amount - $coauthorPoints->count;
+
+        $maxQuery = $mysqli->query("SELECT maxRange FROM sections WHERE sectionID = $submission->sectionID");
+        if ($currentAmount > $maxQuery->fetch_object()->maxRange) {
+            $mysqli->query("UPDATE sections SET maxRange = $currentAmount WHERE sectionID = $submission->sectionID");
+        }
+
     } else if (isset($_POST['resubmit'])) {
         $_SESSION['resubmit'] = $submissionID;
         $_SESSION['newSubmission'] = $submission->section;

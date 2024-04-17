@@ -140,11 +140,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     <div class="performance-section">
                         <?php
                         $sectionQuery = $mysqli->query("SELECT * FROM sections");
-                        $author = $userID;
                         $pointsTotal = 0;
                         $pointsArray = array ();
                         for ($loop = 0; $loop < 7; $loop++) { // A loop for each section in the performance overview.
                             $section = $sectionQuery->fetch_object();
+                            $author = $userID;
                             $minPoints = $section->minPoints;
                             $maxPoints = $section->maxPoints;
                             $minRange = $section->minRange;
@@ -152,9 +152,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                             $title = $section->sectionName;
                             $sectionID = $loop + 1;
 
-                            $approvedQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = $sectionID");
-                            $result = $approvedQuery->fetch_object();
-                            $currentAmount = $result->amount;
+                            $pointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount FROM `submission` WHERE `author` = $author AND sectionID = $sectionID");
+                            $coauthorPointsQuery = $mysqli->query("SELECT SUM(`approved`) AS amount, COUNT('approved') AS count FROM submission, submissioncoauthor WHERE submission.submissionID = submissioncoauthor.submissionID AND submissioncoauthor.coauthor = $author AND sectionID = $sectionID");
+                            $coauthorPoints = $coauthorPointsQuery->fetch_object();
+                            $currentAmount = $pointsQuery->fetch_object()->amount + $coauthorPoints->amount - $coauthorPoints->count;
 
                             if ($currentAmount == 0){
                                 echo "<p>" . translate($title) . ": " . translate("Not enough data to calculate scores") . "</p>";
@@ -167,7 +168,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                                 } else  {
                                     $points = $minPoints + (($maxPoints - $minPoints) * (($currentAmount - $minRange) / ($maxRange - $minRange))); // Points calculation.
                                 }
-                                $pointsTotal += $points;
                                 $percent = (($points-$minPoints)*100)/($maxPoints-$minPoints);
                                 echo 
                                 "<p>" . translate($title) . ":</p>
