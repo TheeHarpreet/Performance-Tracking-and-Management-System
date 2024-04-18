@@ -393,3 +393,44 @@ align-items: center;
   max-width: 80%;
   margin-left: 10%;
 }
+
+/*View-Submission */
+
+.view-submission-container {
+  color: white;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submission-details {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.submission-status {
+  color: goldenrod;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 0;
+  margin-top: 5px;
+}
+/*submission button */
+.download-submission{
+  background-color: goldenrod;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    text-align: center;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    text-decoration: none;
+}
+
+
