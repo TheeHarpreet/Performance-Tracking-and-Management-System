@@ -71,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 }
 
 ?>
+<?php include("includes/lang-config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -248,53 +249,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 </body>
 </html>
 
-<?php include("includes/lang-config.php");
-function translate($key) {
-    $translations = array(
-        /*
-        "en" => array(
-            "View Submission" => "View Submission",
-            "By" => "By",
-            "Date Submitted" => "Date Submitted",
-            "Status" => "Status",
-            "Approved" => "Approved",
-            "Needing Manager approval" => "Needing Manager approval",
-            "Rejected" => "Rejected",
-            "Needing Supervisor approval" => "Needing Supervisor approval",
-            "Coauthors" => "Coauthors",
-            "Please review work" => "Please review work",
-            "Approve" => "Approve",
-            "Comments (For declines only)" => "Comments (For declines only)",
-            "Return" => "Return",
-            "You can only view details of this task" => "You can only view details of this task",
-            "Resubmit" => "Resubmit",
-            "Researcher" => "Researcher",
-            "Supervisor" => "Supervisor",
-            "Manager" => "Manager",
-        ),
-        */
-        "bm" => array(
-            "View Submission" => "Lihat Penyerahan",
-            "By" => "Oleh",
-            "Date Submitted" => "Tarikh Penyerahan",
-            "Status" => "Status",
-            "Approved" => "Diluluskan",
-            "Needing Manager approval" => "Memerlukan kelulusan Pengurus",
-            "Rejected" => "Ditolak",
-            "Needing Supervisor approval" => "Memerlukan kelulusan Penyelia",
-            "Coauthors" => "Penulis Bersama",
-            "Please review work" => "Sila semak kerja",
-            "Approve" => "Luluskan",
-            "Comments (For declines only)" => "Komen (Hanya untuk penolakan)",
-            "Return" => "Kembali",
-            "You can only view details of this task" => "Anda hanya boleh melihat butiran tugasan ini",
-            "Resubmit" => "Serah semula",
-            "Researcher" => "Penyelidik",
-            "Supervisor" => "Penyelia",
-            "Manager" => "Pengurus",
-        )
-    );
 
-    $language = $_SESSION['language'];
-    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
-} ?>

@@ -49,12 +49,12 @@ body {
 .segment-header {
   border-bottom: solid #000000;
   text-align: center;
-  margin: 10px 10% 10px 10%;
-  color: #d4af37;
+  margin: 10px 5%;
+  color: goldenrod;
 }
 .segment-container {
   background-color: #4d4d4d;
-  margin: 0px 50px;
+  margin: 10px 5% 0px 5%;
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -69,7 +69,7 @@ body {
 .section-header {
   border-bottom: solid #000000;
   text-align: center;
-  margin: 10px 20% 10px 20%;
+  margin: 10px 20%;
   color: #d4af37;
 }
 .view-details {
@@ -180,6 +180,10 @@ a {
   font-size: 35px;
   text-align: center;
   width: 250px;
+}
+.points-header {
+  width: 300px;
+  text-align: center;
 }
 
 /* Hide section and sort */
