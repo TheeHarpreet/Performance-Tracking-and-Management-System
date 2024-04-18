@@ -282,6 +282,7 @@ a {
 .signup-div {
   display: flex;
   align-items: center; 
+  align-items: center; 
   flex-direction: column;
   width: 100%; 
   gap: 0px;
