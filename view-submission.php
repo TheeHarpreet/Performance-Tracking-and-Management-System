@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 while ($file = $files->fetch_object()) {
                     echo "
                     <p>$file->name</p>
-                    <a href='submissionfiles/" . htmlspecialchars($file->address) . "' download='" . basename($file->name) . "'>" . translate("Download File") . "</a>
+                    <a class='download-submission' href='submissionfiles/" . htmlspecialchars($file->address) . "' download='" . basename($file->name) . "'>" . translate("Download File") . "</a>
                     ";
                 }
                 echo "</div></div></div>";
@@ -242,6 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         ";
                     }
                     echo "</div>";
+            
                 }
             ?>
         </div>
