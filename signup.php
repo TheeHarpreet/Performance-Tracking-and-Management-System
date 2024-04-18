@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form class="signup-form" method="post">
             
             <div class="signup-div">
-                <div>
+                <div class="signup-seperate" id= "left">
                     <h3><?php echo translate("First name"); ?></h3>
                     <input type="text" name="fname" required>
                     <h3><?php echo translate("Surname"); ?></h3>
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h3><?php echo translate("Email"); ?></h3>
                     <input type="text" name="email" required>
                 </div>
-                <div>
+                <div class="signup-seperate" id="right">
                     <h3><?php echo translate("Password"); ?></h3>
                     <input type="password" name="password1" required>
                     <h3><?php echo translate("Confirm Password"); ?></h3>

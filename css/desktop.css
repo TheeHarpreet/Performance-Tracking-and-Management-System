@@ -36,6 +36,8 @@
   flex-direction: row;
 }
 
+
+
 /* Submission preview fill */
 .coauthor-indicator, .colour-bar {
   max-height: 1000px;
@@ -55,8 +57,14 @@
 
 /* Signup */
 .signup-div {
-  flex-direction: row;
+  flex-direction: row;  
 }
+.signup-div #left{
+margin-left: 10%;
+}
+.signup-div #right{
+  margin-right: 20%;
+  }
 
 /* New submission button */
 .new-submission {
