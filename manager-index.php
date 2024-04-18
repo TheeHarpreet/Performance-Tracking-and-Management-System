@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | MIROS</title>
+    <title><?php translate("Home") ?> | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
     <script src="js/hide-sections.js"></script>
@@ -54,9 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             <div class="segment-container">
                 <table>
                 <tr class="accounts-table">
-                    <th>First Name <a class="sort" href="manager-index.php">Sort by</a></th>
-                    <th>Last Name <a class="sort" href="manager-index.php?orderby=lname">Sort by</a></th>
-                    <th>Job Role <a class="sort" href="manager-index.php?orderby=jobRole">Sort by</a></th>
+                    <th><?php translate("First name") ?> <a class="sort" href="manager-index.php">Sort by</a></th>
+                    <th><?php translate("Last name") ?> <a class="sort" href="manager-index.php?orderby=lname">Sort by</a></th>
+                    <th><?php translate("Job role") ?> <a class="sort" href="manager-index.php?orderby=jobRole">Sort by</a></th>
                 </tr>
                 <?php 
                 $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher' ORDER BY $orderBy");
@@ -79,13 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 <div class="segment-container">
                     <form method="post" class="search-paramaters">
                         <input type="text" name="submissionName" placeholder="Search for work by title">
-                        <p>Status</p>
+                        <p><?php translate("Status") ?> </p>
                         <select name="status" id="work-type-select">
-                            <option value="both">Both</option>
-                            <option value="not-accepted">Needing Review</option>
-                            <option value="accepted">Accepted</option>
+                            <option value="both"><?php translate("Both") ?> </option>
+                            <option value="not-accepted"><?php translate("Needing Review") ?> </option>
+                            <option value="accepted"><?php translate("Accepted") ?> </option>
                         </select>
-                        <button name="search">Search</button>
+                        <button name="search"><?php translate("Search") ?> </button>
                     </form>
                 </div>
                 <?php

@@ -54,7 +54,7 @@ include("includes/lang-config.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update User Details | MIROS</title>  <!-- // NeedsTranslation -->
+    <title><?php echo translate("Update User Details") ?> | MIROS</title>  <!-- // NeedsTranslation -->
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>
@@ -94,10 +94,10 @@ include("includes/lang-config.php");
                         echo "
                         <table>
                         <tr class='assign-supervisor-table'>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Email</th>
-                            <th>Supervisor</th>
+                            <th>" . translate("First name") . "</th>
+                            <th>" . translate("Last name") . "</th>
+                            <th>" . translate("Email") . "</th>
+                            <th>" . translate("Supervisor") . "</th>
                         </tr>
                         ";
                         $possibleSupervisorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $user->userID AND jobRole = 'Supervisor'");

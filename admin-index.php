@@ -76,12 +76,12 @@ if ($user->jobRole != "Admin") {
             if (password_verify("katalaluan123", $passwordCheck->password)) {
                 echo "
                 <div class='change-password'>
-                <h1>Please reset your password</h1>
-                <p>Your password has been reset, your account is not secure until the password has been changed</p>
+                <h1>" . translate("Please reset your password") . "</h1>
+                <p>" . translate("Your password has been reset, your account is not secure until the password has been changed") . "</p>
                 <form method='post'>
-                <p>Password</p>
+                <p>" . translate("Password") . "</p>
                 <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password1'>
-                <p>Confirm Password</p>
+                <p>" . translate("Confirm Password") . "</p>
                 <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password2'>
                 ";
                 if (count($errors) > 0) {

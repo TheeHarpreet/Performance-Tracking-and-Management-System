@@ -175,39 +175,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         // Section F - Supervision - 2 points. Local - 1 point. National - 2 points. International - 3 points.
                         // Section G - Institute - 1 point. District - 2 points. State - 2 points. National - 3 points. International 4 points.
                         echo "
-                        <h1 class='segment-header'>Review Work</h1>
+                        <h1 class='segment-header'>" . translate("Review Work") . "</h1>
                         <div class='segment-container'>
                         <form method='post'>
                         <div>
                         ";
                         if ($submission->sectionID != 1 && $submission->sectionID != 4) {
                             echo "<select name='type-select' id='type-select'>";
-                            if ($submission->sectionID == 2 || $submission->sectionID == 5) {  // NeedsTranslation All the values in the option tags, some repeat
+                            if ($submission->sectionID == 2 || $submission->sectionID == 5) {
                                 echo "
-                                <option value='1'>Internal</option>  
-                                <option value='2'>National</option>
-                                <option value='3'>International</option>
+                                <option value='1'>" . translate("Internal") . "</option>  
+                                <option value='2'>" . translate("National") . "</option>
+                                <option value='3'>" . translate("International") . "</option>
                                 ";
                             } else if ($submission->sectionID == 3) {
                                 echo "
-                                <option value='1'>Internal Project</option>
-                                <option value='3'>External Project</option>
-                                <option value='2'>Operations</option>
+                                <option value='1'>" . translate("Internal Project") . "</option>
+                                <option value='3'>" . translate("External Project") . "</option>
+                                <option value='2'>" . translate("Operations") . "</option>
                                 ";
                             } else if ($submission->sectionID == 6) {
                                 echo "
-                                <option value='2'>Project Supervision</option>
-                                <option value='1'>Local</option>
-                                <option value='2'>National</option>
-                                <option value='3'>International</option>
+                                <option value='2'>" . translate("Project Supervision") . "</option>
+                                <option value='1'>" . translate("Local") . "</option>
+                                <option value='2'>" . translate("National") . "</option>
+                                <option value='3'>" . translate("International") . "</option>
                                 ";
                             } else if ($submission->sectionID == 7) {
                                 echo "
-                                <option value='1'>Institute</option>
-                                <option value='2'>District</option>
-                                <option value='2'>State</option>
-                                <option value='3'>National</option>
-                                <option value='4'>International</option>
+                                <option value='1'>" . translate("Institute") . "</option>
+                                <option value='2'>" . translate("District") . "</option>
+                                <option value='2'>" . translate("State") . "</option>
+                                <option value='3'>" . translate("National") . "</option>
+                                <option value='4'>" . translate("International") . "</option>
                                 ";
                             }
                             echo "</select>";
@@ -235,9 +235,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         include("includes/format-date.php");
                         echo "
                             <div class='return-div'>
-                                <p>Returned by $returner->fname $returner->lname</p>
-                                <p>Date returned: $dateTimeOutput</p>
-                                <p>Reason: $rejection->comments</p>
+                                <p>" . translate("Returned by") . " $returner->fname $returner->lname</p>
+                                <p>" . translate("Date returned") . ": $dateTimeOutput</p>
+                                <p>" . translate("Reason") . ": $rejection->comments</p>
                             </div>
                         ";
                     }

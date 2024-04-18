@@ -71,14 +71,14 @@ include("includes/lang-config.php");?>
                     $passwordCheck = $resetQuery->fetch_object();
                     if (password_verify("katalaluan123", $passwordCheck->password)) {
                         echo "
-                        <h1 class='segment-header'>Please reset your password</h1>
-                        <div class='segment-container'>
-                        <p class='text-align-centre'>Your password has been reset, your account is not secure until the password has been changed</p>
+                        <div class='change-password'>
+                        <h1>" . translate("Please reset your password") . "</h1>
+                        <p>" . translate("Your password has been reset, your account is not secure until the password has been changed") . "</p>
                         <form method='post'>
-                        <p>Password</p>
-                        <input type='password' class='change-password-input' placeholder='" . translate("New Password") . "' name='password1'>
-                        <p>Confirm Password</p>
-                        <input type='password' class='change-password-input' placeholder='" . translate("New Password") . "' name='password2'>
+                        <p>" . translate("Password") . "</p>
+                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password1'>
+                        <p>" . translate("Confirm Password") . "</p>
+                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password2'>
                         ";
                         if (count($errors) > 0) {
                             foreach ($errors as $error) {
@@ -97,7 +97,7 @@ include("includes/lang-config.php");?>
                     if (mysqli_num_rows($needingReviewQuery) > 0) {
                         $usedSubmissions = array ();
                         echo "
-                        <h1 class='segment-header'>Work to review</h1>
+                        <h1 class='segment-header'>" . translate("Work to review") . "</h1>
                         ";
                         while ($obj = $needingReviewQuery->fetch_object()) {
                             if (!in_array($obj->submissionID, $usedSubmissions)) {
@@ -189,7 +189,7 @@ include("includes/lang-config.php");?>
                         ?>
                     </div>
                     <div class="performance-section2">
-                        <h3 class='points-header'>Overall Points</h3>
+                        <h3 class='points-header'><?php translate("Overall Points") ?></h3>
                         <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p>
                         <?php $total = 0; $deg = "deg"; ?>
                         <div id="arc"></div>
@@ -254,13 +254,6 @@ include("includes/lang-config.php");?>
                             }
                             include("includes/submission-preview-fill.php");
                         }
-                        /*
-                        $submissionsQuery = $mysqli->query("SELECT * FROM submission, submissioncoauthor WHERE submissioncoauthor.coauthor = $userID AND submissioncoauthor.submissionID = submission.submissionID AND submission.sectionID = $sectionID");
-                        while ($obj = $submissionsQuery->fetch_object()) { // Outputs all submissions where the user is the coauthor.
-                            $isAuthor = false;
-                            include("includes/submission-preview-fill.php");
-                        }
-                        */
                         echo "
                         <div>
                         <form method='post'>

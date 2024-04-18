@@ -14,26 +14,6 @@ if ($_SESSION['language'] != "en") {
 
 function translate($key) {
     $translations = array(
-        /*
-        "en" => array(
-            "Home" => "Home",
-            "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Your account doesn't have a role assigned. Please speak to an admin to assign you one.",
-            "Select a researcher to view their work" => "Select a researcher to view their work",
-            "Not enough data to calculate scores" => "Not enough data to calculate scores",
-            "Performance Overview" => "Performance Overview",
-            "Submissions" => "Submissions",
-            "Hide" => "Hide",
-            "Add New Submission" => "Add New Submission",
-            "New Password" => "New Password",
-            "Change Password" => "Change Password",
-            "Personal Particulars"=>"Personal Particulars",
-            "Research And Development"=>"Research And Development",
-            "Professional Consultations"=>"Professional Consultations",
-            "Research Outcomes"=>"Research Outcomes",
-            "Professional Recognition"=>"Professional Recognition",
-            "Service To Community"=>"Service To Community"
-        ),
-        */
         "bm" => array(
             "Home" => "Laman Utama",
             "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Akaun anda tidak mempunyai peranan yang diberikan. Sila bercakap dengan pentadbir untuk memberikan anda satu.",
@@ -55,10 +35,10 @@ function translate($key) {
             "First Name" => "Nama Pertama",
             "Last Name" => "Nama Akhir",
             "Email" => "Emel",
-            "Job Role" => "Peranan Pekerjaan",
+            "Job role" => "Peranan pekerjaan",
             "Update" => "Kemaskini",
             "Reset Password" => "Tetapkan Semula Kata Laluan",
-            "Passwords are reset to \"Password123\"" => "Kata Laluan telah ditetapkan semula kepada \"Password123\"",
+            "Passwords are reset to \"katalaluan123\"" => "Kata Laluan telah ditetapkan semula kepada \"katalaluan123\"",
             "None" => "Tiada",
             "Researcher" => "Penyelidik",
             "Supervisor" => "Penyelia",
@@ -70,7 +50,7 @@ function translate($key) {
             "List Of User Accounts" => "Senarai Akaun Pengguna",
             "UserID" => "ID Pengguna",
             "Sort by" => "Disusun mengikut",
-            "Edit" => "Edit",  // NeedsTranslation
+            "Edit" => "Edit",
             "Delete" => "Padam",
             "Unblock" => "Buka Kunci",
             "Block" => "Kunci",
@@ -90,7 +70,6 @@ function translate($key) {
             "Email is already in use" => "Emel telah digunakan",
             "You are registered successfully." => "Anda telah berdaftar dengan berjaya.",
             "Signup" => "Daftar",
-            "First name" => "Nama pertama",
             "Surname" => "Nama keluarga",
             "Confirm Password" => "Sahkan Kata Laluan",
             "Have an account?" => "Sudah mempunyai akaun?",
@@ -122,7 +101,28 @@ function translate($key) {
             "Upload File" => "Muat Naik Fail",
             "Submit" => "Hantar",
             "Logout" => "Log Keluar",
-            
+            "Update User Details" => "",
+            "Please reset your password" => "",
+            "Your password has been reset, your account is not secure until the password has been changed" => "",
+            "Work to review" => "",
+            "Overall Points" => "",
+            "Coauthor" => "",
+            "Review Work" => "",
+            "Internal" => "",
+            "National" => "",
+            "International" => "",
+            "Internal Project" => "",
+            "External Project" => "",
+            "Operations" => "",
+            "Project Supervision" => "",
+            "Local" => "",
+            "Institute" => "",
+            "District" => "",
+            "State" => "",
+            "Returned by" => "",
+            "Date returned" => "",
+            "Reason" => "",
+            "Logout" => "Log Keluar"
         )
     );
 
