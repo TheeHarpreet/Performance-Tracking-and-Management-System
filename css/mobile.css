@@ -49,8 +49,7 @@ body {
 .segment-header {
   border-bottom: solid #000000;
   text-align: center;
-  width: 70%;
-  margin-left: 40px;
+  margin: 10px 10% 10px 10%;
   color: #d4af37;
 }
 .segment-container {
@@ -70,8 +69,7 @@ body {
 .section-header {
   border-bottom: solid #000000;
   text-align: center;
-  width: 50%;
-  margin-left: 40px;
+  margin: 10px 20% 10px 20%;
   color: #d4af37;
 }
 .view-details {
@@ -196,6 +194,9 @@ a {
 }
 .sort {
   margin-left: 15px;
+}
+.hide {
+  justify-content: center;
 }
 
 /* Language buttons */

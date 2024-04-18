@@ -189,6 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         ?>
                     </div>
                     <div class="performance-section2">
+                        
                     <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p>
                     <?php $total = 0; $deg = "deg"; ?>
                     <div id="arc"></div>
