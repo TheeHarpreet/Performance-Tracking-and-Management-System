@@ -77,3 +77,8 @@
   margin-top: 15px;
   width: 250px;
 }
+
+.login-container, .signup-container {
+  max-width: 50%;
+  margin-left: 25%;
+}
