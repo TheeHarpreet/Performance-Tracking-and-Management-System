@@ -82,3 +82,27 @@
   max-width: 50%;
   margin-left: 25%;
 }
+
+/* View Submission */
+
+.view-submission-container {
+  margin: 20px auto; 
+  width: 60%; 
+  padding: 30px; 
+}
+.submission-details {
+  font-size: 16px; 
+  line-height: 1.8; 
+}
+
+  .download-submission {
+    width: 50%; 
+    padding: 15px 20px; 
+    font-size: 16px; 
+  }
+
+  .submission-status {
+    font-size: 18px; 
+    padding-top: 10px; 
+  }
+  
