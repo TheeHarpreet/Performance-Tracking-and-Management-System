@@ -8,10 +8,6 @@ if (isset($_POST['lang'])) {
     $_SESSION['language'] = $_POST['lang'];
 }
 
-if ($_SESSION['language'] != "en") {
-    echo "<script src='js/translate.js'></script>";
-}
-
 function translate($key) {
     $translations = array(
         "bm" => array(
@@ -121,7 +117,12 @@ function translate($key) {
             "State" => "",
             "Returned by" => "",
             "Date returned" => "",
-            "Reason" => ""
+            "Reason" => "",
+            "Sort by" => "",
+            "View Users Work" => "",
+            "Search For Work" => "",
+            "Needing Review" => "",
+            "Accepted" => ""
         )
     );
 

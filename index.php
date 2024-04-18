@@ -189,7 +189,7 @@ include("includes/lang-config.php");?>
                         ?>
                     </div>
                     <div class="performance-section2">
-                        <h3 class='points-header'><?php translate("Overall Points") ?></h3>
+                        <h3 class='points-header'><?php echo translate("Overall Points"); ?></h3>
                         <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p>
                         <?php $total = 0; $deg = "deg"; ?>
                         <div id="arc"></div>
@@ -223,7 +223,7 @@ include("includes/lang-config.php");?>
                         echo "
                         <div class='section-container'>
                         <div class='section-name-bar'>
-                        <h2 class='section-header'>".translate($section->sectionName)."</h2>
+                        <h2 class='section-header'>" . translate($section->sectionName) . "</h2>
                         <button onclick='hideSection($i)' id='toggle-button$i' class='hide'>" . translate("Hide") . "</button>
                         </div>
                         ";

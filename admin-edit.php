@@ -54,7 +54,7 @@ include("includes/lang-config.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo translate("Update User Details") ?> | MIROS</title>  <!-- // NeedsTranslation -->
+    <title><?php echo translate("Update User Details"); ?> | MIROS</title>  <!-- // NeedsTranslation -->
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
 </head>

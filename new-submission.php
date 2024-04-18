@@ -152,10 +152,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         <div class='segment-container'>
             <table>
                 <tr class="add-coauthors-table">
-                    <th><?php translate("First Name") ?> </th>
-                    <th><?php translate("Last Name") ?> </th>
-                    <th><?php translate("Email") ?> </th>
-                    <th><?php translate("Coauthor") ?> </th>
+                    <th><?php echo translate("First Name"); ?> </th>
+                    <th><?php echo translate("Last Name"); ?> </th>
+                    <th><?php echo translate("Email"); ?> </th>
+                    <th><?php echo translate("Coauthor"); ?> </th>
                 </tr>
                 <?php
                 $possibleCoauthorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $userID AND jobRole != 'Admin' AND jobRole != 'Manager'");
