@@ -35,6 +35,12 @@
 .performance-overview {
   flex-direction: row;
 }
+.performance-section p {
+  text-align: start;
+}
+.performance-section2 {
+  margin-left: 12px;
+}
 
 /* Submission preview fill */
 .coauthor-indicator, .colour-bar {
@@ -55,8 +61,14 @@
 
 /* Signup */
 .signup-div {
-  flex-direction: row;
+  flex-direction: row;  
 }
+.signup-div #left{
+margin-left: 10%;
+}
+.signup-div #right{
+  margin-right: 20%;
+  }
 
 /* New submission button */
 .new-submission {

@@ -73,9 +73,9 @@ body {
   color: #d4af37;
 }
 .view-details {
-  width: calc(100% - 300px);
-  margin-left: 150px;
+  margin: 0px 10%;
   height: 35px;
+  width: 80%;
   background-color: #afafaf;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
@@ -123,7 +123,7 @@ a {
 }
 .performance-section2 {
   margin-bottom: 300px;
-  margin-left: 12px;
+  margin-left: calc(50% - 170px);
 }
 #arc, #arc1, #arc2, #arc3, #arc4, #arc5, #arc6, #arc7,
 #arc::before, #arc1::before, #arc2::before, #arc3::before, #arc4::before, #arc5::before, #arc6::before, #arc7::before {
@@ -185,6 +185,12 @@ a {
   width: 300px;
   text-align: center;
 }
+.performance-section p {
+  text-align: center;
+}
+.performance-overview {
+  width: calc()
+}
 
 /* Hide section and sort */
 .hide, .sort {
@@ -200,7 +206,8 @@ a {
   margin-left: 15px;
 }
 .hide {
-  justify-content: center;
+  width: 40px;
+  margin-left: calc(50% - 20px);
 }
 
 /* Language buttons */
@@ -220,6 +227,7 @@ a {
   border-bottom-right-radius: 0px;
 }
 .translate-bm {
+  margin-left: 12px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
@@ -271,16 +279,69 @@ a {
   background-color:coral;
 }
 
-/* Signup */
 .signup-div {
   display: flex;
+  align-items: center; 
   flex-direction: column;
+  width: 100%; 
+  gap: 0px;
+}
+
+.signup-seperate {
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.signup-seperate h3 {
+  margin: 0px;
+}
+
+/* Input Fields Style */
+.signup-form input[type="text"],
+.signup-form input[type="password"] {
+  width: 50%; 
+  padding: 12px; 
+  margin: 8px 0; 
+  box-sizing: border-box;
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}
+
+/* Button Style */
+.signup-form button {
+  width: 50%; 
+  padding: 12px;
+  background-color: goldenrod; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; 
+}
+
+.signup-form button:hover {
+  background-color: rgba(207, 157, 30, 0.986); 
+}
+
+.account-link, .login-change {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.login-change:hover {
+  text-decoration: underline; 
 }
 
 /* New submission button */
 .new-submission {
-  margin-left: 90px;
-  margin-top: 25px;
-  width: 60%;
-  margin-bottom: 10px;
+  margin: 10px 15%;
+  height: 35px;
+  width: 70%;
+  background-color: #d4af37;
+  border-width: 0px;
+  border-radius: 8px;
 }
