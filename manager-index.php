@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 }
 
 ?>
+<?php include("includes/lang-config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,19 +138,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 </body>
 </html>
 
-<?php include("includes/lang-config.php");
-function translate($key) {
-    $translations = array(
-        /*
-        "en" => array(
-            // Things
-        ),
-        */
-        "bm" => array(
-            // Things
-        )
-    );
-
-    $language = $_SESSION['language'];
-    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
-} ?>

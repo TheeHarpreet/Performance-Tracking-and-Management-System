@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
+<?php include("includes/lang-config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,40 +78,3 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </html>
 
 
-
-<?php include("includes/lang-config.php");
-function translate($key) {
-    $translations = array(
-        /*
-        "en" => array(
-            "Log In" => "Log In",
-            "Email" => "Email",
-            "Password" => "Password",
-            "Invalid password" => "Invalid password",
-            "User not found" => "User not found",
-            "Login" => "Login",
-            "Don't have an account?" => "Don't have an account?",
-            "Register here" => "Register here",
-            "Language" => "Language",
-            "English" => "English",
-            "BM" => "BM"
-        ),
-        */
-        "bm" => array(
-            "Log In" => "Log Masuk",
-            "Email" => "Emel",
-            "Password" => "Kata Laluan",
-            "Invalid password" => "Kata Laluan tidak sah",
-            "User not found" => "Pengguna tidak dijumpai",
-            "Login" => "Log Masuk",
-            "Don't have an account?" => "Tiada akaun?",
-            "Register here" => "Daftar di sini",
-            "Language" => "Bahasa",
-            "English" => "Inggeris",
-            "BM" => "BM"
-        )
-    );
-
-    $language = $_SESSION['language'];
-    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
-} ?>

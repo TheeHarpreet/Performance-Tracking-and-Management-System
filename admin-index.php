@@ -57,6 +57,7 @@ if ($user->jobRole != "Admin") {
     header("Location: index.php");
 }
 ?>
+<?php include("includes/lang-config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,49 +180,4 @@ if ($user->jobRole != "Admin") {
 </body>
 </html>
 
-<?php include("includes/lang-config.php");
-function translate($key) {
-    $translations = array(
-        /*
-        "en" => array(
-            "Home" => "Home",
-            "Create User Account" => "Create User Account",
-            "This email is already in use, please try another email." => "This email is already in use, please try another email.",
-            "First Name" => "First Name",
-            "Last Name" => "Last Name",
-            "Email" => "Email",
-            "Password" => "Password",
-            "Create Account" => "Create Account",
-            "List Of User Accounts" => "List Of User Accounts",
-            "UserID" => "UserID",
-            "Sort by" => "Sort by",
-            "Job Role" => "Job Role",
-            "Edit" => "Edit",
-            "Delete" => "Delete",
-            "Unblock" => "Unblock",
-            "Block" => "Block"
-        ),
-        */
-        "bm" => array(
-            "Home" => "Halaman Utama",
-            "Create User Account" => "Cipta Akaun Pengguna",
-            "This email is already in use, please try another email." => "Emel ini sudah digunakan, sila cuba emel yang lain.",
-            "First Name" => "Nama Pertama",
-            "Last Name" => "Nama Akhir",
-            "Email" => "Emel",
-            "Password" => "Kata Laluan",
-            "Create Account" => "Cipta Akaun",
-            "List Of User Accounts" => "Senarai Akaun Pengguna",
-            "UserID" => "ID Pengguna",
-            "Sort by" => "Disusun mengikut",
-            "Job Role" => "Peranan Pekerjaan",
-            "Edit" => "Edit",  // NeedsTranslation
-            "Delete" => "Padam",
-            "Unblock" => "Buka Kunci",
-            "Block" => "Kunci"
-        )
-    );
 
-    $language = $_SESSION['language'];
-    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
-} ?>
