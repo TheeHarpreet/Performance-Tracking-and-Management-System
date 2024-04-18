@@ -81,11 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         <input type="text" name="submissionName" placeholder="Search for work by title">
                         <p><?php translate("Status") ?> </p>
                         <select name="status" id="work-type-select">
-                            <option value="both"><?php translate("Both") ?> </option>
-                            <option value="not-accepted"><?php translate("Needing Review") ?> </option>
-                            <option value="accepted"><?php translate("Accepted") ?> </option>
+                            <option value="both" class="both-translate">Both</option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                            <option value="not-accepted" class="needing-review-translate">Needing Review</option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                            <option value="accepted" class="accepted-translate">Accepted</option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
                         </select>
-                        <button name="search"><?php translate("Search") ?> </button>
+                        <button name="search" class="search-translate">Search</button> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
                     </form>
                 </div>
                 <?php
