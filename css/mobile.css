@@ -359,18 +359,6 @@ align-items: center;
   width: 100%; 
   gap: 0px; 
 }
-
-#signup-button{
-  width: 30%; 
-  padding: 12px;
-  background-color: goldenrod; 
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer; 
-  margin-top: 15px;
-}
-
 .login-input{
   display: flex;
   align-items: center; 
