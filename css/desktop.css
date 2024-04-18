@@ -66,6 +66,11 @@
   flex-direction: column;  
 }
 
+/* Login */
+.login-form {
+  flex-direction: column;  
+}
+
 /* New submission button */
 .new-submission {
   margin-left: 60px;

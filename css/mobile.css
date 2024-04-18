@@ -311,7 +311,7 @@ align-items: center;
 }
 
 /* Button Style */
-.signup-form button {
+.signup-form button, #signup-button {
   width: 30%; 
   padding: 12px;
   background-color: goldenrod; 
@@ -322,7 +322,7 @@ align-items: center;
   margin-top: 15px;
 }
 
-.signup-form button:hover {
+.signup-form button:hover, #signup-button:hover {
   background-color: rgba(207, 157, 30, 0.986); 
 }
 
@@ -348,3 +348,58 @@ align-items: center;
   border-width: 0px;
   border-radius: 8px;
 }
+
+/*Login Form*/
+
+.login-form{
+  display: flex;
+  align-items: center; 
+  align-items: center; 
+  flex-direction: column;
+  width: 100%; 
+  gap: 0px; 
+}
+
+#signup-button{
+  width: 30%; 
+  padding: 12px;
+  background-color: goldenrod; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer; 
+  margin-top: 15px;
+}
+
+.login-input{
+  display: flex;
+  align-items: center; 
+  align-items: center; 
+  flex-direction: column;
+  width: 100%; 
+  gap: 0px;
+}
+
+.login-seperate {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+
+  .login-seperate h3 {
+    margin: 0px;
+  }
+
+.login-input input[type="email"],
+.login-input input[type="password"] {
+  width: 50%; 
+  padding: 12px; 
+  margin: 8px 0; 
+  box-sizing: border-box;
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}
+
+
+  

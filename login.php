@@ -62,12 +62,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <div class="segment-container">
         <form class="login-form" method="post">
             <div class="login-input">
-                
-                <h3><?php echo translate("Email"); ?></h3>
-                <input type="email" name="email" required>
-                <h3><?php echo translate("Password"); ?></h3>
-                <input type="password" name="password" required>
-                <button type="submit" id="signup-button"><?php echo translate("Login"); ?></button>
+                <div class="login-seperate">
+                    <h3><?php echo translate("Email"); ?></h3>
+                    <input type="email" name="email" required>
+                    <h3><?php echo translate("Password"); ?></h3>
+                    <input type="password" name="password" required>
+                    <button type="submit" id="signup-button"><?php echo translate("Login"); ?></button>
+                </div>
             </div>
             <p class="account-link"><?php echo translate("Don't have an account?"); ?></p>
             <a href="signup.php" class="login-change"><?php echo translate("Register here"); ?></a>
