@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include_once("includes/simplified-header.php") ?>
     <h1 class="segment-header"><?php echo translate("Signup"); ?></h1>
-    <div class="segment-container">
+    <div class="segment-container signup-container">
         <form class="signup-form" method="post">
             
             <div class="signup-div">

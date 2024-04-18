@@ -389,5 +389,7 @@ align-items: center;
   border-radius: 4px; 
 }
 
-
-  
+.login-container, .signup-container {
+  max-width: 50%;
+  margin-left: 25%;
+}
