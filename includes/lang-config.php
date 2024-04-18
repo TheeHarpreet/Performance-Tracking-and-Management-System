@@ -121,8 +121,7 @@ function translate($key) {
             "State" => "",
             "Returned by" => "",
             "Date returned" => "",
-            "Reason" => "",
-            "Logout" => "Log Keluar"
+            "Reason" => ""
         )
     );
 
