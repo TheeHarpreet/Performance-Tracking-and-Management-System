@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 
     header("Location: admin-index.php");
 }
+include("includes/lang-config.php");
 ?>
 
 <!DOCTYPE html>
@@ -123,41 +124,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
-
-<?php include("includes/lang-config.php");
-function translate($key) {
-    $translations = array(
-        /*
-        "en" => array(
-            "FirstName" => "FirstName",
-            "LastName" => "LastName",
-            "Email" => "Email",
-            "Job Role" => "Job Role",
-            "Update" => "Update",
-            "Reset Password" => "Reset Password",
-            "Passwords are reset to \"Password123\"" => "Passwords are reset to \"Password123\"",
-            "None" => "None",
-            "Researcher" => "Researcher",
-            "Supervisor" => "Supervisor",
-            "Manager" => "Manager",
-
-        ),
-        */
-        "bm" => array(
-            "First Name" => "Nama Pertama",
-            "Last Name" => "Nama Akhir",
-            "Email" => "Emel",
-            "Job Role" => "Peranan Pekerjaan",
-            "Update" => "Kemaskini",
-            "Reset Password" => "Tetapkan Semula Kata Laluan",
-            "Passwords are reset to \"Password123\"" => "Kata Laluan telah ditetapkan semula kepada \"Password123\"",
-            "None" => "Tiada",
-            "Researcher" => "Penyelidik",
-            "Supervisor" => "Penyelia",
-            "Manager" => "Pengurus",
-        )
-    );
-
-    $language = $_SESSION['language'];
-    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
-} ?>

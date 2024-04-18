@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
         header("Location: view-submission.php");
     }
 }
-?>
+include("includes/lang-config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,25 +189,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                         ?>
                     </div>
                     <div class="performance-section2">
-                        
-                    <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p>
-                    <?php $total = 0; $deg = "deg"; ?>
-                    <div id="arc"></div>
-                    <div id="arc7"></div>
-                    <div id="arc6"></div>
-                    <div id="arc5"></div>
-                    <div id="arc4"></div>
-                    <div id="arc3"></div>
-                    <div id="arc2"></div>
-                    <div id="arc1"></div>
-                    <?php //Sets the arc length for each section. ?>
-                    <style> #arc1::before { transform: rotate(<?php $total = $pointsArray[0]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
-                    <style> #arc2::before { transform: rotate(<?php $total += $pointsArray[1]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
-                    <style> #arc3::before { transform: rotate(<?php $total += $pointsArray[2]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
-                    <style> #arc4::before { transform: rotate(<?php $total += $pointsArray[3]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
-                    <style> #arc5::before { transform: rotate(<?php $total += $pointsArray[4]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
-                    <style> #arc6::before { transform: rotate(<?php $total += $pointsArray[5]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
-                    <style> #arc7::before { transform: rotate(<?php $total += $pointsArray[1]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                        <h3 class='points-header'>Overall Points</h3>
+                        <p class="performance-points"><?php echo "$pointsTotal"; ?> / 55</p>
+                        <?php $total = 0; $deg = "deg"; ?>
+                        <div id="arc"></div>
+                        <div id="arc7"></div>
+                        <div id="arc6"></div>
+                        <div id="arc5"></div>
+                        <div id="arc4"></div>
+                        <div id="arc3"></div>
+                        <div id="arc2"></div>
+                        <div id="arc1"></div>
+                        <?php //Sets the arc length for each section. ?>
+                        <style> #arc1::before { transform: rotate(<?php $total = $pointsArray[0]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                        <style> #arc2::before { transform: rotate(<?php $total += $pointsArray[1]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                        <style> #arc3::before { transform: rotate(<?php $total += $pointsArray[2]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                        <style> #arc4::before { transform: rotate(<?php $total += $pointsArray[3]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                        <style> #arc5::before { transform: rotate(<?php $total += $pointsArray[4]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                        <style> #arc6::before { transform: rotate(<?php $total += $pointsArray[5]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
+                        <style> #arc7::before { transform: rotate(<?php $total += $pointsArray[1]; $points = 180 - ($total * (180/55)); echo "-$points$deg" ?>); } </style>
                     </div>
                 </div>
             </div>
@@ -282,51 +282,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     <?php include_once("includes/footer.php") ?>
 </body>
 </html>
-
-<?php include("includes/lang-config.php");
-function translate($key) {
-    $translations = array(
-        /*
-        "en" => array(
-            "Home" => "Home",
-            "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Your account doesn't have a role assigned. Please speak to an admin to assign you one.",
-            "Select a researcher to view their work" => "Select a researcher to view their work",
-            "Not enough data to calculate scores" => "Not enough data to calculate scores",
-            "Performance Overview" => "Performance Overview",
-            "Submissions" => "Submissions",
-            "Hide" => "Hide",
-            "Add New Submission" => "Add New Submission",
-            "New Password" => "New Password",
-            "Change Password" => "Change Password",
-            "Personal Particulars"=>"Personal Particulars",
-            "Research And Development"=>"Research And Development",
-            "Professional Consultations"=>"Professional Consultations",
-            "Research Outcomes"=>"Research Outcomes",
-            "Professional Recognition"=>"Professional Recognition",
-            "Service To Community"=>"Service To Community"
-        ),
-        */
-        "bm" => array(
-            "Home" => "Laman Utama",
-            "Your account doesn't have a role assigned. Please speak to an admin to assign you one." => "Akaun anda tidak mempunyai peranan yang diberikan. Sila bercakap dengan pentadbir untuk memberikan anda satu.",
-            "Select a researcher to view their work" => "Pilih penyelidik untuk melihat kerja mereka",
-            "Not enough data to calculate scores" => "Tidak cukup data untuk mengira skor",
-            "Performance Overview" => "Gambaran Prestasi",
-            "Submissions" => "Penyerahan",
-            "Hide" => "Sembunyi",
-            "Add New Submission" => "Tambah Penyerahan Baru",
-            "New Password" => "Kata Laluan Baru",
-            "Change Password" => "Tukar Kata Laluan",
-            "Personal Particulars"=>"Khusus Peribadi", 
-            "Professional Achievements"=>"Pencapaian Peribadi",
-            "Research And Development"=>"Pembangun Penyilidik", 
-            "Professional Consultations"=>"Perundingan profesional",
-            "Research Outcomes"=>"Hasil Penyelidik",
-            "Professional Recognition"=>"Pengiktirafan profesional", 
-            "Service To Community"=>"Servis kepada Komuniti"
-        )
-    );
-
-    $language = $_SESSION['language'];
-    return isset($translations[$language][$key]) ? $translations[$language][$key] : $key;
-} ?>
