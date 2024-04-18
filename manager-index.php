@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php translate("Home") ?> | MIROS</title>
+    <title><?php echo translate("Home"); ?> | MIROS</title>
     <link rel="stylesheet" href="css/mobile.css" />
     <link rel="stylesheet" href="css/desktop.css" media="only screen and (min-width : 790px)"/>
     <script src="js/hide-sections.js"></script>
@@ -50,13 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <body id="manager-index">
     <?php include_once("includes/header.php") ?>
         <div class="container">
-            <h1 class="segment-header">View Users Work</h1>
+            <h1 class="segment-header"><?php translate("View Users Work"); ?></h1>
             <div class="segment-container">
                 <table>
                 <tr class="accounts-table">
-                    <th><?php translate("First name") ?> <a class="sort" href="manager-index.php">Sort by</a></th>
-                    <th><?php translate("Last name") ?> <a class="sort" href="manager-index.php?orderby=lname">Sort by</a></th>
-                    <th><?php translate("Job role") ?> <a class="sort" href="manager-index.php?orderby=jobRole">Sort by</a></th>
+                    <th><?php echo translate("First name"); ?> <a class="sort" href="manager-index.php"><?php echo translate("Sort by"); ?></a></th>
+                    <th><?php echo translate("Last name"); ?> <a class="sort" href="manager-index.php?orderby=lname"><?php echo translate("Sort by"); ?></a></th>
+                    <th><?php echo translate("Job role"); ?> <a class="sort" href="manager-index.php?orderby=jobRole"><?php echo translate("Sort by"); ?></a></th>
                 </tr>
                 <?php 
                 $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher' ORDER BY $orderBy");
@@ -75,17 +75,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 </table>
             </div>
             <div class="managers-work-section">
-                <h1 class="segment-header">Search For Work</h1>
+                <h1 class="segment-header"><?php echo translate("Search For Work"); ?></h1>
                 <div class="segment-container">
                     <form method="post" class="search-paramaters">
                         <input type="text" name="submissionName" placeholder="Search for work by title">
-                        <p><?php translate("Status") ?> </p>
+                        <p><?php translate("Status"); ?> </p>
                         <select name="status" id="work-type-select">
-                            <option value="both" class="both-translate">Both</option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
-                            <option value="not-accepted" class="needing-review-translate">Needing Review</option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
-                            <option value="accepted" class="accepted-translate">Accepted</option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                            <option value="both" class="both-translate"><?php echo translate("Both"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                            <option value="not-accepted" class="needing-review-translate"><?php echo translate("Needing Review"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                            <option value="accepted" class="accepted-translate"><?php echo translate("Accepted"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
                         </select>
-                        <button name="search" class="search-translate">Search</button> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                        <button name="search" class="search-translate"><?php echo translate("Search"); ?></button> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
                     </form>
                 </div>
                 <?php

@@ -21,5 +21,10 @@
             ";
             ?>
         </div>
+        <?php
+        if ($_SESSION['language'] != "en") {
+            echo "<script src='js/translate.js'></script>";
+        }
+        ?>
     </header>
 </div>

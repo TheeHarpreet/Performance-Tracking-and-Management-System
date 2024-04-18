@@ -98,7 +98,7 @@ if ($user->jobRole != "Admin") {
             ?>
             <div class="create-account">
                 <?php
-                    if($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['new-password-button'])){
+                    if($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['new-password-button']) && !isset($_POST['lang'])){
                         $fname = $_POST['fname'];
                         $lname = $_POST['lname'];
                         $email = $_POST['email'];
