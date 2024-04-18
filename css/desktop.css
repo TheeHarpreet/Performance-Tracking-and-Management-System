@@ -63,14 +63,8 @@
 
 /* Signup */
 .signup-div {
-  flex-direction: row;  
+  flex-direction: column;  
 }
-.signup-div #left{
-margin-left: 10%;
-}
-.signup-div #right{
-  margin-right: 20%;
-  }
 
 /* New submission button */
 .new-submission {
