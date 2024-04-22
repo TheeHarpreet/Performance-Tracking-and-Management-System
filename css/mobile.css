@@ -247,14 +247,6 @@ a {
   flex-basis: 100%;
 }
 
-/* New admin form */
-.new-admin-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  margin: 0 15px;
-}
-
 /* Admin accounts table */
 .accounts-table th div {
   display: flex;
@@ -308,7 +300,9 @@ align-items: center;
 .admin-edit-form input[type="text"],
 .new-admin-form input[type="text"],
 .new-admin-form input[type="email"],
-.new-admin-form input[type="password"] {
+.new-admin-form input[type="password"],
+.search-paramaters-form input[type="text"],
+.new-submission-form input[type="text"] {
   width: 50%; 
   padding: 12px; 
   margin: 8px 0; 
@@ -318,7 +312,7 @@ align-items: center;
 }
 
 /* Button Style */
-.signup-form button, #signup-button, #admin-update, #admin-new-account {
+.signup-form button, #signup-button, #admin-update, #admin-new-account, #manager-user-search, #new-submission-button {
   width: 30%; 
   padding: 12px;
   background-color: goldenrod; 
@@ -327,6 +321,15 @@ align-items: center;
   border-radius: 8px;
   cursor: pointer; 
   margin-top: 15px;
+}
+
+.status-div {
+  display: flex;
+  flex-direction: row;
+  height: 25px;
+}
+.work-type-select {
+  padding-top: 15px;
 }
 
 .signup-form button:hover, #signup-button:hover {
@@ -358,9 +361,8 @@ align-items: center;
 
 /*Login Form*/
 
-.login-form, .admin-edit-form, .new-admin-form {
+.login-form, .admin-edit-form, .new-admin-form, .search-paramaters-form, .new-submission-form {
   display: flex;
-  align-items: center; 
   align-items: center; 
   flex-direction: column;
   width: 100%; 
@@ -374,6 +376,7 @@ align-items: center;
   width: 100%; 
   gap: 0px;
 }
+
 
 .login-seperate {
   width: 100%;

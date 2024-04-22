@@ -132,24 +132,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     <div>
         
     </div>
-    <form method="post" enctype="multipart/form-data">
-        <div class="segment-container">
+    <div class="segment-container">
+    <form method="post" enctype="multipart/form-data" class="new-submission-form">
+        
             <div class="form-group">
                 <label for="title"><?php echo translate("Title"); ?>:</label>
                 <input type="text" id="title" name="title" placeholder="<?php echo translate("Title"); ?>" required>
             </div>
             <div class="form-group">
                 <label for="comments"><?php echo translate("Comments"); ?>:</label>
-                <textarea id="comments" name="comments" placeholder="<?php echo translate("Comments"); ?>" rows="3" required></textarea>
+                <input type="text" id="comments" name="comments" placeholder="<?php echo translate("Comments"); ?>" rows="3" required></input>
             </div>
             <div class="form-group">
                 <label for="file"><?php echo translate("Upload File"); ?>:</label>
                 <input type="file" id="file" name="file[]" multiple required>  <!-- NeedsTranslation for defaults like "Choose files", "No file chosen", and "4 files" -->
             </div>
-            <button type="submit" class="submit-button" name='check'><?php echo translate("Submit"); ?></button>
-        </div>
+            <button type="submit" class="submit-button" id="new-submission-button" name='check'><?php echo translate("Submit"); ?></button>
         <h1 class = 'segment-header'>Add Coauthors</h1>
-        <div class='segment-container'>
             <table>
                 <tr class="add-coauthors-table">
                     <th><?php echo translate("First Name"); ?> </th>
@@ -171,8 +170,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 }
                 ?>
             </table>
-        </div>
+        
     </form>
+    </div>
 </div>
 
 <?php include_once("includes/footer.php") ?>

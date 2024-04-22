@@ -121,20 +121,14 @@ if ($user->jobRole != "Admin") {
                 <h1 class="segment-header"><?php echo translate("Create Admin Account"); ?></h1>
                 <div class="segment-container">
                     <form action="admin-index.php?userID=<?php echo $userID; ?>" method="post" class="new-admin-form">
-                        <div class="new-admin-inputs">
-                            <div>
-                                <p><?php echo translate("First Name"); ?></p>
-                                <input type="text" name="fname" id="fname" required>
-                                <p><?php echo translate("Last Name"); ?></p>
-                                <input type="text" name="lname" id="lname" required>
-                            </div>
-                            <div>
-                                <p><?php echo translate("Email"); ?></p>
-                                <input type="email" name="email" id="email" required>
-                                <p><?php echo translate("Password"); ?></p>
-                                <input type="password" name="password" id="password" required>
-                            </div>
-                        </div>
+                        <p><?php echo translate("First Name"); ?></p>
+                        <input type="text" name="fname" id="fname" required>
+                        <p><?php echo translate("Last Name"); ?></p>
+                        <input type="text" name="lname" id="lname" required>
+                        <p><?php echo translate("Email"); ?></p>
+                        <input type="email" name="email" id="email" required>
+                        <p><?php echo translate("Password"); ?></p>
+                        <input type="password" name="password" id="password" required>
                         <input type="submit" id="admin-new-account" name="submit" value="<?php echo translate("Create Account"); ?>" required>
                     </form>
                 </div>

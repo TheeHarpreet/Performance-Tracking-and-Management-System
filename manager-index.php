@@ -50,9 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <body id="manager-index">
     <?php include_once("includes/header.php") ?>
         <div class="container">
-            <h1 class="segment-header"><?php translate("View Users Work"); ?></h1>
-            <div class="segment-container">
-                <table>
+            <h1 class="segment-header"><?php echo translate("View Users Work"); ?></h1>
+            <div class="segment-container" id="all-user-display">
+                <table id="all-user-display-table">
                 <tr class="accounts-table">
                     <th><?php echo translate("First name"); ?> <a class="sort" href="manager-index.php"><?php echo translate("Sort by"); ?></a></th>
                     <th><?php echo translate("Last name"); ?> <a class="sort" href="manager-index.php?orderby=lname"><?php echo translate("Sort by"); ?></a></th>
@@ -77,15 +77,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             <div class="managers-work-section">
                 <h1 class="segment-header"><?php echo translate("Search For Work"); ?></h1>
                 <div class="segment-container">
-                    <form method="post" class="search-paramaters">
+                    <form method="post" class="search-paramaters-form">
                         <input type="text" name="submissionName" placeholder="Search for work by title">
-                        <p><?php translate("Status"); ?> </p>
-                        <select name="status" id="work-type-select">
-                            <option value="both" class="both-translate"><?php echo translate("Both"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
-                            <option value="not-accepted" class="needing-review-translate"><?php echo translate("Needing Review"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
-                            <option value="accepted" class="accepted-translate"><?php echo translate("Accepted"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
-                        </select>
-                        <button name="search" class="search-translate"><?php echo translate("Search"); ?></button> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                        <div class="status-div">
+                            <p style="margin: 4px;"><?php echo translate("Status") . ":"; ?> </p>
+                            <select name="status" id="work-type-select">
+                                <option value="both" class="both-translate"><?php echo translate("Both"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                                <option value="not-accepted" class="needing-review-translate"><?php echo translate("Needing Review"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                                <option value="accepted" class="accepted-translate"><?php echo translate("Accepted"); ?></option> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
+                            </select>
+                        </div>
+
+                        <button name="search" class="search-translate" id="manager-user-search"><?php echo translate("Search"); ?></button> <!-- Class name used for translation. Add another class or change to a better name if you add css -->
                     </form>
                 </div>
                 <?php
