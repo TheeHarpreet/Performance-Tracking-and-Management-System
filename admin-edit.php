@@ -63,7 +63,7 @@ include("includes/lang-config.php");
         <div class="admin-edit-container">
             <h1 class="segment-header"><?php echo $user->fname . " " . $user->lname ?></h1>
             <div class="segment-container">
-                <form method="post">
+                <form method="post" class='admin-edit-form'>
                     <p><?php echo translate("First Name"); ?>:</p>
                     <input type="text" name="fname" value="<?php echo $user->fname; ?>" required>
 
@@ -82,7 +82,7 @@ include("includes/lang-config.php");
                         <option value='Manager'" . ($user->jobRole == 'Manager' ? ' selected' : '') . ">" . translate("Manager") . "</option>
                     </select>";
                     } ?>
-                    <button type="submit" class="submit-button"><?php echo translate("Update"); ?></button>
+                    <button type="submit" class="submit-button" id='admin-update'><?php echo translate("Update"); ?></button>
                     <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link"><?php echo translate("Reset Password"); ?></a></p>
                     <p><?php echo translate("Passwords are reset to \"katalaluan123\""); ?></p>
 
@@ -90,35 +90,35 @@ include("includes/lang-config.php");
             </div>
             <div class="segment-container">
             <?php 
-                    if ($user->jobRole == "Researcher") {
+                if ($user->jobRole == "Researcher") {
+                    echo "
+                    <table>
+                    <tr class='assign-supervisor-table'>
+                        <th>" . translate("First name") . "</th>
+                        <th>" . translate("Last name") . "</th>
+                        <th>" . translate("Email") . "</th>
+                        <th>" . translate("Supervisor") . "</th>
+                    </tr>
+                    ";
+                    $possibleSupervisorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $user->userID AND jobRole = 'Supervisor'");
+                    while ($supervisor = $possibleSupervisorsQuery->fetch_object()) {
                         echo "
-                        <table>
-                        <tr class='assign-supervisor-table'>
-                            <th>" . translate("First name") . "</th>
-                            <th>" . translate("Last name") . "</th>
-                            <th>" . translate("Email") . "</th>
-                            <th>" . translate("Supervisor") . "</th>
-                        </tr>
-                        ";
-                        $possibleSupervisorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $user->userID AND jobRole = 'Supervisor'");
-                        while ($supervisor = $possibleSupervisorsQuery->fetch_object()) {
-                            echo "
-                            <tr>
-                            <td>$supervisor->fname</td>
-                            <td>$supervisor->lname</td>
-                            <td>$supervisor->email</td>
-                            <td><input type='checkbox' name='supervisors[]' value='" . $supervisor->userID . "' ";
-                            $selectedCheck = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $userID AND supervisorID = $supervisor->userID");
-                            if (mysqli_num_rows($selectedCheck) > 0) {
-                                echo "checked";
-                            }
-                            echo "></td>
-                            </tr>
-                            </table>
-                            ";
+                        <tr>
+                        <td>$supervisor->fname</td>
+                        <td>$supervisor->lname</td>
+                        <td>$supervisor->email</td>
+                        <td><input type='checkbox' name='supervisors[]' value='" . $supervisor->userID . "' ";
+                        $selectedCheck = $mysqli->query("SELECT * FROM researcherssupervisor WHERE researcherID = $userID AND supervisorID = $supervisor->userID");
+                        if (mysqli_num_rows($selectedCheck) > 0) {
+                            echo "checked";
                         }
+                        echo "></td>
+                        </tr>
+                        </table>
+                        ";
                     }
-                    ?>
+                }
+            ?>
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>

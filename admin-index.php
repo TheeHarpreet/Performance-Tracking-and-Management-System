@@ -135,21 +135,22 @@ if ($user->jobRole != "Admin") {
                                 <input type="password" name="password" id="password" required>
                             </div>
                         </div>
-                        <input type="submit" class="btn" name="submit" value="<?php echo translate("Create Account"); ?>" required>
+                        <input type="submit" id="admin-new-account" name="submit" value="<?php echo translate("Create Account"); ?>" required>
                     </form>
                 </div>
 
             </div>
             <div class="account-list">
                 <h1 class="segment-header"><?php echo translate("List Of User Accounts"); ?></h1>
-                <table class="segment-container">
-                    <thead>
+                <div class="segment-container">
+
+                    <table>
                         <tr class="accounts-table">
-                            <th><div><?php echo translate("UserID"); ?> <a class="sort" href="admin-index.php"><?php echo translate("Sort by"); ?></a></div></th>
-                            <th><div><?php echo translate("First Name"); ?> <a class="sort" href="admin-index.php?orderby=fname"><?php echo translate("Sort by"); ?></a></div></th>
-                            <th><div><?php echo translate("Last Name"); ?> <a class="sort" href="admin-index.php?orderby=lname"><?php echo translate("Sort by"); ?></a></div></th>
-                            <th><div><?php echo translate("Email"); ?> <a class="sort" href="admin-index.php?orderby=email"><?php echo translate("Sort by"); ?></a></div></th>
-                            <th><div><?php echo translate("Job Role"); ?> <a class="sort" href="admin-index.php?orderby=jobRole"><?php echo translate("Sort by"); ?></a></div></th>
+                            <th><?php echo translate("UserID"); ?> <a class="sort" href="admin-index.php"><?php echo translate("Sort by"); ?></a></th>
+                            <th><?php echo translate("First Name"); ?> <a class="sort" href="admin-index.php?orderby=fname"><?php echo translate("Sort by"); ?></a></th>
+                            <th><?php echo translate("Last Name"); ?> <a class="sort" href="admin-index.php?orderby=lname"><?php echo translate("Sort by"); ?></a></th>
+                            <th><?php echo translate("Email"); ?> <a class="sort" href="admin-index.php?orderby=email"><?php echo translate("Sort by"); ?></a></th>
+                            <th><?php echo translate("Job Role"); ?> <a class="sort" href="admin-index.php?orderby=jobRole"><?php echo translate("Sort by"); ?></a></th>
                             <th><?php echo translate("Edit"); ?></th>
                             <th><?php echo translate("Delete"); ?></th>
                         </tr>
@@ -172,8 +173,8 @@ if ($user->jobRole != "Admin") {
                         }
                         ?>
                         </tr>
-                    </thead>
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     <?php include_once("includes/footer.php") ?>

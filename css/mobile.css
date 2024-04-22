@@ -301,7 +301,14 @@ align-items: center;
 
 /* Input Fields Style */
 .signup-form input[type="text"],
-.signup-form input[type="password"] {
+.signup-form input[type="password"],
+.login-input input[type="email"],
+.login-input input[type="password"],
+.admin-edit-form input[type="email"],
+.admin-edit-form input[type="text"],
+.new-admin-form input[type="text"],
+.new-admin-form input[type="email"],
+.new-admin-form input[type="password"] {
   width: 50%; 
   padding: 12px; 
   margin: 8px 0; 
@@ -311,7 +318,7 @@ align-items: center;
 }
 
 /* Button Style */
-.signup-form button, #signup-button {
+.signup-form button, #signup-button, #admin-update, #admin-new-account {
   width: 30%; 
   padding: 12px;
   background-color: goldenrod; 
@@ -351,7 +358,7 @@ align-items: center;
 
 /*Login Form*/
 
-.login-form{
+.login-form, .admin-edit-form, .new-admin-form {
   display: flex;
   align-items: center; 
   align-items: center; 
@@ -379,15 +386,6 @@ align-items: center;
     margin: 0px;
   }
 
-.login-input input[type="email"],
-.login-input input[type="password"] {
-  width: 50%; 
-  padding: 12px; 
-  margin: 8px 0; 
-  box-sizing: border-box;
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
-}
 
 .login-container, .signup-container {
   max-width: 80%;
@@ -422,15 +420,25 @@ align-items: center;
 /*submission button */
 .download-submission{
   background-color: goldenrod;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 15px;
-    text-align: center;
-    display: block;
-    width: 80%;
-    margin: 10px auto;
-    text-decoration: none;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  text-align: center;
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  text-decoration: none;
 }
 
-
+th {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 5px 0px;
+}
+td {
+  padding: 5px 0px;
+  border-top: 1px solid rgb(189, 189, 189);
+}
