@@ -93,12 +93,15 @@ include("includes/lang-config.php");
                 if ($user->jobRole == "Researcher") {
                     echo "
                     <table>
+                    <thead>
                     <tr class='assign-supervisor-table'>
                         <th>" . translate("First name") . "</th>
                         <th>" . translate("Last name") . "</th>
                         <th>" . translate("Email") . "</th>
                         <th>" . translate("Supervisor") . "</th>
                     </tr>
+                    </thead>
+                    <tbody class='admin-edit-tbody'>
                     ";
                     $possibleSupervisorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $user->userID AND jobRole = 'Supervisor'");
                     while ($supervisor = $possibleSupervisorsQuery->fetch_object()) {
@@ -114,13 +117,13 @@ include("includes/lang-config.php");
                         }
                         echo "></td>
                         </tr>
-                        </table>
+                        
                         ";
                     }
+                    echo "</tbody></table>";
                 }
             ?>
             </div>
         </div>
-    <?php include_once("includes/footer.php") ?>
 </body>
 </html>

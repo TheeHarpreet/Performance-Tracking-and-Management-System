@@ -74,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <a href="signup.php" class="login-change"><?php echo translate("Register here"); ?></a>
         </form>
     </div>
-    <?php include_once("includes/footer.php") ?>
 </body>
 </html>
 

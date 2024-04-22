@@ -71,30 +71,7 @@ if ($user->jobRole != "Admin") {
     <?php include_once("includes/header.php") ?>
         <div class="admin-container">
         <?php
-            $resetQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
-            $passwordCheck = $resetQuery->fetch_object();
-            if (password_verify("katalaluan123", $passwordCheck->password)) {
-                echo "
-                <div class='change-password'>
-                <h1>" . translate("Please reset your password") . "</h1>
-                <p>" . translate("Your password has been reset, your account is not secure until the password has been changed") . "</p>
-                <form method='post'>
-                <p>" . translate("Password") . "</p>
-                <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password1'>
-                <p>" . translate("Confirm Password") . "</p>
-                <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password2'>
-                ";
-                if (count($errors) > 0) {
-                    foreach ($errors as $error) {
-                        echo "<div class='error-message'>$error</div>";
-                    }
-                }
-                echo "
-                <button type='submit' class='new-password-btn' name='new-password-button'>" . translate("Change Password") . "</button>
-                </form>
-                </div>
-                ";
-            }
+            include("includes/password-check.php");
             ?>
             <div class="create-account">
                 <?php
@@ -139,6 +116,7 @@ if ($user->jobRole != "Admin") {
                 <div class="segment-container">
 
                     <table>
+                        <thead>
                         <tr class="accounts-table">
                             <th><?php echo translate("UserID"); ?> <a class="sort" href="admin-index.php"><?php echo translate("Sort by"); ?></a></th>
                             <th><?php echo translate("First Name"); ?> <a class="sort" href="admin-index.php?orderby=fname"><?php echo translate("Sort by"); ?></a></th>
@@ -148,7 +126,8 @@ if ($user->jobRole != "Admin") {
                             <th><?php echo translate("Edit"); ?></th>
                             <th><?php echo translate("Delete"); ?></th>
                         </tr>
-                        <tr>
+                        </thead>
+                        <tbody class="admin-tbody">
                         <?php
                         $userAccounts = mysqli_query($mysqli, "SELECT * FROM users ORDER BY $orderBy");
                         while ($row = $userAccounts->fetch_object())
@@ -166,12 +145,11 @@ if ($user->jobRole != "Admin") {
                             ";
                         }
                         ?>
-                        </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    <?php include_once("includes/footer.php") ?>
 </body>
 </html>
 

@@ -103,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="login.php" class="login-change"><?php echo translate("Login"); ?></a>
         </form>
     </div>
-    <?php include_once("includes/footer.php") ?>
 </body>
 </html>
 

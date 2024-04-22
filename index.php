@@ -67,30 +67,7 @@ include("includes/lang-config.php");?>
             ?>
             <?php
                 if (!isset($_GET['user_override'])) {
-                    $resetQuery = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
-                    $passwordCheck = $resetQuery->fetch_object();
-                    if (password_verify("katalaluan123", $passwordCheck->password)) {
-                        echo "
-                        <div class='change-password'>
-                        <h1>" . translate("Please reset your password") . "</h1>
-                        <p>" . translate("Your password has been reset, your account is not secure until the password has been changed") . "</p>
-                        <form method='post'>
-                        <p>" . translate("Password") . "</p>
-                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password1'>
-                        <p>" . translate("Confirm Password") . "</p>
-                        <input type='password' class='new-password-input' placeholder='" . translate("New Password") . "' name='password2'>
-                        ";
-                        if (count($errors) > 0) {
-                            foreach ($errors as $error) {
-                                echo "<div class='error-message'>$error</div>";
-                            }
-                        }
-                        echo "
-                        <button type='submit' class='new-password-btn' name='new-password-button'>" . translate("Change Password") . "</button>
-                        </form>
-                        </div>
-                        ";
-                    }
+                    include("includes/password-check.php");
                 }
                 if ($user->jobRole == "Supervisor") { // Options for supervisors to view the accounts of users they supervise.
                     $needingReviewQuery = $mysqli->query("SELECT * FROM submission, researcherssupervisor, submissionreturn WHERE researcherssupervisor.supervisorID = $userID AND researcherssupervisor.researcherID = submission.author AND submitted = 0 AND submission.submissionID NOT IN (SELECT submission.submissionID FROM submission, submissionReturn WHERE submissionReturn.returnDate > submission.dateSubmitted)");
@@ -272,6 +249,5 @@ include("includes/lang-config.php");?>
                 ?>
             </div>
         </div>
-    <?php include_once("includes/footer.php") ?>
 </body>
 </html>

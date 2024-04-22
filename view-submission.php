@@ -227,7 +227,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     }
                 }
                 if (mysqli_num_rows($rejectedQuery) > 0) {
-                    echo "<h1 class='segment-header'>Rejection History:</h1><div class='segment-container'>";
+                    echo "
+                    <h1 class='segment-header'>Rejection History:</h1>
+                    <div class='segment-container'>
+                    ";
                     while ($rejection = $rejectedQuery->fetch_object()) {
                         $returnerQuery = $mysqli->query("SELECT * FROM users WHERE userID = $rejection->returner");
                         $returner = $returnerQuery->fetch_object();
@@ -246,7 +249,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 }
             ?>
         </div>
-    <?php include_once("includes/footer.php") ?>
 </body>
 </html>
 

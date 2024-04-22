@@ -3,6 +3,7 @@ require_once("includes/config.php");
 require_once("includes/redirect-login.php");
 ob_clean();
 
+$errors = array ();
 $query = $mysqli->query("SELECT * FROM users WHERE userID = $userID");
 $user = $query->fetch_object();
 
@@ -50,17 +51,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
 <body id="manager-index">
     <?php include_once("includes/header.php") ?>
         <div class="container">
+            <?php include("includes/password-check.php"); ?>
             <h1 class="segment-header"><?php echo translate("View Users Work"); ?></h1>
             <div class="segment-container" id="all-user-display">
                 <table id="all-user-display-table">
-                <tr class="accounts-table">
-                    <th><?php echo translate("First name"); ?> <a class="sort" href="manager-index.php"><?php echo translate("Sort by"); ?></a></th>
-                    <th><?php echo translate("Last name"); ?> <a class="sort" href="manager-index.php?orderby=lname"><?php echo translate("Sort by"); ?></a></th>
-                    <th><?php echo translate("Job role"); ?> <a class="sort" href="manager-index.php?orderby=jobRole"><?php echo translate("Sort by"); ?></a></th>
-                </tr>
+                    <thead>
+                        <tr class="accounts-table">
+                            <th><?php echo translate("First name"); ?> <a class="sort" href="manager-index.php"><?php echo translate("Sort by"); ?></a></th>
+                            <th><?php echo translate("Last name"); ?> <a class="sort" href="manager-index.php?orderby=lname"><?php echo translate("Sort by"); ?></a></th>
+                            <th><?php echo translate("Job role"); ?> <a class="sort" href="manager-index.php?orderby=jobRole"><?php echo translate("Sort by"); ?></a></th>
+                        </tr>
+                    </thead>
+                    <tbody class="manager-tbody">
                 <?php 
                 $user_accounts = mysqli_query($mysqli, "SELECT * FROM users WHERE jobRole = 'Supervisor' OR jobRole = 'Researcher' ORDER BY $orderBy");
-                
                 while ($obj = $user_accounts->fetch_object()) { // Outputs the list of supervisors and researchers. The hyperlink could be changed to cover the entire row.
                     $rowUserID = $obj->userID;
                     echo "
@@ -72,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                     ";
                 }
                 ?>
+                </tbody>
                 </table>
             </div>
             <div class="managers-work-section">
@@ -137,7 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
                 ?>
             </div>
         </div>
-    <?php include_once("includes/footer.php") ?>
 </body>
 </html>
 

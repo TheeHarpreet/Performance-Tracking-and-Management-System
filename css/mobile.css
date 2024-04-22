@@ -312,7 +312,7 @@ align-items: center;
 }
 
 /* Button Style */
-.signup-form button, #signup-button, #admin-update, #admin-new-account, #manager-user-search, #new-submission-button {
+.signup-form button, #signup-button, #admin-update, #admin-new-account, #manager-user-search, #new-submission-button, #update-password-button {
   width: 30%; 
   padding: 12px;
   background-color: goldenrod; 
@@ -361,7 +361,7 @@ align-items: center;
 
 /*Login Form*/
 
-.login-form, .admin-edit-form, .new-admin-form, .search-paramaters-form, .new-submission-form {
+.login-form, .admin-edit-form, .new-admin-form, .search-paramaters-form, .new-submission-form, .return-div, .update-password-form {
   display: flex;
   align-items: center;  
   flex-direction: column;
@@ -381,6 +381,10 @@ align-items: center;
   gap: 0px;
 }
 
+.return-div {
+  border: 2px solid white;
+  border-radius: 8px;
+}
 
 .login-seperate {
   width: 100%;
@@ -455,3 +459,15 @@ td {
   width:100%;
   
 }
+
+
+.manager-tbody, .coauthor-tbody, .admin-tbody, .admin-edit-tbody {
+  display: block;
+  height: 500px;
+  overflow: auto;
+  }
+  thead, tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  }

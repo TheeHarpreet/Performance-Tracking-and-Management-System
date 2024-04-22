@@ -134,49 +134,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     </div>
     <div class="segment-container">
     <form method="post" enctype="multipart/form-data" class="new-submission-form">
+        <label for="title"><?php echo translate("Title"); ?>:</label>
+        <input type="text" id="title" name="title" placeholder="<?php echo translate("Title"); ?>" required>
+
+        <label for="comments"><?php echo translate("Comments"); ?>:</label>
+        <input type="text" id="comments" name="comments" placeholder="<?php echo translate("Comments"); ?>" rows="3" required></input>
+
+        <label for="file"><?php echo translate("Upload File"); ?>:</label>
+        <input type="file" id="file" name="file[]" multiple required>
+
+        <button type="submit" class="submit-button" id="new-submission-button" name='check'><?php echo translate("Submit"); ?></button>
         
-            <div class="form-group">
-                <label for="title"><?php echo translate("Title"); ?>:</label>
-                <input type="text" id="title" name="title" placeholder="<?php echo translate("Title"); ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="comments"><?php echo translate("Comments"); ?>:</label>
-                <input type="text" id="comments" name="comments" placeholder="<?php echo translate("Comments"); ?>" rows="3" required></input>
-            </div>
-            <div class="form-group">
-                <label for="file"><?php echo translate("Upload File"); ?>:</label>
-                <input type="file" id="file" name="file[]" multiple required>  <!-- NeedsTranslation for defaults like "Choose files", "No file chosen", and "4 files" -->
-            </div>
-            <button type="submit" class="submit-button" id="new-submission-button" name='check'><?php echo translate("Submit"); ?></button>
         <h1 class = 'segment-header'>Add Coauthors</h1>
-            <table>
-                <tr class="add-coauthors-table">
+        <table class="add-coauthors-table">
+            <thead>
+                <tr>
                     <th><?php echo translate("First Name"); ?> </th>
                     <th><?php echo translate("Last Name"); ?> </th>
                     <th><?php echo translate("Email"); ?> </th>
                     <th><?php echo translate("Coauthor"); ?> </th>
                 </tr>
-                <?php
-                $possibleCoauthorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $userID AND jobRole != 'Admin' AND jobRole != 'Manager'");
-                while ($coauthor = $possibleCoauthorsQuery->fetch_object()) {
-                    echo "
-                    <tr>
-                    <td>$coauthor->fname</td>
-                    <td>$coauthor->lname</td>
-                    <td>$coauthor->email</td>
-                    <td><input type='checkbox' name='coauthors[]' value='" . $coauthor->userID . "'></td>
-                    </tr>
-                    ";
-                }
-                ?>
-            </table>
-        
+            </thead>
+            <tbody class="coauthor-tbody">
+            <?php
+            $possibleCoauthorsQuery = $mysqli->query("SELECT * FROM users WHERE userID != $userID AND jobRole != 'Admin' AND jobRole != 'Manager'");
+            while ($coauthor = $possibleCoauthorsQuery->fetch_object()) {
+                echo "
+                <tr>
+                <td>$coauthor->fname</td>
+                <td>$coauthor->lname</td>
+                <td>$coauthor->email</td>
+                <td><input type='checkbox' name='coauthors[]' value='" . $coauthor->userID . "'></td>
+                </tr>
+                ";
+            }
+            ?>
+            </tbody>
+        </table>
     </form>
     </div>
 </div>
-
-<?php include_once("includes/footer.php") ?>
-
 </body>
 </html>
 
