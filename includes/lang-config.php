@@ -123,7 +123,8 @@ function translate($key) {
             "Search For Work" => "Cari untuk kerja",
             "Needing Review" => "Perlu disemak",
             "Accepted" => "Diterima",
-            "Add Coauthors" => " Tambah Pengarang bersama"
+            "Add Coauthors" => " Tambah Pengarang bersama",
+            "New Submission" =>"Penyerahan baru"
         )
     );
 
