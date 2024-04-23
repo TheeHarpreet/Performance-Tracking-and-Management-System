@@ -122,7 +122,8 @@ function translate($key) {
             "View Users Work" => "Lihat kerja pengguna",
             "Search For Work" => "Cari untuk kerja",
             "Needing Review" => "Perlu disemak",
-            "Accepted" => "Diterima"
+            "Accepted" => "Diterima",
+            "Add Coauthors" => " Tambah Pengarang bersama"
         )
     );
 
