@@ -15,6 +15,8 @@ if (isset($_SESSION['resubmit'])) {
     }
 }
 
+include("includes/lang-config.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     if (isset($overrideSubmissionID)) {
         $files = $mysqli->query("SELECT file.fileID FROM file, submissionfile WHERE file.fileID = submissionfile.fileID AND submissionfile.submissionID = $overrideSubmissionID");
@@ -110,7 +112,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     }
 }
 ?>
-<?php include("includes/lang-config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

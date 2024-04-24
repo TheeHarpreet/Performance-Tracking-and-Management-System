@@ -57,7 +57,6 @@ include("includes/lang-config.php");?>
                     echo "
                     <p class='invalid-role'>" . translate("Your account doesn't have a role assigned. Please speak to an admin to assign you one.") . "</p>
                     </div>";
-                    include_once("includes/footer.php");
                     exit();
                 } else if ($user->jobRole == "Admin") { // Redirects for admin.
                     header("Location: admin-index.php");
