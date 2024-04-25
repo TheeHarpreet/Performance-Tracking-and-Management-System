@@ -23,7 +23,7 @@
         $status = "Waiting for supervisor approval";
     }
 
-    echo "<p>Status: $status</p>";
+    echo "<p class='$status'>Status: $status</p>";
     echo "</div>";
     echo "</div>";
     echo "</div>";

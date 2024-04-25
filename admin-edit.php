@@ -32,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
     $stmt->execute();
 
     $mysqli->query("DELETE FROM researcherssupervisor WHERE researcherID = $userID");
-
     if (isset($_POST['supervisors'])) {
         $i = 1;
         $queryText = "INSERT INTO researcherssupervisor VALUES ";
@@ -42,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['lang'])) {
             $i++;
         }
         $supervisorInsert = $mysqli->query($queryText);
+        echo $queryText;
     }
 
     header("Location: admin-index.php");
@@ -86,7 +86,7 @@ include("includes/lang-config.php");
                     <p><a href="admin-edit.php?userID=<?php echo $userID; ?>&reset=1" class="reset-link"><?php echo translate("Reset Password"); ?></a></p>
                     <p><?php echo translate("Passwords are reset to \"katalaluan123\""); ?></p>
 
-                </form>
+                
             </div>
             <div class="segment-container">
             <?php 
@@ -124,6 +124,7 @@ include("includes/lang-config.php");
                 }
             ?>
             </div>
+            </form>
         </div>
 </body>
 </html>
