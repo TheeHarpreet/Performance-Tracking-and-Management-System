@@ -106,3 +106,7 @@ List of tools used in the project:
 
 ✔️ Add email notifications for feedback and submission status
 
+## Use Case Diagram
+We designed a use case diagram to help us visualise the plethora of features needed for this system.
+
+![System Diagram](images/Picture1.png)
