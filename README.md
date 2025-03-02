@@ -3,17 +3,12 @@
 
 The system helps the clients track and manage employees work such as the an employee's work output and performance by digitizing performance management, including research publications. 
 
-
 ## Badges
-
-Add badges from somewhere like: [shields.io](https://shields.io/)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![GitHub stars](https://img.shields.io/github/stars/TheeHarpreet/Performance-Tracking-and-Management-System?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/TheeHarpreet/Performance-Tracking-and-Management-System?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/TheeHarpreet/Performance-Tracking-and-Management-System)
-
-
 
 ## Features
 
