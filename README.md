@@ -1,8 +1,7 @@
 
 # Performance Tracking and Management System
 
-The system helps the clients track and manage employees work such as the an employee's work output and performance by digitizing performance management, including research publications. 
-
+The primary objective of PTMS is to facilitate a comprehensive and efficient approach to tracking and managing the work outputs and performance of research officers within the institute.
 ## Badges
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
@@ -79,18 +78,25 @@ List of tools used in the project:
 - 💻 Frontend: HTML, CSS, JavaScript
 - 🖥️ Backend: PHP, MySQL
 - 📡 Server: Apache (via XAMPP/WAMP)
+- 
 ## 🔄 Usage Guide
-### 👩‍🔬 Research Officer
-➡️ Logs in → Submits work → Assigns co-author (optional) → Reviews feedback → Views performance
-
-### 👨‍🏫 Supervisor
-➡️ Logs in → Reviews submitted work → Provides feedback → Sends work back if revisions needed → Submits work to manager → Views research officer performance
-
-### 👨‍💼 Manager
-➡️ Logs in → Views received work → Tracks employee performance
-
-### 🔧 Admin
-➡️ Manages user roles → Assigns job roles → Deletes accounts → Oversees system activity
+### Research Officer (User)
+🔹 Submit Work: Upload research work to the system for review.
+🔹 Assign Co-Authors: If applicable, add co-authors before submission.
+🔹 View Feedback: Check supervisor feedback on submitted work.
+🔹 Track Performance: Monitor work progress and feedback history.
+### Supervisor
+🔹 Review Work: Access submitted research work.
+🔹 Provide Feedback: Approve, suggest revisions, or return work to the research officer.
+🔹 Submit Work to Manager: Forward reviewed work to higher management.
+🔹 Track Performance: Monitor the progress of research officers.
+### Manager
+🔹 View Received Work: Access work submitted by supervisors.
+🔹 Monitor Performance: Track employee research outputs and progress.
+### Admin
+🔹 Manage User Roles: Assign research officers, supervisors, and managers.
+🔹 Edit Job Roles: Modify roles if necessary.
+🔹 Delete Accounts: Remove inactive users when needed.
 
 
 ## 🚀 Future Improvements
